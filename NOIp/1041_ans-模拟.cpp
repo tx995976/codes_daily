@@ -68,7 +68,4 @@ int get(int n,int ans)
     if(!q)return ans;
 	//如果这层为空，那么答案就是现在感染的人数
     return g;
-
-
-    
 }
