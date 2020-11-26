@@ -17,5 +17,7 @@ int test3(int a, int b){
 }
 
 int main(){
+    test2(1,3);
+    test3(3,5);
     return 0;
 }
