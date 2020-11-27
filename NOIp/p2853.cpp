@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<cstring>
+
 using namespace std;
 
 const int node = 10100;
@@ -30,7 +31,7 @@ int main(){
         cow_dfs(cow[i]);
         memset(reached,0,sizeof(reached));      
     }
-    for(int i = 1;i <= k;i++){
+    for(int i = 1;i <= n;i++){
         if(garden[i] >= k)
             total++;
     }
