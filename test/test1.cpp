@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int n,m,temp,all;
+int n,m,temp,total;
 set<int> ans;
 
 int get_ans(int t){
@@ -25,19 +25,19 @@ int main(){
         ans.insert(temp);
     }
     for(int i = 1;i <= t;i++){
-        int l;
+        int l,all = 0;
         cin>>l;
         for(int j = 1;j <= l;j++){
-            all=0;
+            total = 0;
             for(int k = 1;k <= 7;k++){
-                int total = 0;
                 cin>>temp;
-                if(ans.count(temp))
+                if(ans.count(temp)){
                     total++;
-                all+=get_ans(total);
+                }
             }
-            cout<<all<<endl;
+                all+=get_ans(total);
         }
+        cout<<all<<endl;
     }
     return 0;
 }
