@@ -18,8 +18,7 @@ int get_ans(int t){
 int main(){
     ios::sync_with_stdio(0);cin.tie(0);
     int t;
-    cin>>t;
-    cin>>m>>n;
+    cin>>t>>m>>n;
     for(int k = 1;k <= 7;k++){
         cin>>temp;
         ans.insert(temp);
