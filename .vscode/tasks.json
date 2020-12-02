@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "C/C++: g++.exe build active file",
+			"label": "g++.exe",
 			"command": "C:\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-g",
