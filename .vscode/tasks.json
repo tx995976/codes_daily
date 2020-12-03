@@ -19,26 +19,7 @@
 			],
 			"group": "build"
 		},
-		{
-			"type": "shell",
-			"label": "C/C++: g++.exe build active file",
-			"command": "C:\\mingw64\\bin\\g++.exe",
-			"args": [
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build"
-				
-			
-		},
+		
 		{
 			"label": "在Chrome中运行",
 			"type": "process",

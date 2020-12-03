@@ -1,6 +1,9 @@
 #include<iostream>
 #include<set>
+
 using namespace std;
+using set_itor = set<int>::iterator;
+
 set<int> test4;
 /*void test(int a,int b){
     int a,b;
@@ -20,11 +23,12 @@ int test3(int a, int b){
 
 
 int main(){
+    set_itor it;
     int a,b;
-    cin>>a;
+    cin>>a>>b;
     test4.insert(a);
-    cout<<test4.count(a);
-    //test2(1,3);
-    //test3(3,5);
+    test4.insert(b);
+    it = test4.begin();
+    cout<<*it<<" "<<*(++it)<<endl;
     return 0;    
 }
