@@ -1,10 +1,10 @@
 #include<iostream>
 #include<set>
+#include<map>
 
 using namespace std;
-using set_itor = set<int>::iterator;
 
-set<int> test4;
+map<int,int> test4;
 /*void test(int a,int b){
     int a,b;
     std::cin>>a>>b;
@@ -23,12 +23,13 @@ int test3(int a, int b){
 
 
 int main(){
-    set_itor it;
     int a,b;
     cin>>a>>b;
-    test4.insert(a);
-    test4.insert(b);
-    it = test4.begin();
-    cout<<*it<<" "<<*(++it)<<endl;
+    test4[a]++;
+    test4[b]++;
+    test4[a]++;
+    test4[b]++;
+    test4[a]++;
+    cout<<test4[a]<<endl;
     return 0;    
 }
