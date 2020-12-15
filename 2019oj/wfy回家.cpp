@@ -17,7 +17,7 @@ int main()
 {
 	Point st, ed, tmp;
 	int n, t;
-	//freopen("wfy指社昧字.in","r", stdin);
+	freopen("wfy指社昧字.in","r", stdin);
 	//freopen("wfy指社昧字.out","w", stdout);
 	while(~scanf("%d", &t)){
 		while(t--){
