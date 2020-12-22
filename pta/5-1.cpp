@@ -21,6 +21,7 @@ class num{
 
 vector<num> data_1;
 vector<num> fall;
+
 //判断，计算函数
 double average_price(num a){
     return (a.a1+a.a2+a.a3+a.a4+a.a5)/5;
@@ -39,7 +40,7 @@ bool compare_date(num a,num b){
 void num_read(){
     num temp;
     ifstream num_data;
-    num_data.open("D:\\vscodes\\pta\\in.txt",ios::in|ios::out);
+    num_data.open("in.txt",ios::in|ios::out);
     while(!num_data.eof()){
         num_data>>temp.id;
         num_data>>temp.name;
@@ -58,7 +59,7 @@ void num_read(){
 }
 
 void num_write(){
-    ofstream num_data("D:\\vscodes\\pta\\in.txt");
+    ofstream num_data("in.txt");
     ofstream fail("fall.txt");
     for(int i = 0;i < data_1.size();i++){
         num_data<<data_1[i].id<<"   "<<data_1[i].name<<"    "<<data_1[i].sex<<"      "<<data_1[i].date<<"      "<<data_1[i].tel<<"     "<<data_1[i].a1<<"   "<<data_1[i].a2<<"   "<<data_1[i].a3<<"   "<<data_1[i].a4<<"   "<<data_1[i].a5<<"   "<<endl;
@@ -75,6 +76,7 @@ void print_it(){
         // 1.       100012400569      小明         男          2001.09.21        18452261236        80       32      63      95       32
     for(int i = 0; i < data_1.size();i++)
         cout<<i+1<<".    "<<data_1[i].id<<"   "<<data_1[i].name<<"    "<<data_1[i].sex<<"      "<<data_1[i].date<<"      "<<data_1[i].tel<<"     "<<data_1[i].a1<<"   "<<data_1[i].a2<<"   "<<data_1[i].a3<<"   "<<data_1[i].a4<<"   "<<data_1[i].a5<<"   "<<average_price(data_1[i])<<endl;
+
 }
 void add(){
     int i = 1;
@@ -104,9 +106,11 @@ void print_member(){
     cin>>n;
     switch(n){
         case 1:
+            system("cls");
             sort(data_1.begin(),data_1.end(),compare_price);
             break;
         case 2:
+            system("cls");
             sort(data_1.begin(),data_1.end(),compare_date);
             break;
     }
@@ -123,12 +127,15 @@ void funtion1(){
         cin>>n;
         switch(n){
             case 1:
+                system("cls");
                 add();
                 continue;
             case 2:
+                system("cls");
                 print_member();
                 continue;
             case 3:
+                system("cls");
                 num_write();
                 return;    
         }
@@ -159,14 +166,17 @@ int main(){
         cin>>n;
         switch(n){
             case 1:
+                system("cls");
                 funtion1();
                 continue;
             case 2:
+                system("cls");
                 funtion2();
                 continue;
             case 3:
                 return 0;
             default:
+                system("cls");
                 cout<<"无功能，重新输入"<<endl;
                 continue;
         }
