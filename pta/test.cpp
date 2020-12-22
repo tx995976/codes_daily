@@ -39,6 +39,7 @@ void num_read(){
         num_data>>temp.a5;
         data_1.push_back(temp);
     }
+    data_1.erase(data_1.end());
     num_data.close();
 }  
 
@@ -46,7 +47,7 @@ int main(){
     num_read();
         cout<<"序号  "<<"学号           "<<"姓名    "<<"性别    "<<"出生日期        "<<"电话            "<<"语文 "<<"数学 "<<"英语 "<<"理综 "<<"体育 "<<endl;
       // 1.       100012400569      小明         男          2001.09.21        18452261236        80       32      63      95       32
-    for(int i = 0; i < data_1.size()-1;i++){
+    for(int i = 0; i < data_1.size();i++){
         cout<<i+1<<".    "<<data_1[i].id<<"   "<<data_1[i].name<<"    "<<data_1[i].sex<<"      "<<data_1[i].date<<"      "<<data_1[i].tel<<"     "<<data_1[i].a1<<"   "<<data_1[i].a2<<"   "<<data_1[i].a3<<"   "<<data_1[i].a4<<"   "<<data_1[i].a5<<"   "<<endl;
         //cout<<"1.    "<<"100012400569   "<<"小明    "<<"男      "<<"2001.09.21      "<<"18408563321     "<<"80   "<<"32   "<<"63   "<<"95   "<<"60   "<<endl;
     }
