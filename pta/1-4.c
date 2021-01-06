@@ -16,7 +16,6 @@ int main(){
         b = 0.95;
     else    
         b = 0.97;
-    b = a>b? a : b;
     printf("%.2f$\n",a*b*oil);
     return 0;
 }

@@ -4,11 +4,13 @@
 void encrypt(char *);
 int main(){
 	char line[MAXLINE];
-	
+	int a,b;
 	printf("Input the string:");
 	gets(line);
 	encrypt(line);
+	swap(a,b);
 	printf("%s%s\n","After being encrypted:",line);
+	
 	return 0;
 }
 

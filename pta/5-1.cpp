@@ -106,11 +106,9 @@ void print_member(){
     cin>>n;
     switch(n){
         case 1:
-            system("cls");
             sort(data_1.begin(),data_1.end(),compare_price);
             break;
         case 2:
-            system("cls");
             sort(data_1.begin(),data_1.end(),compare_date);
             break;
     }
@@ -127,15 +125,12 @@ void funtion1(){
         cin>>n;
         switch(n){
             case 1:
-                system("cls");
                 add();
                 continue;
             case 2:
-                system("cls");
                 print_member();
                 continue;
             case 3:
-                system("cls");
                 num_write();
                 return;    
         }
