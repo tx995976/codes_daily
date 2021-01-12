@@ -15,7 +15,7 @@ int func_1(int n,int u,int d,int ans = 0,int high = 0){
     }
     return ans;
 }
-cpp
+
 int main(){
    ios::sync_with_stdio(0);cin.tie(0);
     int n,u,d;
