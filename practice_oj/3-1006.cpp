@@ -11,9 +11,10 @@ int temp;
 int n,ans = 0;
 
 int main(){
-    while(~scanf("%d", &n)){
+    ios::sync_with_stdio(0);cin.tie(0);
+    while(cin>>n){
         for(n;n > 0;n--){
-            scanf("%d", &temp);
+            cin>>temp;
             node[temp]++;
             ans = max(ans,node[temp]);
         }
