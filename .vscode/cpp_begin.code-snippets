@@ -33,5 +33,10 @@
 			"}",
 		],
 		"description": "cpp算法初始模板"
+	},
+	"cpp_o2":{
+		"prefix": "cpp_optimize",
+		"body": "#pragma gcc optimize(2)"
 	}
+
 }
