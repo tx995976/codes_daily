@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream>
+
 using namespace std;
 
 namespace tree{
@@ -96,11 +97,4 @@ namespace tree{
                 return func_tree_find_back(tree[i].l_num,x,ans);
         }
     }
-}
-
-int main(){
-    int k;      
-    cin>>k;          
-    cout<<k/2<<endl;
-    return 0;
 }

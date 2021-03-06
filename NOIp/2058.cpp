@@ -4,6 +4,8 @@
 #include<cstring>
 #include<queue>
 
+#pragma gcc optimize(2)
+
 using namespace std;
 
 class node{
@@ -21,13 +23,16 @@ node temp;
 int func_1(){
     cin>>t>>k;
     //处理超时
-    temp = queue_num.front();
-    while(temp.t+86400 <= t){
-        queue_num.pop();
-        num_city[temp.x]--;
-        if(num_city[temp.x]==0)
-            ans--;
+    while(!queue_num.empty()){
         temp = queue_num.front();
+        if(temp.t <= t-86400){
+            queue_num.pop();
+            num_city[temp.x]--;
+            if(num_city[temp.x]==0)
+                ans--;
+            continue;
+        }
+        break;
     }
     //录入
     temp.t = t;
