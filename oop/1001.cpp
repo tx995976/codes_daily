@@ -1,8 +1,5 @@
 #include<iostream>
 #include<string>
-#include<vector>
-#include<algorithm>
-
 using namespace std;
 
     class stu{
@@ -22,19 +19,14 @@ using namespace std;
             bool operator < (const stu &other){
                     return this->age < other.age;
             }
-    };
-    vector<stu> data_stu;
+    }  node_tree[3];
 
     int main(){
             stu node1,node2,node3;
-            node1.stu_set("tom","tom@Gmail.com",18);
-            node2.stu_set("jerry","jerry@Gmail.com",23);
-            node3.stu_set("tx995976","tx995976@Gmail.com",19);
-            data_stu.push_back(node1);
-            data_stu.push_back(node2);
-            data_stu.push_back(node3);
-            sort(data_stu.begin(),data_stu.end());
-            for(int i = 0;i < data_stu.size();i++)
-                data_stu[i].stu_show();
+            node_tree[0].stu_set("tom","tom@Gmail.com",18);
+            node_tree[1].stu_set("jerry","jerry@Gmail.com",23);
+            node_tree[2].stu_set("tx995976","tx995976@Gmail.com",19);
+            for(int i = 0;i < 3;i++)
+                node_tree[i].stu_show();
             return 0;
     }
