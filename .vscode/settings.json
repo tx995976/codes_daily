@@ -74,5 +74,6 @@
         "valarray": "cpp",
         "queue": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "python.pythonPath": "C:\\Program Files\\Python2\\python.exe"
 }
