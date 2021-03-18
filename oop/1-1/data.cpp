@@ -1,9 +1,9 @@
 #include"test.hpp"
 
 using itor_map = map<string,member>::iterator;
-map<string,member> data_tree;                  ///////////ç´¢å¼•æ ‘
+map<string,member> data_tree;                  ///////////Ë÷ÒýÊ÷
 itor_map now_contrl;
-
+int i;
 
 //////////////////////////////////////////////////////////////////////////////
 void login(){
@@ -13,21 +13,21 @@ void login(){
     cin>>a;
     itor_map temp = data_tree.find(a);
     while(temp == data_tree.end()){
-        cout<<"idä¸å­˜åœ¨,è¯·é‡è¯•"<<endl<<"id:";
+        cout<<"id²»´æÔÚ,ÇëÖØÊÔ"<<endl<<"id:";
         cin>>a;
         itor_map temp = data_tree.find(a);
     }
     cout<<"password:";
     cin>>b;
     while(!(temp->second.match_password(b))){
-        cout<<"å¯†ç é”™è¯¯ï¼Œè¯·é‡è¯•"<<endl<<"password:";
+        cout<<"ÃÜÂë´íÎó£¬ÇëÖØÊÔ"<<endl<<"password:";
         cin>>b;
     }
     now_contrl = temp;
 }
 
 void welcome(){
-    cout<<"æ¬¢è¿Ž:"<<now_contrl->second.show_name()<<endl;
+    cout<<"»¶Ó­:"<<now_contrl->second.show_name()<<endl;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -35,30 +35,44 @@ void welcome(){
 void add_card(){
          string temp,temp1,temp3;
          double temp2;
-         cout<<"è¾“å…¥ä½ çš„åå­—:";
+         cout<<"ÊäÈëÄãµÄÃû×Ö:";
          cin>>temp;
-         cout<<"è¾“å…¥ä½ çš„id";
+         cout<<"ÊäÈëÄãµÄid";
          cin>>temp3;
-         cout<<"è¾“å…¥ä½ çš„å¯†ç ";
+         cout<<"ÊäÈëÄãµÄÃÜÂë";
          cin>>temp1;
-         cout<<"è¾“å…¥ä½ çš„å¼€å¡é‡‘é¢";
+         cout<<"ÊäÈëÄãµÄ¿ª¿¨½ð¶î";
          cin>>temp2;
          member new_card(temp3,temp1,temp,temp2);
          data_tree[temp3] = new_card;
-         cout<<"æ³¨å†Œå·²å®Œæˆ"<<endl;
+         cout<<"×¢²áÒÑÍê³É"<<endl;
          return;
      }
 
+    void delete_card(){
+        itor_map temp = now_contrl;
+        login();
+        cout<<now_contrl->second.show_name()<<" ÄúÈ·¶¨ÒªÍË¿¨Âð?"<<endl<<"1.ÊÇ      2.·ñ"<<endl;
+        cin>>i;
+        if(i){
+            cout<<"ÍË¿¨ÒÑÍê³É"<<endl
+                <<"ÐÕÃû:"<<now_contrl->second.show_name()<<"        "<<"½ð¶î:"<<now_contrl->second.show_money()<<endl;
+            data_tree.erase(now_contrl);
+        }
+        return;
+     }
+
+
+
 //////////////////////////////////////////////////////////////////////////////
-    ifstream data_in;
-    ofstream data_out;
 
 void data_read(){
+    ifstream data_in;
     string a,b,c;
     double d;
     data_in.open("data.txt",ios::in);
-    while(cin>>a){
-        cin>>b>>c>>d;
+    while(data_in.good()){
+        data_in>>a>>b>>c>>d;
         member temp(a,b,c,d);
         data_tree[a] = temp;
     }
@@ -67,6 +81,7 @@ void data_read(){
 }
 
  void data_write(){
+    ofstream data_out;
     string a,b,c;
     double d;
     data_out.open("data.txt",ios::out);
@@ -75,7 +90,7 @@ void data_read(){
         b = now->second.show_password();
         c = now->second.show_name();
         d = now->second.show_money();
-        data_out<<a<<" "<<b<<" "<<c<<" "<<d;
+        data_out<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
     }
     data_out.close();
     return;

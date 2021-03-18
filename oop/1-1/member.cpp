@@ -57,9 +57,7 @@
      void count_sys(){
          return;
      }
-     void delete_card(){
-         return;
-     }
+     
      
 
 
