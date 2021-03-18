@@ -4,25 +4,33 @@
 #include<time.h>
 #include<vector>
 #include<map>
-using namespace std;
-    class member{
-            string id;
-            string password;
-            string name;
-            double money;
-        public:
-            bool match_password(string password_in);
-            void money_add(double a);
-            void new_card(string a,string b,string c,double d);
-            void money_refund();
-            string show_id();
-            string show_password();
-            string show_name();
-            double show_money();
+#include<string>
 
-    };
+using namespace std;
+
+        class member{
+                string id;
+                string password;
+                string name;
+                double money;
+            public:
+                member(){}
+                member(string a,string b,string c,double d);
+                ~member(){}
+                bool match_password(string password_in);
+                void money_add(double a);
+                void new_card(string a,string b,string c,double d);
+                string show_id();
+                string show_password();
+                string show_name();
+                double show_money();
+
+        };
+       
+
     //
-    extern bool login();
+    extern void login();
+    extern void welcome();
     //
     extern void add_card();         
     extern void query_card();

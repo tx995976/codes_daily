@@ -1,43 +1,71 @@
 #include"test.hpp"
 
-map<string,member> data_tree;
-ifstream data_in;
-ofstream data_out;
-
 using itor_map = map<string,member>::iterator;
-extern itor_map now_contrl;
+map<string,member> data_tree;                  ///////////索引树
+itor_map now_contrl;
 
-bool login(){
+
+//////////////////////////////////////////////////////////////////////////////
+void login(){
     string a,b;
+    system("cls");
     cout<<"id:";
     cin>>a;
     itor_map temp = data_tree.find(a);
-    if(temp == data_tree.end()){
-        cout<<"id不存在"<<endl;
-        return 0;
+    while(temp == data_tree.end()){
+        cout<<"id不存在,请重试"<<endl<<"id:";
+        cin>>a;
+        itor_map temp = data_tree.find(a);
     }
     cout<<"password:";
     cin>>b;
-    if(temp->second.match_password(b))
-        
-        
+    while(!(temp->second.match_password(b))){
+        cout<<"密码错误，请重试"<<endl<<"password:";
+        cin>>b;
+    }
+    now_contrl = temp;
 }
 
+void welcome(){
+    cout<<"欢迎:"<<now_contrl->second.show_name()<<endl;
+}
 
+//////////////////////////////////////////////////////////////////////////////
+
+void add_card(){
+         string temp,temp1,temp3;
+         double temp2;
+         cout<<"输入你的名字:";
+         cin>>temp;
+         cout<<"输入你的id";
+         cin>>temp3;
+         cout<<"输入你的密码";
+         cin>>temp1;
+         cout<<"输入你的开卡金额";
+         cin>>temp2;
+         member new_card(temp3,temp1,temp,temp2);
+         data_tree[temp3] = new_card;
+         cout<<"注册已完成"<<endl;
+         return;
+     }
+
+//////////////////////////////////////////////////////////////////////////////
+    ifstream data_in;
+    ofstream data_out;
 
 void data_read(){
-    member temp;
     string a,b,c;
     double d;
     data_in.open("data.txt",ios::in);
     while(cin>>a){
         cin>>b>>c>>d;
-        temp.new_card(a,b,c,d);
+        member temp(a,b,c,d);
         data_tree[a] = temp;
     }
     data_in.close();
     return;
 }
+
  void data_write(){
     string a,b,c;
     double d;
@@ -52,3 +80,5 @@ void data_read(){
     data_out.close();
     return;
 }
+
+//////////////////////////////////////////////////////////////////////////////

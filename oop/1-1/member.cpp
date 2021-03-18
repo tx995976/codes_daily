@@ -1,5 +1,12 @@
 #include"test.hpp"
 
+    member::member(string a,string b,string c,double d){
+        this->id = a;    
+        this->password = b;
+        this->name = c;
+        this->money = d;
+    }
+
     bool member:: match_password(string password_in){
         if(this->password == password_in)
             return 1;
@@ -11,19 +18,7 @@
         this->money += a;
         return;
     }
-
-    void member:: new_card(string a,string b,string c,double d){
-        this->id = a;
-        this->password = b;
-        this->name = c;
-        this->money = d;
-        return;
-    }
     
-    void member:: money_refund(){
-        return;
-    }
-
     string member:: show_id(){
         return this->id;
     }
@@ -43,10 +38,7 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-     void add_card(){
 
-         return;
-     }
      void query_card(){
          return;
      }

@@ -1,9 +1,35 @@
 #include"test.hpp"
+using itor_map = map<string,member>::iterator;
+
 int main(){
-        while(!login());
-            cout<<"请重试"<<endl;
-        int i;
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        int i,log = 0;
         cout<<"欢迎使用网络计费系统"<<endl;
+        cout<<"请先登录或开卡"<<endl
+            <<"1.登录"<<endl
+            <<"2.添加卡"<<endl
+            <<"3.退出"<<endl;
+        cin>>i;
+        while(!log){
+            switch(i){
+                case 1:
+                    login();
+                    log = 1;
+                    break;
+                case 2:
+                    add_card();
+                    break;
+                case 3: 
+                    return 0;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        system("cls");
+        welcome();
         cout<<"1.添加卡"<<endl
             <<"2.查询卡"<<endl
             <<"3.上机"<<endl
