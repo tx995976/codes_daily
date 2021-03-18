@@ -1,10 +1,11 @@
-#include"test.hpp"
+#include"member.hpp"
 
     member::member(string a,string b,string c,double d){
         this->id = a;    
         this->password = b;
         this->name = c;
         this->money = d;
+        this->status = 0;
     }
 
     bool member:: match_password(string password_in){
@@ -18,7 +19,12 @@
         this->money += a;
         return;
     }
-    
+
+    void member::money_result(double a){
+        this->money -= a;
+        return;
+    }
+
     string member:: show_id(){
         return this->id;
     }
@@ -39,9 +45,7 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-     void query_card(){
-         return;
-     }
+     
      void start_up(){
          return;
      }

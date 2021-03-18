@@ -1,4 +1,4 @@
-#include"test.hpp"
+#include"member.hpp"
 
 using itor_map = map<string,member>::iterator;
 map<string,member> data_tree;                  ///////////索引树
@@ -6,6 +6,9 @@ itor_map now_contrl;
 int i;
 
 //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+
 void login(){
     string a,b;
     system("cls");
@@ -15,7 +18,7 @@ void login(){
     while(temp == data_tree.end()){
         cout<<"id不存在,请重试"<<endl<<"id:";
         cin>>a;
-        itor_map temp = data_tree.find(a);
+        temp = data_tree.find(a);
     }
     cout<<"password:";
     cin>>b;
@@ -30,18 +33,31 @@ void welcome(){
     cout<<"欢迎:"<<now_contrl->second.show_name()<<endl;
 }
 
+
 //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+void query_card(){
+        string status;
+        if(now_contrl->second.status == 1)
+            status = "online";
+        else
+            status ="offline";    
+        cout<<"当前用户:"<<now_contrl->second.show_name()<<"     余额:"<<now_contrl->second.show_money()<<endl
+            <<"状态: "<<status<<endl;
+        return;
+}
 
 void add_card(){
          string temp,temp1,temp3;
          double temp2;
-         cout<<"输入你的名字:";
+         cout<<"输入你的名字: ";
          cin>>temp;
-         cout<<"输入你的id";
+         cout<<"输入你的id: ";
          cin>>temp3;
-         cout<<"输入你的密码";
+         cout<<"输入你的密码: ";
          cin>>temp1;
-         cout<<"输入你的开卡金额";
+         cout<<"输入你的开卡金额: ";
          cin>>temp2;
          member new_card(temp3,temp1,temp,temp2);
          data_tree[temp3] = new_card;
@@ -49,21 +65,28 @@ void add_card(){
          return;
      }
 
-    void delete_card(){
-        itor_map temp = now_contrl;
-        login();
+    bool delete_card(){
+        string b;
+        cout<<"password:";
+        cin>>b;
+        while(!(now_contrl->second.match_password(b))){
+            cout<<"密码错误，请重试"<<endl<<"password:";
+            cin>>b;
+        }
         cout<<now_contrl->second.show_name()<<" 您确定要退卡吗?"<<endl<<"1.是      2.否"<<endl;
         cin>>i;
         if(i){
             cout<<"退卡已完成"<<endl
                 <<"姓名:"<<now_contrl->second.show_name()<<"        "<<"金额:"<<now_contrl->second.show_money()<<endl;
             data_tree.erase(now_contrl);
+            return 1;
         }
-        return;
+        return 0;
      }
 
 
 
+//////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
 void data_read(){

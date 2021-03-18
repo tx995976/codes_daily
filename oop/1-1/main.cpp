@@ -1,13 +1,9 @@
-#include"test.hpp"
+#include"member.hpp"
 using itor_map = map<string,member>::iterator;
+int login_if = 1;
 
-int main(){
-        data_read();        //////////初始化///////////
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////
-        int i,log = 0;
+void start(){
+    int i,log = 0;
         while(!log){
             cout<<endl<<"欢迎使用网络计费系统"<<endl;
             cout<<"请先登录或开卡"<<endl
@@ -25,12 +21,14 @@ int main(){
                     break;
                 case 3: 
                     data_write();
-                    return 0;
+                    login_if = 0;
+                    return;
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////
         system("cls");
         while(1){
+            cout<<endl;
             welcome();
             cout<<"1.添加卡"<<endl
                 <<"2.查询卡"<<endl
@@ -45,6 +43,7 @@ int main(){
             cin>>i;
             switch(i){
                 case 1:       
+                    system("cls");
                     add_card();         
                     continue;   
                 case 2:
@@ -66,14 +65,23 @@ int main(){
                     count_sys();
                     continue;  
                 case 8:
-                    delete_card();
+                    system("cls");
+                    if(delete_card())
+                        return;
                     continue;  
                 case 0:
                     data_write();
-                    return 0; 
+                    return; 
                 default:
                     cout<<"输入不符合要求"<<endl;
                     continue;
             }
         }
-    }
+}
+
+int main(){
+    data_read();        //////////初始化///////////
+    while(login_if)
+        start();
+    return 0;
+}
