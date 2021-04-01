@@ -75,5 +75,6 @@
         "queue": "cpp"
     },
     "cmake.configureOnOpen": false,
-    "python.pythonPath": "C:\\Program Files\\Python2\\python.exe"
+    "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+    "editor.fontFamily": "Source Code Pro, Consolas, 'Courier New', monospace"
 }

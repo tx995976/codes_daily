@@ -1,6 +1,7 @@
 #include<iostream>
 
 using namespace std; 
+#ifndef Myclass
 	class MyClass { 
 		public: 
 		MyClass();
@@ -9,3 +10,5 @@ using namespace std;
 	private: 
 		int x, y; 
 	}; 
+
+#endif

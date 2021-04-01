@@ -6,7 +6,6 @@ class Shape{
     public:
         virtual  ~Shape(){}
         Shape(){}    
-
         virtual double perimeter() = 0;   
         virtual double area() = 0;
         virtual void   show(){}   

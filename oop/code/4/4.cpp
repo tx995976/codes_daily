@@ -9,7 +9,7 @@ class myPoint {
       double GetX() { return x;}
       double GetY() {return y;}
       void SetX(double x0) {x=x0;}
-      void SetY(double y0) {x=y0;} 
+      void SetY(double y0) {y=y0;} 
       void SetPoint(double x0,double y0) {x=x0;y=y0;}
       void SetPoint(myPoint &np) { x=np.x; y=np.y;}
       double  GetLength(myPoint p) {
@@ -23,12 +23,14 @@ class Triangle{
    myPoint p1,p2,p3;
    public:
    Triangle(double p1_x,double p1_y,double p2_x,double p2_y,double p3_x,double p3_y){
-      p1.SetX(p1_x);
-      p1.SetX(p1_y);
-      p2.SetX(p2_x);
-      p2.SetX(p2_y);
-      p3.SetX(p3_x);
-      p3.SetX(p3_y);
+      ////////////////////////三角形自检///////////////////
+      
+
+
+      ///////////////////////////////////////////////////
+      p1.SetPoint(p1_x,p1_y);
+      p2.SetPoint(p2_x,p2_y);
+      p3.SetPoint(p3_x,p3_y);
    }
    Triangle(){}
    ~Triangle(){}
@@ -45,11 +47,9 @@ class Triangle{
 };
 
 int main(){
-   Triangle test;
-
-
-
-
+   Triangle test(0,0,7,7,14,0);
+   cout<<"length is: "<<test.get_length()<<endl;
+   cout<<"sqrt is: "<<test.get_sqrt()<<endl;
    return 0;
 }
 

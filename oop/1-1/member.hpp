@@ -7,6 +7,7 @@
 #include<string>
 #include<iomanip>
 
+
 using namespace std;
 
         class member{
@@ -44,8 +45,8 @@ using namespace std;
     extern void count_sys();
     extern bool delete_card();
     //
-    extern void data_read();
-    extern void data_write();
+    extern void user_data_read();
+    extern void user_data_write();
     //
 
 

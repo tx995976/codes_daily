@@ -10,10 +10,10 @@ class test{
     }
     ~test(){}
     double func_1(){
-        return this->length + this->wide;
+        return (this->length + this->wide)*2;
     }
     double func_2(){
-        return this->length * this->wide;
+        return (this->length * this->wide);
     }
 };
 

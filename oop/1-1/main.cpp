@@ -1,15 +1,16 @@
 #include"member.hpp"
+#include<iostream>
 using itor_map = map<string,member>::iterator;
 int login_if = 1;
 
 void start(){
     int i,log = 0;
         while(!log){
-            cout<<endl<<"»¶Ó­Ê¹ÓÃÍøÂç¼Æ·ÑÏµÍ³"<<endl;
-            cout<<"ÇëÏÈµÇÂ¼»ò¿ª¿¨"<<endl
-                <<"1.µÇÂ¼"<<endl
-                <<"2.Ìí¼Ó¿¨"<<endl
-                <<"3.ÍË³ö"<<endl;
+            cout<<endl<<"æ¬¢è¿Žä½¿ç”¨ç½‘ç»œè®¡è´¹ç³»ç»Ÿ"<<endl;
+            cout<<"è¯·å…ˆç™»å½•æˆ–å¼€å¡"<<endl
+                <<"1.ç™»å½•"<<endl
+                <<"2.æ·»åŠ å¡"<<endl
+                <<"3.é€€å‡º"<<endl;
             cin>>i;
             switch(i){
                 case 1:
@@ -20,7 +21,7 @@ void start(){
                     add_card();
                     break;
                 case 3: 
-                    data_write();
+                    user_data_write();
                     login_if = 0;
                     return;
             }
@@ -30,16 +31,16 @@ void start(){
         while(1){
             cout<<endl;
             welcome();
-            cout<<"1.Ìí¼Ó¿¨"<<endl
-                <<"2.²éÑ¯¿¨"<<endl
-                <<"3.ÉÏ»ú"<<endl
-                <<"4.ÏÂ»ú"<<endl
-                <<"5.³äÖµ"<<endl
-                <<"6.ÍË·Ñ"<<endl
-                <<"7.²éÑ¯Í³¼Æ"<<endl
-                <<"8.×¢Ïú¿¨"<<endl
-                <<"0.ÍË³ö"<<endl;
-            cout<<"ÇëÊäÈëÏàÓ¦¹¦ÄÜ±àºÅ"<<endl;
+            cout<<"1.æ·»åŠ å¡"<<endl
+                <<"2.æŸ¥è¯¢å¡"<<endl
+                <<"3.ä¸Šæœº"<<endl
+                <<"4.ä¸‹æœº"<<endl
+                <<"5.å……å€¼"<<endl
+                <<"6.é€€è´¹"<<endl
+                <<"7.æŸ¥è¯¢ç»Ÿè®¡"<<endl
+                <<"8.æ³¨é”€å¡"<<endl
+                <<"0.é€€å‡º"<<endl;
+            cout<<"è¯·è¾“å…¥ç›¸åº”åŠŸèƒ½ç¼–å·"<<endl;
             cin>>i;
             switch(i){
                 case 1:       
@@ -70,17 +71,18 @@ void start(){
                         return;
                     continue;  
                 case 0:
-                    data_write();
+                    user_data_write();
                     return; 
                 default:
-                    cout<<"ÊäÈë²»·ûºÏÒªÇó"<<endl;
+                    cout<<"è¾“å…¥ä¸ç¬¦åˆè¦æ±‚"<<endl;
                     continue;
             }
         }
 }
 
 int main(){
-    data_read();        //////////³õÊ¼»¯///////////
+    system("chcp 65001");
+    user_data_read();        //////////åˆå§‹åŒ–///////////
     while(login_if)
         start();
     return 0;

@@ -186,12 +186,10 @@ class T_prism:public Triangle{
 };
 class Geometric_shape{
     public:
-        void show(){}
-        double perimeter(){}
-        double area(){}
-        double volume(){}
-
-
+       virtual void show(){}
+       virtual double perimeter(){}
+       virtual double area(){}
+       virtual double volume(){}
 };
 int main()
 {

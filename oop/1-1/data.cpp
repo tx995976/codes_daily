@@ -1,7 +1,8 @@
 #include"member.hpp"
+#include"data_info.hpp"
 
 using itor_map = map<string,member>::iterator;
-map<string,member> data_tree;                  ///////////Ë÷ÒýÊ÷
+map<string,member> data_tree;                  ///////////ç´¢å¼•æ ‘
 itor_map now_contrl;
 int i;
 
@@ -16,21 +17,21 @@ void login(){
     cin>>a;
     itor_map temp = data_tree.find(a);
     while(temp == data_tree.end()){
-        cout<<"id²»´æÔÚ,ÇëÖØÊÔ"<<endl<<"id:";
+        cout<<"idä¸å­˜åœ¨,è¯·é‡è¯•"<<endl<<"id:";
         cin>>a;
         temp = data_tree.find(a);
     }
     cout<<"password:";
     cin>>b;
     while(!(temp->second.match_password(b))){
-        cout<<"ÃÜÂë´íÎó£¬ÇëÖØÊÔ"<<endl<<"password:";
+        cout<<"å¯†ç é”™è¯¯ï¼Œè¯·é‡è¯•"<<endl<<"password:";
         cin>>b;
     }
     now_contrl = temp;
 }
 
 void welcome(){
-    cout<<"»¶Ó­:"<<now_contrl->second.show_name()<<endl;
+    cout<<"æ¬¢è¿Ž:"<<now_contrl->second.show_name()<<endl;
 }
 
 
@@ -43,25 +44,25 @@ void query_card(){
             status = "online";
         else
             status ="offline";    
-        cout<<"µ±Ç°ÓÃ»§:"<<now_contrl->second.show_name()<<"     Óà¶î:"<<now_contrl->second.show_money()<<endl
-            <<"×´Ì¬: "<<status<<endl;
+        cout<<"å½“å‰ç”¨æˆ·:"<<now_contrl->second.show_name()<<"     ä½™é¢:"<<now_contrl->second.show_money()<<endl
+            <<"çŠ¶æ€: "<<status<<endl;
         return;
 }
 
 void add_card(){
          string temp,temp1,temp3;
          double temp2;
-         cout<<"ÊäÈëÄãµÄÃû×Ö: ";
+         cout<<"è¾“å…¥ä½ çš„åå­—: ";
          cin>>temp;
-         cout<<"ÊäÈëÄãµÄid: ";
+         cout<<"è¾“å…¥ä½ çš„id: ";
          cin>>temp3;
-         cout<<"ÊäÈëÄãµÄÃÜÂë: ";
+         cout<<"è¾“å…¥ä½ çš„å¯†ç : ";
          cin>>temp1;
-         cout<<"ÊäÈëÄãµÄ¿ª¿¨½ð¶î: ";
+         cout<<"è¾“å…¥ä½ çš„å¼€å¡é‡‘é¢: ";
          cin>>temp2;
          member new_card(temp3,temp1,temp,temp2);
          data_tree[temp3] = new_card;
-         cout<<"×¢²áÒÑÍê³É"<<endl;
+         cout<<"æ³¨å†Œå·²å®Œæˆ"<<endl;
          return;
      }
 
@@ -70,14 +71,14 @@ void add_card(){
         cout<<"password:";
         cin>>b;
         while(!(now_contrl->second.match_password(b))){
-            cout<<"ÃÜÂë´íÎó£¬ÇëÖØÊÔ"<<endl<<"password:";
+            cout<<"å¯†ç é”™è¯¯ï¼Œè¯·é‡è¯•"<<endl<<"password:";
             cin>>b;
         }
-        cout<<now_contrl->second.show_name()<<" ÄúÈ·¶¨ÒªÍË¿¨Âð?"<<endl<<"1.ÊÇ      2.·ñ"<<endl;
+        cout<<now_contrl->second.show_name()<<" æ‚¨ç¡®å®šè¦é€€å¡å—?"<<endl<<"1.æ˜¯      2.å¦"<<endl;
         cin>>i;
         if(i){
-            cout<<"ÍË¿¨ÒÑÍê³É"<<endl
-                <<"ÐÕÃû:"<<now_contrl->second.show_name()<<"        "<<"½ð¶î:"<<now_contrl->second.show_money()<<endl;
+            cout<<"é€€å¡å·²å®Œæˆ"<<endl
+                <<"å§“å:"<<now_contrl->second.show_name()<<"        "<<"é‡‘é¢:"<<now_contrl->second.show_money()<<endl;
             data_tree.erase(now_contrl);
             return 1;
         }
@@ -88,12 +89,12 @@ void add_card(){
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-
-void data_read(){
+////æ”¹äºŒè¿›åˆ¶
+void user_data_read(){
     ifstream data_in;
     string a,b,c;
     double d;
-    data_in.open("data.txt",ios::in);
+    data_in.open("data.data",ios::in);
     while(data_in.good()){
         data_in>>a>>b>>c>>d;
         member temp(a,b,c,d);
@@ -103,11 +104,11 @@ void data_read(){
     return;
 }
 
- void data_write(){
+ void user_data_write(){
     ofstream data_out;
     string a,b,c;
     double d;
-    data_out.open("data.txt",ios::out);
+    data_out.open("data.data",ios::out);
     for(itor_map now = data_tree.begin();now != data_tree.end();now++){
         a = now->second.show_id();
         b = now->second.show_password();
@@ -120,3 +121,19 @@ void data_read(){
 }
 
 //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+ void start_up(){
+    time_t now = time(NULL);
+    record_online(now);
+    cout<<"æ¬¢è¿Žä½¿ç”¨ï¼Œå·²å¼€æœº"<<endl;
+    cout<<"å½“å‰æ—¶é—´ï¼š "<<(char*)ctime(&now)<<endl;
+    now_contrl->second.status = 1;
+ }
+ void shut_down(){
+    time_t now = time(NULL);
+    record_offline(now);
+    cout<<"æ¬¢è¿Žä¸‹æ¬¡ä½¿ç”¨"<<endl;
+    cout<<"å½“å‰æ—¶é—´ï¼š "<<(char*)ctime(&now)<<endl;
+    now_contrl->second.status = 0;
+
+ }

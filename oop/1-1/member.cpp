@@ -46,12 +46,6 @@
 
 
      
-     void start_up(){
-         return;
-     }
-     void shut_down(){
-         return;
-     }
      void add_money(){
          return;
      }
