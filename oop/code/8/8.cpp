@@ -5,12 +5,21 @@
 
 using namespace std;
 
+class Geometric_shape{
+    public:
+        Geometric_shape(){}
+        virtual ~Geometric_shape(){}
+        virtual void show() = 0;
+        virtual double perimeter() = 0;
+        virtual double area() = 0;
+        virtual double volume() = 0;
+};
 class Circle :public Geometric_shape {
     protected:
             double R;
     public:
         Circle(){}
-        Circle(double R){
+        Circle(double R):Geometric_shape(){
             this->R = R;
         }        
         ~Circle(){}
@@ -35,14 +44,14 @@ class Rectangle: public Geometric_shape{
     public:
         Rectangle(){}        
         ~Rectangle(){}
-        Rectangle(double longth,double width){
+        Rectangle(double longth,double width):Geometric_shape(){
             this->longth = longth;
             this->width = width;
         }
         void show(){
             cout<<this->longth<<" "<<this->width<<endl;
         }    
-        double permeter(){
+        double perimeter(){
             return 2*(this->longth + this->width);
         }    
         double area(){
@@ -58,7 +67,7 @@ class Triangle: public Geometric_shape{
         double l1,l2,l3;
     public:        
         ~Triangle(){}
-        Triangle(double l1,double l2, double l3){
+        Triangle(double l1,double l2, double l3):Geometric_shape(){
             this->l1 = l1;                
             this->l2 = l2;                
             this->l3 = l3;                    
@@ -90,7 +99,7 @@ class Box : public Rectangle {
             cout<<this->H<<" "<<this->longth<<" "<<this->width<<endl;
         }
         double perimeter(){
-            return Rectangle::permeter();
+            return Rectangle::perimeter();
         }
         double area(){
             return Rectangle::area();
@@ -184,15 +193,9 @@ class T_prism:public Triangle{
             return this->H * Triangle::area();
         }
 };
-class Geometric_shape{
-    public:
-       virtual void show(){}
-       virtual double perimeter(){}
-       virtual double area(){}
-       virtual double volume(){}
-};
 int main()
 {
+    system("chcp 65001");
 	Geometric_shape * gs[]={
         new	Circle(10),new Rectangle(6,8),new Triangle(3,4,5),
         new Box(6,8,3),new Cylinder(10,3),new Cone(10,3),

@@ -25,7 +25,6 @@ class info_cost{
     bool paid_if;
 };
 
-
 class info_online{
     public:
     string id;
@@ -47,11 +46,14 @@ class info_money_add{
 
 class all_member_info{
     public:
-    info_member member;
-    vector<info_cost> cost;
-    vector<info_online> online;
-    vector<info_offline> offline;
-    vector<info_money_add> money_add;
+        all_member_info(){}
+        ~all_member_info(){}        
+        info_member member;
+        vector<info_cost> cost;
+        vector<info_online> online;
+        vector<info_offline> offline;
+        vector<info_money_add> money_add;
+
 };
 
 extern void record_offline(time_t time);
@@ -59,13 +61,21 @@ extern void record_online(time_t time);
 extern void once_cost();
 extern void send_Key(string id);
 
+//////////////////////////////////////////////////////
 
+extern void user_record_online();
+extern void user_record_offline();
+extern void user_card_info();
+extern void user_record_cost();
 
+///////////////////////////////////////////////////////
 
+extern void admin_search_id();
+extern void admin_search_non();
+extern void admin_list_users();
+extern void admin_delete_card();
 
-
-
-
+//////////////////////////////////////////////////////
 
 
 

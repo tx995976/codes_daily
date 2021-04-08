@@ -4,7 +4,7 @@ using itor_map = map<string,member>::iterator;
 int login_if = 1;
 
 void start(){
-    int i,log = 0;
+    int i = 1,log = 0;
         while(!log){
             cout<<endl<<"欢迎使用网络计费系统"<<endl;
             cout<<"请先登录或开卡"<<endl

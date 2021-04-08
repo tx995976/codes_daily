@@ -7,6 +7,7 @@
 #include<string>
 #include<iomanip>
 
+#ifndef member_hpp
 
 using namespace std;
 
@@ -30,6 +31,7 @@ using namespace std;
                 string show_password();
                 string show_name();
                 double show_money();
+                void cost_money(double cost);
         };
 
     //
@@ -49,8 +51,7 @@ using namespace std;
     extern void user_data_write();
     //
 
-
-
+#endif
 
 
 

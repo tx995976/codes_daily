@@ -1,0 +1,1 @@
+g++   data_info.o data.o main.o member.o -o main
