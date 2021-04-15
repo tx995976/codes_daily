@@ -56,9 +56,7 @@
      void return_money(){
          return;
      }
-     void count_sys(){
-         return;
-     }
+     
      
      
 

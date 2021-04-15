@@ -9,7 +9,9 @@
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-finput-charset=UTF-8",//输入编译器文本编码 默认为UTF-8
+                "-fexec-charset=UTF-8"//编译器输出文本编码 自行选择
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

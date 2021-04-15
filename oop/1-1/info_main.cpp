@@ -1,6 +1,7 @@
 #include"data_info.hpp"
+#include"member.hpp"
 
-void info_welcome(){
+void user_info_welcome(){
     system("cls");
     cout<<"用户数据记录"<<endl;
     cout<<"1.上机记录"<<endl

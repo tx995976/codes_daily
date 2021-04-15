@@ -36,9 +36,32 @@ void welcome(){
     cout<<"欢迎:"<<now_contrl->second.show_name()<<endl;
 }
 
+void count_sys(){
+        user_info_welcome();
+        return;
+     }
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
+
+void add_money(){
+    double temp;
+    cout<<"输入充值金额: "<<endl;
+    cin>>temp;
+    now_contrl->second.money_add(temp);
+    cout<<"充值完成"<<endl
+        <<"金额: "<<temp<<" $"<<endl;
+
+    //////////////////////////////////////////
+
+
+
+
+
+
+
+         return;
+     }
 
 void query_card(){
         string status;
@@ -101,7 +124,6 @@ void add_card(){
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-////改二进制
 void user_data_read(){
     ifstream data_in;
     string a,b,c;
@@ -136,6 +158,10 @@ void user_data_read(){
 //////////////////////////////////////////////////////////////////////////////
  void start_up(){
     time_t now = time(NULL);
+    if(now_contrl->second.status == 1){
+        cout<<"已上机"<<endl;
+        return;
+    }
     cout<<"欢迎使用，已开机"<<endl;
     cout<<"当前时间： "<<(char*)ctime(&now)<<endl;
     record_online(now);
@@ -143,8 +169,15 @@ void user_data_read(){
  }
  void shut_down(){
     time_t now = time(NULL);
+    double cost = record_offline(now);
+    if(now_contrl->second.status == 0){
+        cout<<"已下机"<<endl;
+        return;
+    }
     cout<<"欢迎下次使用"<<endl;
-    cout<<"当前时间： "<<(char*)ctime(&now)<<endl;
+    cout<<"当前时间： "<<(char*)ctime(&now)<<endl
+        <<"本次消费: "<<cost<<" $"<<endl
+        <<"余额: "<<now_contrl->second.show_money()<<" $"<<endl;
     now_contrl->second.status = 0;
-    record_offline(now);
+    now_contrl->second.cost_money(now);
  }

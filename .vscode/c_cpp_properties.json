@@ -29,7 +29,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "C:/mingw64/include",
+                "C:\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include"
             ],
             "defines": [
                 "_DEBUG",
@@ -38,7 +39,7 @@
             ],
             "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
             "cStandard": "gnu11",
-            "cppStandard": "gnu++14",
+            "cppStandard": "gnu++17",
             "intelliSenseMode": "gcc-x64"
         },
         {
