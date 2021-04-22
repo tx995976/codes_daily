@@ -13,7 +13,8 @@ using namespace std;
 
         class member{
             public:
-                int status = 0;
+                int status = 1;
+                bool health = 1;
             private:
                 string id;
                 string password;

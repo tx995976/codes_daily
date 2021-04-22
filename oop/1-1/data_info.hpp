@@ -75,6 +75,8 @@ extern void admin_search_id();
 extern void admin_search_non();
 extern void admin_list_users();
 extern void admin_delete_card();
+
+extern void change_user_admin(string id);
 //////////////////////////////////////////////////////
 
 

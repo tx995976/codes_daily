@@ -5,7 +5,7 @@
         this->password = b;
         this->name = c;
         this->money = d;
-        this->status = 0;
+        this->status = 1;
     }
 
     bool member:: match_password(string password_in){

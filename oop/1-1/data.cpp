@@ -12,8 +12,8 @@ void login(){
     cout<<"id:";
     cin>>a;
     itor_map temp = data_tree.find(a);
-    while(temp == data_tree.end()){
-        cout<<"id不存在,请重试"<<endl<<"id:";
+    while(temp == data_tree.end()||temp->second.health == 0){
+        cout<<"id不存在或已注销,请重试"<<endl<<"id:";
         cin>>a;
         temp = data_tree.find(a);
     }
@@ -132,7 +132,7 @@ void add_card(){
         if(i == 1){
             cout<<"退卡已完成"<<endl
                 <<"姓名:"<<now_contrl->second.show_name()<<"        "<<"金额:"<<now_contrl->second.show_money()<<endl;
-            data_tree.erase(now_contrl);
+            now_contrl->second.health = 0;
             return 1;
         }
         else
@@ -148,7 +148,7 @@ void user_data_read(){
     ifstream data_in("data.data",ios::in);
     member temp;
     while(data_in>>temp.id){
-        data_in>>temp.password>>temp.name>>temp.money>>temp.status;
+        data_in>>temp.password>>temp.name>>temp.money>>temp.status>>temp.health;
         data_tree[temp.id] = temp;
     }
     data_in.close();
@@ -162,7 +162,7 @@ void user_data_read(){
     ofstream data_out;
     data_out.open("data.data",ios::out);
     for(itor_map now = data_tree.begin();now != data_tree.end();now++){
-        data_out<<now->second.id<<" "<<now->second.password<<" "<<now->second.name<<" "<<now->second.money<<" "<<now->second.status<<endl;
+        data_out<<now->second.id<<" "<<now->second.password<<" "<<now->second.name<<" "<<now->second.money<<" "<<now->second.status<<" "<<now->second.health<<endl;
     }
     data_out.close();
     ////////////////////////
@@ -175,6 +175,8 @@ void user_data_read(){
 //////////////////////////////////////////////////////////////////////////////
  void start_up(){
     time_t now = time(NULL);
+    if(now_contrl->second.show_money() < 0)
+        cout<<"已欠费"<<endl;
     if(now_contrl->second.status == 1){
         cout<<"已上机"<<endl;
         return;
