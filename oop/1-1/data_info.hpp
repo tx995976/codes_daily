@@ -11,10 +11,10 @@ class info_member{
     public:
         string id;
         string name;
-        time_t card_start;
-        time_t card_end;
+        time_t card_start = 0;
+        time_t card_end = 0;
         double money_all;
-        bool status;
+        bool status = 1;
     public:
         info_member(){}
         ~info_member(){}        
@@ -23,8 +23,8 @@ class info_member{
 
 class info_cost {
     public:
-    time_t online;
-    time_t offline;
+    time_t online = 0;
+    time_t offline = 0;
     double cost;
     public:
     void show_online();
@@ -33,7 +33,7 @@ class info_cost {
 
 class info_money_add{
     public:
-    time_t time;
+    time_t time = 0;
     double add_money;
     void show();
 };
@@ -53,16 +53,16 @@ extern void map_write();
 ///////////////////////////////////////////////
 extern void user_info_member_load();
 extern void user_info_cost_load();
-extern void user_info_money_add_load();
 extern void user_info_member_write();
 extern void user_info_cost_write();
+extern void user_info_money_add_load();
 extern void user_info_money_add_write();
 //////////////////////////////////////////
 extern void record_online(time_t time);
-extern double record_offline(time_t time);
 extern void record_add_money(time_t time,double money);
-extern double once_cost();
 extern void send_Key(string id);
+extern double record_offline(time_t time);
+extern double once_cost();
 //////////////////////////////////////////////////////
 extern void user_info_welcome();
 extern void user_record_online();

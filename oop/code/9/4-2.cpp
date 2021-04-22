@@ -47,13 +47,10 @@ class vector_{
         it.y -= other.y;
         return it;
    }
-
-
-
     int main(){
-        vector_ test1(2,2),test2(3,3),test3,test4;
+        vector_ test1(6,7),test2(7,8),test3,test4;
         test3 = test1 + test2;
-        test4 = test2 - test1;
+        test4 = test1 - test2;
         test3.show();
         test4.show(); 
         test3 += test4;

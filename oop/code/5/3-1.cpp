@@ -55,7 +55,7 @@ class D2 : virtual public Base {                             ///////////////////
 class D12 : public D1, public D2 {
     public :
         D12(int p11,int p12,int p13,int p21,int p22,int p23,int p)
-        : D1(p11, p12, p13), D2(p21, p22, p23),Base(p11,p12) { data5 = p; }           ////////////////////////////////////////////////////////
+        : D1(p11, p12, p13), D2(p21, p22, p23),Base(p11,p12) { data5 = p; }       
         int Inc1( )
         {   D1::Inc1();   
             D2::Inc1( );
@@ -65,7 +65,8 @@ class D12 : public D1, public D2 {
         void Display( )
         { 
             cout<<" data1 = "<<data1<<"  data2 = " << data2 <<endl;       // ①
-            cout<<" data3 = "<<data3<<"  data4 = "<< data4 <<"    data5 = " << data5 <<endl<<endl; 
+            cout<<" data3 = "<<data3<<"  data4 = "<< data4 
+                <<"    data5 = " << data5 <<endl<<endl; 
             
             cout<< "D1::Display( )----"<<endl<<endl;
             D1::Display( );

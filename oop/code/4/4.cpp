@@ -23,11 +23,6 @@ class Triangle{
    myPoint p1,p2,p3;
    public:
    Triangle(double p1_x,double p1_y,double p2_x,double p2_y,double p3_x,double p3_y){
-      ////////////////////////三角形自检///////////////////
-      
-
-
-      ///////////////////////////////////////////////////
       p1.SetPoint(p1_x,p1_y);
       p2.SetPoint(p2_x,p2_y);
       p3.SetPoint(p3_x,p3_y);
@@ -43,7 +38,6 @@ class Triangle{
          double p = (a+b+c)/2;
          return sqrt(p*(p-a)*(p-b)*(p-c));
    }
-
 };
 
 int main(){

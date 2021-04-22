@@ -6,10 +6,6 @@ map<string,member> data_tree;                  ///////////索引树
 itor_map now_contrl;
 int i;
 
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-
 void login(){
     string a,b;
     system("cls");
@@ -28,8 +24,19 @@ void login(){
         cin>>b;
     }
     now_contrl = temp;
+
     //////////////////////////////////
     send_Key(now_contrl->second.show_id());
+    user_info_cost_load();
+    user_info_member_load();
+    user_info_money_add_load();
+}
+
+void logout(){
+    user_info_money_add_write();
+    user_info_cost_write();
+    user_info_member_write();
+    return;
 }
 
 void welcome(){
@@ -44,7 +51,26 @@ void count_sys(){
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
+
+void return_money(){
+    double temp;
+    if(now_contrl->second.show_money() <= 0){
+        cout<<"当前账户无法退费"<<endl;
+        return;
+    }
+    cout<<"输入您希望的退费金额:"<<" (当前金额: "<<now_contrl->second.show_money()<<")"<<endl;
+    cin>>temp;
+    if(temp > now_contrl->second.show_money())
+        cout<<"金额不足"<<endl;
+    else{
+        now_contrl->second.cost_money(temp);
+        cout<<"退费完成"<<endl;
+    }
+    return;
+}
+
 void add_money(){
+    time_t now = time(NULL);
     double temp;
     cout<<"输入充值金额: "<<endl;
     cin>>temp;
@@ -53,15 +79,9 @@ void add_money(){
         <<"金额: "<<temp<<" $"<<endl;
 
     //////////////////////////////////////////
-
-
-
-
-
-
-
-         return;
-     }
+    record_add_money(now,temp);
+    return;
+}
 
 void query_card(){
         string status;
@@ -125,32 +145,29 @@ void add_card(){
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 void user_data_read(){
-    ifstream data_in;
-    string a,b,c;
-    double d;
-    data_in.open("data.data",ios::in);
-    while(data_in.good()){
-        data_in>>a>>b>>c>>d;
-        member temp(a,b,c,d);
-        data_tree[a] = temp;
+    ifstream data_in("data.data",ios::in);
+    member temp;
+    while(data_in>>temp.id){
+        data_in>>temp.password>>temp.name>>temp.money>>temp.status;
+        data_tree[temp.id] = temp;
     }
     data_in.close();
+    ////////////////////////////////
+    map_load();
+    ////////////////////////////////
     return;
 }
 
  void user_data_write(){
     ofstream data_out;
-    string a,b,c;
-    double d;
     data_out.open("data.data",ios::out);
     for(itor_map now = data_tree.begin();now != data_tree.end();now++){
-        a = now->second.show_id();
-        b = now->second.show_password();
-        c = now->second.show_name();
-        d = now->second.show_money();
-        data_out<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
+        data_out<<now->second.id<<" "<<now->second.password<<" "<<now->second.name<<" "<<now->second.money<<" "<<now->second.status<<endl;
     }
     data_out.close();
+    ////////////////////////
+    map_write();
+    ///////////////////////
     return;
 }
 
@@ -174,10 +191,10 @@ void user_data_read(){
         cout<<"已下机"<<endl;
         return;
     }
+    now_contrl->second.status = 0;
+    now_contrl->second.cost_money(cost);
     cout<<"欢迎下次使用"<<endl;
     cout<<"当前时间： "<<(char*)ctime(&now)<<endl
         <<"本次消费: "<<cost<<" $"<<endl
         <<"余额: "<<now_contrl->second.show_money()<<" $"<<endl;
-    now_contrl->second.status = 0;
-    now_contrl->second.cost_money(now);
  }

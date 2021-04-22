@@ -13,14 +13,12 @@ class member{
                 double money;
         };
 int main(){
-    int i;
-    time_t now,now2;
-    now = time(NULL);
-    char* t_now = ctime(&now);
-    tm *now_t = localtime(&now);
-    cout<<"tap to continue"<<endl;    
-    cin>>i;
-    time(&now2);
-    time_t it = now2 - now;
-    cout<<it<<endl;
+    time_t a3 = 1619080326;
+    time_t a4 = 1619080246;
+    struct tm a1,a2;
+    localtime_s(&a1,&a3);
+    localtime_s(&a2,&a4);
+    cout<<a2.tm_sec<<endl<<a1.tm_sec<<endl;
+    
+
 }

@@ -9,17 +9,17 @@ class test{
         wide = b;
     }
     ~test(){}
-    double func_1(){
+    double perimeter(){
         return (this->length + this->wide)*2;
     }
-    double func_2(){
+    double Area(){
         return (this->length * this->wide);
     }
 };
 
 int main(){
     test a(20,50),b(3.6,4.5);
-    cout<<a.func_1()<<"  "<<a.func_2()<<endl;
-    cout<<b.func_1()<<"  "<<b.func_2()<<endl;
+    cout<<a.perimeter()<<"  "<<a.Area()<<endl;
+    cout<<b.perimeter()<<"  "<<b.Area()<<endl;
     return 0;
 }

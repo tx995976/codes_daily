@@ -29,11 +29,9 @@ class Circle :public Geometric_shape {
         double perimeter(){
             return 2*this->R*3.14;
         }
-
         double area(){
             return 3.14 * pow(this->R,2);
         }
-
         double volume(){
             return 0;
         }
@@ -60,7 +58,6 @@ class Rectangle: public Geometric_shape{
         double volume(){
             return 0;
         }
-
 };
 class Triangle: public Geometric_shape{
     protected:
@@ -107,7 +104,6 @@ class Box : public Rectangle {
         double volume(){
             return Rectangle::area() * this->H;
         }
-
 };
 class Cylinder: public Circle {
     protected:
@@ -209,14 +205,14 @@ int main()
 	cout<<"平面图形："<<endl;
     for (int i=0;i<3;i++)
 	   {
-		   cout<<"图形周长："<<gs[i]->perimeter()<<'\t';
+		cout<<"图形周长："<<gs[i]->perimeter()<<'\t';
         cout<<"图形面积："<<gs[i]->area()<<'\t';
-        cout<<"图形体积："<<gs[i]->volume()<<endl;
+        cout<<"图形体积："<<gs[i]->volume()<<endl<<endl;
     }
 	cout<<"立体图形："<<endl;
     for (int i=3;i<8;i++)
 	   {
-		   cout<<"图形底周长："<<gs[i]->perimeter()<<'\t';
+		cout<<"图形底周长："<<gs[i]->perimeter()<<'\t';
         cout<<"图形底面积："<<gs[i]->area()<<'\t';
         cout<<"图形体积  ："<<gs[i]->volume()<<endl;
     }

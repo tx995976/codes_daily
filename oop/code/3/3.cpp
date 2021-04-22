@@ -9,11 +9,11 @@ public:
     void printAll();
     void set_member(int size ,int *control);
 private:
-	int *ia;
+	int *ia = NULL; //////////////////////
 	int size;
 };
     IntArray::IntArray( int sz ) { 
-        set_member(sz,&this->size);
+        set_member(sz,this->ia);
     }
     IntArray:: IntArray( int *array, int sz ) { 
         set_member(sz,array);
@@ -29,17 +29,16 @@ private:
     cout<<endl;
     }
  
-    void IntArray::set_member(int size ,int *control){
-        this->size = size;
-        this->ia = new int [size];
-        if(control != &this->size){
-            for(int i = 0;i < size;i++)
-            ia[i] = control[i];
-        }
-        else{
-            for(int i = 0;i < size;i++)
-            ia[i] = 0;
-        }
+    void IntArray::set_member(int size_ ,int *control){
+        this->ia = new int [size_];
+        this->size = size_;
+        if(control == NULL)
+            for(int i = 0;i < size_;i++)
+                ia[i] = 0;
+        else
+            for(int i = 0;i < size_;i++)
+                ia[i] = control[i];
+            
     }
 
 int main()

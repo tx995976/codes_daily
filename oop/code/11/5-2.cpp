@@ -1,15 +1,15 @@
 #include<iostream>
-#include<fstream>
 #include<sstream>
-#include<vector>
+#include<cstdio>
 #include<string>
-
+#include<algorithm>
 
 using namespace std;
 
 class number{
     protected:
         string phone_num;
+        string region_num;
     public:
         friend void operator >>(istream &in,number &other);
         friend void operator <<(ostream &out,const number &other);
@@ -18,14 +18,19 @@ class number{
 
 
 void operator >> (istream &in,number &other){
-    in>>other.phone_num;
+    string a2;
+    in>>a2;
+    stringstream phone;
+    a2.erase(remove(a2.begin(),a2.end(),' '),a2.end());
+    replace(a2.begin(),a2.end(),'(',' ');
+    replace(a2.begin(),a2.end(),')',' ');
+    phone<<a2; 
+    phone>>other.region_num>>other.phone_num;
 }
 
 void operator <<(ostream &out,const number &other){
-    out << other.phone_num;
+    out <<"("<<other.region_num<<")"<< other.phone_num<<endl;
 }
-
-
 
 int main(){
     number a;

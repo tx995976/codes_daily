@@ -2,7 +2,6 @@
 #include<stack>
 using namespace std;
 const int MaxSize = 100; // 栈中能保存的最多元素个
-    
     template<class t>
     class Istack{
         public:
@@ -19,37 +18,35 @@ const int MaxSize = 100; // 栈中能保存的最多元素个
             int Top;          // 保存栈顶的当前位置
             
     };
-
     template<class t>
     Istack<t>::Istack(){
         this->Top = 0;
     }
-
     template<class t>
     void Istack<t>::Push(const t &n){
-        elem[Top++] = n;
+        if(Top == MaxSize)
+            cerr<<"full !"<<endl;
+        else
+            elem[Top++] = n;
     }
-
     template<class t>
     void Istack<t>::Pop(){
         if(Top == 0 )
-            cout<<"it's empty!"<<endl;
+            cerr<<"it's empty!"<<endl;
         else{
             int temp = Top;
             elem[--Top] = elem[temp];
         }
     }
-
     template<class t>
     t Istack<t>::GetTop(){
         if(Top == 0){
-            cout<<"it's empty!"<<endl;
+            cerr<<"it's empty!"<<endl;
             return elem[Top];
         }
         else
             return elem[Top-1];
     }
-
     template<class t>
     bool Istack<t>::Empty(){
         if(Top == 0)
@@ -57,12 +54,10 @@ const int MaxSize = 100; // 栈中能保存的最多元素个
         else
             return 0;
     }
-
     template<class t>
     int Istack<t>::Size(){
         return Top;        
     }
-
     template<class t>
     void Istack<t>::ClearStack(){
         for(int i = Top-1;i >= 0;i--)
@@ -71,10 +66,10 @@ const int MaxSize = 100; // 栈中能保存的最多元素个
     }
 
 int main(){ 
-    Istack<char> test;
-    test.Push('c');
-    test.Push('s');
-    test.Push('a');
+    Istack<string> test;
+    test.Push("first");
+    test.Push("second");
+    test.Push("third");
     cout<<test.GetTop()<<endl;
     test.Pop();
     cout<<test.GetTop()<<endl;

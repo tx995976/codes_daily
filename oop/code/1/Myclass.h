@@ -2,6 +2,7 @@
 
 using namespace std; 
 #ifndef Myclass
+
 	class MyClass { 
 		public: 
 		MyClass();

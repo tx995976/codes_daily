@@ -1,3 +1,5 @@
+/////////////////!
+
 #include<iostream>
 #include<cstdlib>
 #include<cmath>
@@ -19,12 +21,12 @@ class Point {
 
 class Rectangle : public Point {
     private:
-        Point point_for_rectangle;
         double length,width;
     public:
         Rectangle(){}
         ~Rectangle(){}
-        Rectangle(double point_x,double point_y,double length,double width):Point(point_x,point_y){
+        Rectangle(double point_x,double point_y,double length,double width)
+        :Point(point_x,point_y){
             this->length = length;
             this->width = width;
         }
@@ -33,25 +35,21 @@ class Rectangle : public Point {
             return sqrt(pow(this->getx()-input.getx(),2)+pow(this->gety()-input.gety(),2));
         }
 };
-
-
 class Circle : public Point {
     private:
-        Point Point_for_Circle;
         double R;
     public:
         Circle(){}    
         ~Circle(){}
-        Circle(double point_x,double point_y,double R):Point(point_x,point_y){
+        Circle(double point_x,double point_y,double R)
+        :Point(point_x,point_y){
             this->R = R;
         }
         void cout_judge_by_point(Point input);    
         double get_distance(Point input){
-            return sqrt(pow(this->getx() - input.getx(),2) + pow(this->gety() - input.gety(),2));
+            return sqrt(pow(this->getx()-input.getx(),2)+pow(this->gety()-input.gety(),2));
         }
 };
-
-
 void Circle::cout_judge_by_point(Point input){
     if(get_distance(input) == this->R){
         cout<<"在圆上"<<endl;
@@ -65,21 +63,15 @@ void Circle::cout_judge_by_point(Point input){
         cout<<"在圆外"<<endl;
 }
 void Rectangle::cout_judge_by_point(Point input){
-    if(input.getx() < this->getx()||input.gety() > this->gety())
+    if(   input.getx() < this->getx()
+        ||input.gety() > this->gety()
+        ||input.getx() > this->length+this->getx()
+        ||input.gety() < this->gety()-this->width)
         cout<<"在矩形外"<<endl;
-    else if(input.getx() == this->getx()){
-        if(get_distance(input) <= this->width)
-            cout<<"在矩形上"<<endl;
-        else
-            cout<<"在矩形外"<<endl;
-    }
-    else if(input.gety() == this->gety()){
-        if(get_distance(input) <= this->length)
-            cout<<"在矩形上"<<endl;
-        else
-
-            cout<<"在矩形外"<<endl;
-    }
+    else if(input.getx() == this->getx()||input.getx() == this->getx()+this->length)
+        cout<<"在矩形上"<<endl;
+    else if(input.gety() == this->gety()||input.gety() == this->gety()-this->width)
+        cout<<"在矩形上"<<endl;
     else
         cout<<"在矩形内"<<endl;
 }

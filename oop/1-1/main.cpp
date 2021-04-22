@@ -71,7 +71,7 @@ void start(){
                         return;
                     continue;  
                 case 0:
-                    user_data_write();
+                    logout();
                     return; 
                 default:
                     cout<<"输入不符合要求"<<endl;

@@ -1,1 +1,2 @@
 g++   data_info.o data.o main.o member.o -o main
+g++   data_info.cpp data.cpp main.cpp member.cpp info_main.cpp -o main -g

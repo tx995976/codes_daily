@@ -1,4 +1,5 @@
 #include"Myclass.h"
+
 	MyClass::MyClass(){
 		x = 0;
 		y = 0;

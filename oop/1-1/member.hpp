@@ -13,7 +13,7 @@ using namespace std;
 
         class member{
             public:
-                int status;
+                int status = 0;
             private:
                 string id;
                 string password;
@@ -32,10 +32,14 @@ using namespace std;
                 string show_name();
                 double show_money();
                 void cost_money(double cost);
+
+                friend void user_data_read();
+                friend void user_data_write();
         };
 
     //
     extern void login();
+    extern void logout();
     extern void welcome();
     //
     extern void add_card();         
