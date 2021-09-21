@@ -13,7 +13,7 @@ using namespace std;
 
         class member{
             public:
-                int status = 1;
+                int status = 0;
                 bool health = 1;
             private:
                 string id;
@@ -36,9 +36,11 @@ using namespace std;
 
                 friend void user_data_read();
                 friend void user_data_write();
+                friend void add_card();
         };
 
     //
+    extern bool admin_log();
     extern void login();
     extern void logout();
     extern void welcome();
@@ -57,35 +59,3 @@ using namespace std;
     //
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

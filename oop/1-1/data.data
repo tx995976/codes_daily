@@ -1,9 +1,81 @@
-1 0 test 20 0 0
-100 020626 12 770 0 1
-1000001 020926 tx995976 100 0 1
-1000002 020926 tx33 300.5 0 1
-100002 020926 tx 300 0 1
-1223 020926 tx666 500 0 1
-123456 020926 tx995976 600 0 1
-1522 020926 1555 300 0 1
-tx995976 020926 tx99596 30 0 1
+110 00 tx 15 0 0
+admin admin admin 0 0 1
+Bundle 'gmarik/vundle'
+
+"------------------
+" Code Completions
+"------------------
+Plug 'Shougo/neocomplcache'
+Plug 'mattn/emmet-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'ervandew/supertab'
+" snippets
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+"------ snipmate dependencies -------
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+
+"-----------------
+" Fast navigation
+"-----------------
+Plug 'edsono/vim-matchit'
+Plug 'Lokaltog/vim-easymotion'
+
+"--------------
+" Fast editing
+"--------------
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sjl/gundo.vim'
+Plug 'godlygeek/tabular'
+Plug 'nathanaelkane/vim-indent-guides'
+
+"--------------
+" IDE features
+"--------------
+Plug 'scrooloose/nerdtree'
+Plug 'humiaozuzu/TabBar'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'Lokaltog/vim-powerline'
+Plug 'scrooloose/syntastic'
+Plug 'bronson/vim-trailing-whitespace'
+
+"-------------
+" Other Utils
+"-------------
+Plug 'humiaozuzu/fcitx-status'
+Plug 'nvie/vim-togglemouse'
+
+"----------------------------------------
+" Syntax/Indent for language enhancement
+"----------------------------------------
+"------- web backend ---------
+Plug '2072/PHP-Indenting-for-VIm'
+"Plug 'tpope/vim-rails'
+Plug 'lepture/vim-jinja'
+"Plug 'digitaltoad/vim-jade'
+
+"------- web frontend ----------
+Plug 'othree/html5.vim'
+" Plug 'tpope/vim-haml'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'nono/jquery.vim'
+" Plug 'groenewege/vim-less'
+" Plug 'wavded/vim-stylus'
+" Plug 'nono/vim-handlebars'
+
+"------- markup language -------
+Plug 'tpope/vim-markdown'
+" Plug 'timcharper/textile.vim'
+Plug 'rickharris/vim-blackboard'
+Plug 'altercation/vim-colors-solarized'
+Plug 'rickharris/vim-monokai'
+Plug 'tpope/vim-vividchalk'
+Plug 'Lokaltog/vim-distinguished'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'fisadev/fisa-vim-colorscheme'

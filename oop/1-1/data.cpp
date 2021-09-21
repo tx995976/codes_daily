@@ -27,15 +27,14 @@ void login(){
 
     //////////////////////////////////
     send_Key(now_contrl->second.show_id());
-    user_info_cost_load();
-    user_info_member_load();
-    user_info_money_add_load();
+    user_load();
 }
 
 void logout(){
     user_info_money_add_write();
     user_info_cost_write();
     user_info_member_write();
+    user_logout();
     return;
 }
 
@@ -44,15 +43,25 @@ void welcome(){
 }
 
 void count_sys(){
-        user_info_welcome();
-        return;
+    user_info_welcome();
+    return;
      }
 
+bool admin_log(){
+    if(now_contrl->second.show_id().find("admin") != string::npos){
+        admin_info_welcome();
+        return 1;
+    }
+    else
+        return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
 
-void return_money(){
+void return_money(){    
+    time_t now = time(NULL);     //////////////////
     double temp;
     if(now_contrl->second.show_money() <= 0){
         cout<<"当前账户无法退费"<<endl;
@@ -63,8 +72,10 @@ void return_money(){
     if(temp > now_contrl->second.show_money())
         cout<<"金额不足"<<endl;
     else{
+        record_add_money(now,0-temp);
         now_contrl->second.cost_money(temp);
         cout<<"退费完成"<<endl;
+
     }
     return;
 }
@@ -95,26 +106,25 @@ void query_card(){
 }
 
 void add_card(){
+        member empty;
         int i = 1;
-        string temp,temp1,temp3;
-        double temp2;
         cout<<"输入你的名字: ";
-        cin>>temp;
+        cin>>empty.name;
         while(i){
             cout<<"输入你的id: ";
-            cin>>temp3;
-            if(data_tree.find(temp3) != data_tree.end()){
+            cin>>empty.id;
+            if(data_tree.find(empty.id) != data_tree.end()){
                 cout<<"id已存在,请重新输入:"<<endl;
                 continue;
             }
             i = 0;
         }
         cout<<"输入你的密码: ";
-        cin>>temp1;
+        cin>>empty.password;
         cout<<"输入你的开卡金额: ";
-        cin>>temp2;
-        member new_card(temp3,temp1,temp,temp2);
-        data_tree[temp3] = new_card;
+        cin>>empty.money;
+        data_tree[empty.id] = empty;
+        user_new_member(empty.id,empty.name);
         cout<<"注册已完成"<<endl;
         return;
      }
@@ -133,15 +143,13 @@ void add_card(){
             cout<<"退卡已完成"<<endl
                 <<"姓名:"<<now_contrl->second.show_name()<<"        "<<"金额:"<<now_contrl->second.show_money()<<endl;
             now_contrl->second.health = 0;
+            user_card_remove();
             return 1;
         }
         else
             cout<<"已取消"<<endl;
         return 0;
      }
-
-
-
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 void user_data_read(){
@@ -152,9 +160,7 @@ void user_data_read(){
         data_tree[temp.id] = temp;
     }
     data_in.close();
-    ////////////////////////////////
     map_load();
-    ////////////////////////////////
     return;
 }
 
@@ -165,9 +171,7 @@ void user_data_read(){
         data_out<<now->second.id<<" "<<now->second.password<<" "<<now->second.name<<" "<<now->second.money<<" "<<now->second.status<<" "<<now->second.health<<endl;
     }
     data_out.close();
-    ////////////////////////
     map_write();
-    ///////////////////////
     return;
 }
 
@@ -188,11 +192,11 @@ void user_data_read(){
  }
  void shut_down(){
     time_t now = time(NULL);
-    double cost = record_offline(now);
     if(now_contrl->second.status == 0){
         cout<<"已下机"<<endl;
         return;
     }
+    double cost = record_offline(now);
     now_contrl->second.status = 0;
     now_contrl->second.cost_money(cost);
     cout<<"欢迎下次使用"<<endl;

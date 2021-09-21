@@ -1,9 +1,10 @@
 #include"member.hpp"
+#include"data_info.hpp"
 #include<iostream>
-using itor_map = map<string,member>::iterator;
 int login_if = 1;
 
 void start(){
+    st:
     int i = 1,log = 0;
         while(!log){
             cout<<endl<<"欢迎使用网络计费系统"<<endl;
@@ -27,6 +28,8 @@ void start(){
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////
+        if(admin_log())
+            goto st;
         system("cls");
         while(1){
             cout<<endl;
@@ -68,6 +71,7 @@ void start(){
                 case 8:
                     system("cls");
                     if(delete_card())
+                        logout();
                         return;
                     continue;  
                 case 0:

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/vscodes/oop/code/finally/src/calculator.hpp
+iostream
+-
+algorithm
+-
+cmath
+-
+cctype
+-
+string
+-
+sstream
+-
+vector
+-
+
+F:/vscodes/oop/code/finally/src/main.cpp
+calculator.hpp
+F:/vscodes/oop/code/finally/src/calculator.hpp
+

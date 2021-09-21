@@ -1,6 +1,8 @@
 #include"data_info.hpp"
 
 map<string,all_member_info> data_info;
+vector<total_income> income_record;
+
 using itor_info = map<string,all_member_info>::iterator;
 using itor_cost = vector<info_cost>::iterator;
 using itor_money = vector<info_money_add>::iterator;
@@ -14,33 +16,26 @@ double price_for_night = 15;
 void info_member::show(){
     cout<<"id:     "<<this->id<<endl
         <<"名字:    "<<this->name<<endl
-        <<"开卡时间: "<<this->card_start<<endl
-        <<"注销时间: "<<this->card_end<<endl
-        <<"累计消费: "<<this->money_all<<endl
-        <<"用户状态: "<<this->status<<endl;
+        <<"开卡时间: "<<(char*)ctime(&this->card_start)
+        <<"注销时间: "<<(char*)ctime(&this->card_end)    
+        <<"累计消费: "<<this->money_all<<" $"<<endl
+        <<"用户状态: "<<this->status<<endl<<endl;
 }
 
-void info_cost::show_offline(){
-    cout<<"下机时间: "<<(char*)ctime(&this->offline)<<endl;
-}
-
-void info_cost::show_online(){
-    cout<<"上机时间: "<<(char*)ctime(&this->online)<<endl;
+void info_cost::show(){
+    cout<<"上机时间:"<<(char*)ctime(&this->online)
+        <<"下机时间:"<<(char*)ctime(&this->offline)
+        <<"消费金额:"<<this->cost<<" $"<<endl<<endl;
 }
 
 void info_money_add::show(){
-    cout<<"充值时间: "<<(char*)ctime(&this->time)<<endl
-        <<"金额: "<<this->add_money<<" $"<<endl;
+    cout<<"时间: "<<(char*)ctime(&this->time)
+        <<"金额: "<<this->add_money<<" $"<<endl<<endl;
 }
 ///////////////////////////////////////////////////////////////////////
 
 void send_Key(string id){
-
-    ::control_id = id;                         //////////////////////////////
-    if(data_info.find(id) == data_info.end()){ //////////////////////////////
-        all_member_info empty;
-        data_info[id] = empty;
-    }
+    ::control_id = id;                        
     user = data_info.find(id);
 }
 
@@ -67,7 +62,7 @@ double once_cost(){
     tm online ,offline;
     localtime_s(&online,&temp.online);
     localtime_s(&offline,&temp.offline);
-    cout<<offline.tm_sec<<" "<<online.tm_sec<<endl;
+   
     //默认不超过一天//
         if(online.tm_hour > 23||online.tm_hour < 6){
             if(offline.tm_hour > 23||offline.tm_hour < 6)
@@ -100,7 +95,7 @@ double once_cost(){
             }
 
         }
-    
+        income_data_write(temp.offline,cost);
         user->second.member.money_all += cost;
         return cost;
 }
@@ -112,9 +107,9 @@ void record_add_money(time_t time,double money){
     user->second.money_add.push_back(empty);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define error cerr<<"failed"<<endl;
+#define error cerr<<"error"<<endl;
 
 void map_load(){
     all_member_info empty;
@@ -193,53 +188,224 @@ void user_info_money_add_write(){
     write.close();
 }
 
+void income_data_load(){
+    total_income empty;
+    ifstream load("./user_info/income.data",ios::in);
+    if(load)
+        while(load>>empty.time){
+            load>>empty.income;
+            income_record.push_back(empty);
+        }
+    else
+        error
+    load.close();
+}
+
+void income_data_write(time_t time,double income){
+    ofstream write("./user_info/income.data",ios::out|ios::app);
+    write<<time<<" "<<income<<endl;
+    write.close();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-void user_record_online(){
-    
-
-
+void user_card_remove(){
+    time_t now = time(NULL);
+    user->second.member.card_end = now;
+    user->second.member.status = 0;
 }
 
-void user_record_offline(){
-
+void user_new_member(string id,string name){
+    time_t now = time(NULL);
+    all_member_info empty;
+    empty.member.id = id;
+    empty.member.name = name;
+    empty.member.card_start = now;
+    data_info[id] = empty;
 }
+
 
 void user_card_info(){
-
+    user->second.member.show();
 }
 
 void user_record_cost(){
+    auto i =user->second.cost.begin();
+    int a = 0;
+    for(;i != user->second.cost.end();i++){
+        i->show();
+        a++;
+    }
+    cout<<"共有 "<<a<<" 条记录"<<endl;
 
+}
+
+void user_info_add_money(){
+    auto i =user->second.money_add.begin();
+    int a = 0;
+    for(;i != user->second.money_add.end();i++){
+        i->show();
+        a++;
+    }
+    cout<<"共有 "<<a<<" 条记录"<<endl;
+}
+
+void user_load(){
+    user_info_cost_load();
+    user_info_member_load();
+    user_info_money_add_load();
+}
+
+void user_logout(){
+    all_member_info empty;
+    user->second = empty;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 void admin_search_id(){
-
+    string temp;
+    cout<<"输入id:"<<endl;
+    cin>>temp;
+    auto i = data_info.find(temp);
+    if(i == data_info.end())
+        cout<<"id不存在"<<endl;
+    else{
+        user = i;
+        user_load();
+        cout<<"找到用户 :"<<i->second.member.name<<endl;
+        admin_view_user();
+    }
 }
 
 void admin_search_non(){
-
+    int a = 0;
+    vector<itor_info> tree;
+    auto i =data_info.begin();
+    string temp;
+    cout<<"输入id模糊查找:"<<endl;
+    cin>>temp;
+    for(;i != data_info.end();i++){
+        user = i;
+        user_load();
+        if(i->first.find(temp) != string::npos || i->second.member.name.find(temp) != string::npos){
+            tree.push_back(i);
+            cout<<a<<".  "<<i->first<<" "<<i->second.member.name<<endl;
+            a++;
+        }
+    }
+    cout<<"共找到 "<<a<<" 个用户"<<endl<<"输入序号查看特定用户:"<<endl;
+    cin>>a;
+    user = tree[a];
+    admin_view_user();
 }
 
 void admin_list_users(){
-
+    int a = 0;
+    vector<itor_info> tree;
+    auto i =data_info.begin();
+    for(;i != data_info.end();i++){
+        user = i;
+        user_load();
+        tree.push_back(i);
+        cout<<a<<".  "<<i->first<<" "<<i->second.member.name<<endl;
+        a++;
+    }
+    cout<<"输入序号查看特定用户:"<<endl;
+    cin>>a;
+    user = tree[a];
+    admin_view_user();
 }
 
-void admin_delete_card(){
-
+void admin_total_money(){
+    int i = 0;
+    cout<<"选择你需要查看收入的方式"<<endl
+        <<"1.按月"<<endl
+        <<"2.按时间段"<<endl;
+    cin>>i;
+    switch(i){
+        case 1:
+            admin_search_month();
+            break;
+        case 2:
+            admin_search_timepoint();
+            break;
+        default:
+            return;
+    }
+    return;
 }
 
+void admin_search_month(){
+    int i;
+    double total = 0;
+    auto k = income_record.begin();
+    tm j;
+    cout<<"输入月份(默认年份为当前年份):"<<endl;
+    cin>>i;
+    for(;k != income_record.end();k++){
+        localtime_s(&j,&k->time);
+        if(j.tm_mon+1 == i)
+            total += k->income;
+    }
+    cout<<i<<"月份的营业额为: "<<total<<endl;
+    return;
+}
 
+void admin_search_timepoint(){
+    stringstream input;
+    stringstream input2;
+    string st,ed;
+    double total;
+    int st_year,st_mon,st_day,ed_year,ed_mon,ed_day;
+    auto i = income_record.begin();
+    tm j;
+    cout<<"输入时间段(示例: 2021.3.21 2021.6.30)"<<endl;
+    cin>>st>>ed;
+    replace(st.begin(),st.end(),'.',' ');
+    replace(ed.begin(),ed.end(),'.',' ');
+    input<<st;
+    input2<<ed;
+    input>>st_year>>st_mon>>st_day;
+    st_year -= 1900;
+    input2>>ed_year>>ed_mon>>ed_day;
+    ed_year -= 1900;
 
+    for(;i != income_record.end();i++){
+        localtime_s(&j,&i->time);
+        if((j.tm_year >= st_year && j.tm_year <= ed_year)
+        && (j.tm_mon+1 >= st_mon && j.tm_mon+1 <= ed_mon)
+        && (j.tm_mday >= st_day && j.tm_mday <= ed_day)
+        ){
+            total += i->income;            
+        }
+    }
+    cout<<"时间段内的收入为: "<<total<<endl;
+    return;
+}
 
-
-
-
-
-
-
-
-
-
-
+void admin_view_user(){
+    int i = 1;
+    while(1){
+    cout<<"选择要查看的内容:"<<endl;
+    cout<<"1.卡信息记录"<<endl
+        <<"2.消费记录"<<endl
+        <<"3.充值记录"<<endl
+        <<"4.退出"<<endl<<endl;
+    cin>>i;
+        switch(i){
+            case 1:
+                user_card_info();
+                break;            
+            case 2:
+                user_record_cost();
+                break;                     
+            case 3:
+                user_info_add_money();
+                break;            
+            case 4:
+                user_logout();
+                return;                            
+        }
+        cout<<endl;
+    }
+}
