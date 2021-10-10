@@ -7,6 +7,8 @@ using namespace std;
 
 const int node_int = 110;
 int deep_num[node_int],deep_max;
+string t;
+
 
 class tree{
     public:

@@ -203,4 +203,4 @@ void user_data_read(){
     cout<<"当前时间： "<<(char*)ctime(&now)<<endl
         <<"本次消费: "<<cost<<" $"<<endl
         <<"余额: "<<now_contrl->second.show_money()<<" $"<<endl;
- }
+}

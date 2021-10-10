@@ -24,10 +24,12 @@ using namespace std;
                 member(){}
                 member(string a,string b,string c,double d);
                 ~member(){}
+                
                 bool match_password(string password_in);
                 void money_add(double a);
                 void money_result(double a);
                 void new_card(string a,string b,string c,double d);
+
                 string show_id();
                 string show_password();
                 string show_name();
