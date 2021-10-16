@@ -1,100 +1,87 @@
 #include <iomanip>
 #include <iostream>
-#include"Linklist.hpp"
+#include"Sqlist.hpp"
 #include"Student.hpp"
 
 
-LinkList<Student> Lt;
+SqList<Student> Lt;
 
+using namespace std;
 
-int print_Lt(int i = 1){
-    std::cout<<""<<std::setw(15)<<""<<std::setw(6)<<""<<std::setw(6)<<""<<std::endl;
-    Student *temp;
-    Lt.Get(1,*temp);
-    while(temp != nullptr){
-        std::cout<<i++<<".  "<<temp;
-    }
+int print_St(int i = 1){
+   
     return 0;
 }
 
-int input_Lt(){
-    int i;
-    std::string id,name;
-    double GMp;
-    std::cin>>id>>name>>GMp;
-    Student temp(id,name,GMp);
-    std::cin>>i;
-    Lt.Insert(i, temp);
+int input_St(){
+   
 }
 
-int search_Lt(){
+int search_St(){
 
-    std::string input;
-    std::cin>>input;
-
+  
 
 }
 
-int Delete_Lt(){ 
-    int i;
-    Student temp;
-    std::cin>>i;
-    Lt.Delete(i,temp);
-    return 0;
+int Delete_St(){ 
+
 } 
 
-int set_Lt(){
+int set_St(){
     
 
 }
 
+int report_St(){}
 
+int sort_St(){}
 
-
-
-
-
-
+int clear_St(){}
 
 //////////////////////////////////////////////////////
 void menu(){
     using namespace std;
     int i;
-    cout<<"1"<<endl
-        <<"2"<<endl
-        <<"3"<<endl
-        <<"4"<<endl
-        <<"5"<<endl
-        <<"6"<<endl
-        <<"7"<<endl
-        <<"8"<<endl
-        <<"input"<<endl;
-        cin>>i;
-        switch (i) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-           default:
-
-            cout<<"invaild_input,try again:"<<endl;
-        }
+    while(1){
+        cout<<"1.显示"<<endl
+            <<"2.录入"<<endl
+            <<"3.查找"<<endl
+            <<"4.删除"<<endl
+            <<"5.更新"<<endl
+            <<"6.统计"<<endl
+            <<"7.排序"<<endl
+            <<"8.清空"<<endl
+            <<"0.退出"<<endl
+            <<"input"<<endl;
+            cin>>i;
+            switch (i) {
+                case 0:
+                    return;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+            default:
+                cout<<"invaild_input,try again:"<<endl;
+            }
+    }
 
 }
 
 int main(){
-
+    system("chcp 65001");
+    menu();
     return 0;
 }

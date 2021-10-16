@@ -1,48 +1,47 @@
-#pragma once
 #include <iostream>
 #include <istream>
 #include <ostream>
 #include <string>
 #include<iomanip>
 
+#pragma once
 
 class Student{
-    protected:
+    public:
         std::string name;
         std::string id;
         double GMP;
-    public:
+    
         Student(){
             this->name.clear();
             this->id.clear();
             this->GMP = 0;
         }
-        Student(std::string &name_in,std::string &id_in,double GMP_in){
-            this->name = name_in;
+        Student(std::string &id_in,std::string &name_in,double GMP_in){
             this->id = id_in;
+            this->name = name_in;
             this->GMP = GMP_in;
         }
-        ~Student();
+        
+        ~Student(){}
+        
         bool operator > (const Student &value_r) const{
             if(this->GMP != value_r.GMP)
                 return this->GMP > value_r.GMP;
             else
                 return this->name > value_r.name;;
         }
+
         bool sort_id(const Student &value_l,const Student &value_r){
-            
+                    
 
-
+            return 1;
         }
 
 
-        bool operator << (std::ostream &out){
-            if(this->id.empty()){
-                std::cerr<<"no data"<<std::endl;
-                return 0;
-            }
-             out<<this->id<<" "<<std::setw(6)<<this->name<<std::setw(6)<<this->GMP<<std::endl;
-             return 1;
+        friend std::ostream & operator<< (std::ostream &out,const Student &data){
+            out<<data.id<<"      "<<data.name<<"       "<<data.GMP<<std::endl;
+            return out;
         }
 
         bool is_match(std::string input){
@@ -53,8 +52,4 @@ class Student{
             else
                 return 0;
         }
-
-
-
-
 };

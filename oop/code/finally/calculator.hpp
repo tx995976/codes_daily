@@ -7,6 +7,8 @@
 #include<list>
 #include<vector>
 
+#pragma once
+
 using namespace std;
 
 class  calculator_nums{
