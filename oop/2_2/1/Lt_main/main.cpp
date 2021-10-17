@@ -1,11 +1,13 @@
 #include <iostream>
 #include <iomanip>
+#include<algorithm>
 #include"Linklist.hpp"
 #include"Student.hpp"
 
 
 LinkList<Student> Lt;
 
+using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 int print_Lt(int i = 1){
     std::cout<<"序号"<<"   "<<"学号";
@@ -57,8 +59,11 @@ int search_Lt(){
                 if(temp_st.id == temp_str)
                     break;
             }
-            std::cout<<"未找到"<<std::endl;
-            return -1;
+            if(i == Lt.GetLength()+2){
+                std::cout<<"未找到"<<std::endl;
+                return -1;
+            }
+            break;
         }
         default:
             std::cout<<"无效输入"<<std::endl;
@@ -99,8 +104,35 @@ int report_Lt(){
 
 }
 
-int sort_Lt(){
-
+int sort_Lt(int begin = 0){
+    int i;
+    std::cout<<"1.按绩点"<<endl
+        <<"2.按学号"<<endl
+        <<"选择方式:";
+    std::cin>>i;
+    int size = Lt.GetLength();
+    Student temp[size];
+    switch(i){
+        case 1:{
+            while(Lt.GetLength() != 0)
+                Lt.Delete(1,temp[begin++]);
+            sort(temp,temp+size,sort_GP);
+            for(int i = 1;i <= size;i++)
+                Lt.Insert(i,temp[i-1]);
+            break;
+        }
+        case 2:{
+            while(Lt.GetLength() != 0)
+                Lt.Delete(1,temp[begin++]);
+            sort(temp,temp+size,sort_id);
+            for(int i = 1;i <= size;i++)
+                Lt.Insert(i,temp[i-1]);
+            break;
+        }
+        default:
+            std::cout<<"无效输入"<<std::endl;
+            return -1;
+    }
     return 0;
 }
 
@@ -153,7 +185,7 @@ void menu(){
                     sort_Lt();
                     break;
                 case 8:
-                    Delete_Lt();
+                    free_Lt();
                     break;
             default:
                 cout<<"invaild_input,try again:"<<endl;

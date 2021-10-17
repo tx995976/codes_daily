@@ -73,7 +73,11 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "queue": "cpp",
-        "stl_list.h": "c"
+        "stl_list.h": "c",
+        "stack": "cpp",
+        "stl_stack.h": "c",
+        "concept_check.h": "c",
+        "debug.h": "c"
     },
     "cmake.configureOnOpen": false,
     "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",

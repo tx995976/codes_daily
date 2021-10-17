@@ -10,6 +10,7 @@ class SqList
 protected:
     int length; // 顺序表的当前长度
     int maxLength; // 顺序表的最大容量
+public:
     ElemType *data; // 元素存储空间的首地址
 public:
     SqList(int size = DEFAULT_SIZE); // 构造一个空表
@@ -27,28 +28,29 @@ public:
 
 template <class ElemType>
 int SqList<ElemType>::clear(){
-    delete [] this->*data;
-    this->*data = new ElemType[DEFAULT_SIZE];
+    delete [] this->data;
+    this->data = new ElemType[DEFAULT_SIZE];
     this->length = 0;
+    return 0;
 }
 
 template <class ElemType>
-SqList<ElemType>::SqList(int size = DEFAULT_SIZE){
+SqList<ElemType>::SqList(int size){
     this->length = 0;
     this->maxLength = size;
-    this->*data = new ElemType[size];
+    this->data = new ElemType[size];
     return;
 }
 
 template <class ElemType>
-SqList<ElemType>::SqList(ElemType v[],int n,int size = DEFAULT_SIZE){
+SqList<ElemType>::SqList(ElemType v[],int n,int size){
     ElemType* temp = new ElemType[size];
     for(int i = 0;i < n;i++){
         temp[i] = v[i];
     }
     this->length = n;
     this->maxLength = size;
-    this->*data = temp;
+    this->data = temp;
 }
 
 template <class ElemType>
@@ -76,7 +78,7 @@ int SqList<ElemType>::Locate(const ElemType &e){
 
 template<class ElemType>
 int SqList<ElemType>::Get(int i,ElemType &e){
-    if(i < 0||i >= this->maxLength){
+    if(i < 0||i >= this->length){
         std::cerr<<"vaild_input"<<std::endl;
         return -1;
     }
@@ -99,7 +101,7 @@ int SqList<ElemType>::Set(int i, const ElemType &e){
 template<class ElemType>
 int SqList<ElemType>::Delete(int i, ElemType &e){
     if(i < 0||i >= this->maxLength){
-        std::cerr<<"invaild_input"<<std::endl
+        std::cerr<<"invaild_input"<<std::endl;
         return -1;
     }
     else if(i >= this->length){
@@ -121,7 +123,7 @@ int SqList<ElemType>::Insert(int i,const ElemType &e){
         return -1;
     }
     else if(i < 0||i >= this->maxLength){
-        std::cerr<<"invaild_input"<<std::endl
+        std::cerr<<"invaild_input"<<std::endl;
         return -1;
     }
     else if(i > this->length){
