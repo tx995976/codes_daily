@@ -9,10 +9,15 @@ class Sqstack{
         int max_size;
         T  *data;;
     public:
-        Sqstack(int size = DEFAULT_SIZE,T &array_T);
+        Sqstack(const Sqstack<T> &array_T);
         Sqstack(int size = DEFAULT_SIZE);
         ~Sqstack(){}
 
+        int size(); 
+        bool empty();
+        int top();
+        int push(T &i);
+        int pop(T &i);
 
-
+        Sqstack<T> &operator = (const Sqstack<T> &value_r);
 };
