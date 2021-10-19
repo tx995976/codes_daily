@@ -15,18 +15,13 @@ std::map<char,int> up_level = {
     {'-',1},
     {'/',2},
     {'*',2},
-    {'(',3},
-    {')',3}
+    {'(',0},
+    {')',0}
 };
 
 void str_in(){
     std::getline(std::cin,input);
     //input.erase(remove(input.begin(),input.end(),' '),input.end());
-}
-
-void stack_punct(){
-
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -39,23 +34,81 @@ int middle_back(){
     while(math_str.peek() != '='){
         if(isdigit(math_str.peek())){
             math_str>>temp_num;
+            std::cout<<temp_num<<" ";
+            continue;
+        }
+
+        if(ispunct(math_str.peek())){
+
+            if(math_str.peek() == ')'){
+                while(punct_st.Top() != '('){
+                    punct_st.pop(temp_punct);
+                    std::cout<<temp_punct<<" ";
+                }
+                punct_st.pop(temp_punct);
+                continue;
+            }
+
+            if(math_str.peek() == '('){
+                math_str.get(temp_punct);
+                punct_st.push(temp_punct);
+                continue;
+            }
+            //////////////////////////////////////
+            if(punct_st.Top() == '(' || punct_st.empty()){
+                math_str>>temp_num;
+                num_st.push(temp_num);
+                continue;
+            }
+
+            if(punct_st.empty() || up_level[punct_st.Top()] < up_level[math_str.peek()]){
+                math_str.get(temp_punct);
+                punct_st.push(temp_punct);
+                continue;
+            }
+
+            else{
+                char temp;
+                math_str.get(temp_punct);
+                while(!punct_st.empty() && up_level[punct_st.Top()] >= up_level[temp_punct]){
+                        punct_st.pop(temp);
+                        std::cout<<temp<<" ";
+                }
+                punct_st.push(temp_punct);
+            }
+        }
+    }
+    while(!punct_st.empty()){
+        punct_st.pop(temp_punct);
+        std::cout<<temp_punct<<" ";
+    }
+    return 0;
+}
+
+int back_calculate(){
+    str_in();
+    int temp_num;
+    char temp_punct;
+    std::stringstream math_str;
+    while(!math_str.eof()){
+        while(math_str.peek() == ' ')
+            math_str.get();
+        if(isdigit(math_str.peek())){
+            math_str>>temp_num;
             num_st.push(temp_num);
             continue;
         }
         if(ispunct(math_str.peek())){
+            math_str.get(temp_punct);
             
 
 
         }
+
+
+
+
     }
-
-
-
-}
-
-int back_calculate(){
-
-
 
 
 }
