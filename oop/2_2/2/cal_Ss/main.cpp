@@ -24,10 +24,23 @@ void str_in(){
     //input.erase(remove(input.begin(),input.end(),' '),input.end());
 }
 
+int get_result(int num_l,int num_r,char punct){
+    if(punct == '+')
+        return num_l + num_r;
+    else if(punct == '-')
+        return num_l - num_r;
+    else if(punct == '*')
+        return num_l * num_r;
+    else if(punct == '/')
+        return num_l / num_r;
+    return 0;
+}
+
 /////////////////////////////////////////////////////////////////////
 int middle_back(){
     int temp_num;
     char temp_punct;
+    str_in();
     input.erase(remove(input.begin(),input.end(),' '),input.end());
     math_str<<input;
 
@@ -87,7 +100,7 @@ int middle_back(){
 
 int back_calculate(){
     str_in();
-    int temp_num;
+    int num_l,num_r,temp_num;
     char temp_punct;
     std::stringstream math_str;
     while(!math_str.eof()){
@@ -100,17 +113,15 @@ int back_calculate(){
         }
         if(ispunct(math_str.peek())){
             math_str.get(temp_punct);
-            
-
-
+            num_st.pop(num_r);
+            num_st.pop(num_l);
+            temp_num = get_result(num_l,num_r,temp_punct);
+            num_st.push(temp_num);
+            continue;
         }
-
-
-
-
     }
-
-
+    num_st.pop(temp_num);
+    return temp_num;
 }
 
 
@@ -124,9 +135,10 @@ void menu(){
     std::cin.ignore();
     switch(i){
         case 1:
-
+            std::cout<<""<<std::endl;
+            middle_back();
         case 2:
-
+            back_calculate();
     }
 
 }
