@@ -44,6 +44,10 @@ int middle_back(){
     input.erase(remove(input.begin(),input.end(),' '),input.end());
     math_str<<input;
 
+    if(math_str.peek() == '-'){
+        math_str>>temp_num;
+        std::cout<<temp_num<<" ";
+    }
     while(math_str.peek() != '='){
         if(isdigit(math_str.peek())){
             math_str>>temp_num;
@@ -65,12 +69,10 @@ int middle_back(){
             if(math_str.peek() == '('){
                 math_str.get(temp_punct);
                 punct_st.push(temp_punct);
-                continue;
-            }
-            //////////////////////////////////////
-            if(punct_st.Top() == '(' || punct_st.empty()){
-                math_str>>temp_num;
-                num_st.push(temp_num);
+                if(math_str.peek() == '-'){
+                    math_str>>temp_num;
+                    std::cout<<temp_num<<" ";
+                }
                 continue;
             }
 
@@ -138,9 +140,8 @@ void menu(){
             std::cout<<""<<std::endl;
             middle_back();
         case 2:
-            back_calculate();
+            std::cout<<back_calculate();
     }
-
 }
 
 int main(){
