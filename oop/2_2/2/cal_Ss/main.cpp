@@ -58,6 +58,7 @@ int middle_back(){
         if(ispunct(math_str.peek())){
 
             if(math_str.peek() == ')'){
+                math_str.get(temp_punct);
                 while(punct_st.Top() != '('){
                     punct_st.pop(temp_punct);
                     std::cout<<temp_punct<<" ";
@@ -105,6 +106,7 @@ int back_calculate(){
     int num_l,num_r,temp_num;
     char temp_punct;
     std::stringstream math_str;
+    math_str<<input;
     while(!math_str.eof()){
         while(math_str.peek() == ' ')
             math_str.get();
@@ -115,6 +117,12 @@ int back_calculate(){
         }
         if(ispunct(math_str.peek())){
             math_str.get(temp_punct);
+            if(isdigit(math_str.peek())){
+                math_str.unget();
+                math_str>>temp_num;
+                num_st.push(temp_num);
+                continue;
+            }
             num_st.pop(num_r);
             num_st.pop(num_l);
             temp_num = get_result(num_l,num_r,temp_punct);
@@ -126,8 +134,6 @@ int back_calculate(){
     return temp_num;
 }
 
-
-
 void menu(){
     std::cout<<"输入序号"<<std::endl
              <<"1.中缀转后缀"<<std::endl
@@ -137,14 +143,18 @@ void menu(){
     std::cin.ignore();
     switch(i){
         case 1:
-            std::cout<<""<<std::endl;
+            std::cout<<"输入算式"<<std::endl;
             middle_back();
+            break;
         case 2:
             std::cout<<back_calculate();
+            break;
     }
 }
 
 int main(){
     using namespace std;
+    system("chcp 65001");
+    menu();
     return 0;
 }
