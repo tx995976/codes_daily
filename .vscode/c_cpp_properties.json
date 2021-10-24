@@ -11,7 +11,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "intelliSenseMode": "windows-gcc-x64",
+            "intelliSenseMode": "linux-clang-x64",
             "macFrameworkPath": [],
             "windowsSdkVersion": "10.0.18362.0",
             "compilerArgs": [],
