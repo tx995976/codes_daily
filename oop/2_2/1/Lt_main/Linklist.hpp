@@ -153,7 +153,6 @@ int LinkList<ElemType>::Insert (int index, const ElemType &e){
     Node<ElemType> * temp = this->head->next;
     Node<ElemType> * temp_2 = this->head;
     if(index > this->length){
-        std::cerr<<"auto insert in"<<this->length+1<<std::endl;
         index = this->length+1;
     }
     int i = 1;

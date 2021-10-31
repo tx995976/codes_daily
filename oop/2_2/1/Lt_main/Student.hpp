@@ -11,7 +11,6 @@ class Student{
         std::string name;
         std::string id;
         double GMP;
-    
         Student(){
             this->name.clear();
             this->id.clear();
@@ -22,20 +21,16 @@ class Student{
             this->name = name_in;
             this->GMP = GMP_in;
         }
-        
         ~Student(){}
-
         friend std::ostream & operator<< (std::ostream &out,const Student &data){
             out<<data.id<<"      "<<data.name<<"       "<<data.GMP<<std::endl;
             return out;
         }
-
 };
 
 bool sort_GP(const Student &value_l,const Student &value_r){
     return value_l.GMP > value_r.GMP;
 }
-
 bool sort_id(const Student &value_l,const Student &value_r){
     auto strl = value_l.id.begin();
     auto strr = value_r.id.begin();
