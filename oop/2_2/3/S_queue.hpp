@@ -33,9 +33,21 @@ namespace my_queue{
     }
     
     template<class T>
+    Sq_queue<T>::Sq_queue(Sq_queue<T> &Sq_in){
+        this->top = Sq_in.top;
+        this->fear = Sq_in.fear;
+        this->max_size = Sq_in.max_size;
+        this->data = new T[this->max_size];
+        for(int i = 0;i < max_size;i++){
+            this->data[i] = Sq_in.data[i];
+        }
+    }
+
+    template<class T>
     int Sq_queue<T>::size()const{
         return (this->fear-this->top+this->max_size)%this->max_size;
     }
+
     template<class T>
     bool Sq_queue<T>::empty()const{
         if(this->fear == this->top)
@@ -43,28 +55,37 @@ namespace my_queue{
         else
             return 0;
     }
+
     template<class T>
     T Sq_queue<T>::front()const{
+        if(this->empty())
+            return *data;
         return this->data[this->top];
     }
+
     template<class T>
     T Sq_queue<T>::back()const{
+        if(this->empty())
+            return *data;
         return this->data[(this->fear+this->max_size-1)%this->max_size];
     }
+
     template<class T>
     T Sq_queue<T>::pop(){
+        if(this->empty())
+            return *data;
         T temp = this->front();
         this->top = (this->top+1)%this->max_size;
         return temp;
     }
+
     template<class T>
     int Sq_queue<T>::push(T &in){
-        
+        if((this->fear+1)%this->max_size == this->top)
+            return -1;
+        this->data[this->fear] = in;
+        this->fear = (this->fear+1)%this->max_size;
+        return 0;
     }
-    template<class T>
-
-
-
-
 
 }
