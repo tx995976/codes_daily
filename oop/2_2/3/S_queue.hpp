@@ -14,7 +14,7 @@ namespace my_queue{
         public:
             ~Sq_queue(){}
             Sq_queue();
-            Sq_queue
+            Sq_queue(Sq_queue<T> &Sq_in);
             int size() const;
             bool empty() const;
             void clear();
