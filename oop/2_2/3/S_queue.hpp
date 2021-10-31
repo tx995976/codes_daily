@@ -88,4 +88,8 @@ namespace my_queue{
         return 0;
     }
 
+    template<class T>
+    void Sq_queue<T>::clear(){
+        this->fear = this->top;
+    }
 }
