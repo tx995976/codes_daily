@@ -15,7 +15,7 @@ namespace my_queue{
 
     template<class T>
     Node<T>::Node(){
-        this->data = null;
+        this->data = nullptr;
         this->next =nullptr;
     }
 
@@ -41,6 +41,7 @@ namespace my_queue{
             T pop();
             T front() const;
             T back() const;
+            void visit(void (*method_visit)(T &in));
     };
 
 
@@ -102,7 +103,7 @@ namespace my_queue{
     template<class T>
     T Lq_queue<T>::pop(){
         if(this->empty())
-            return null;
+            return nullptr;
         T pop_data = this->top->next->data;
         Node<T> *pop_node = this->top->next;
         this->top->next = pop_node->next;
@@ -118,5 +119,16 @@ namespace my_queue{
     template<class T>
     T Lq_queue<T>::back()const{
         return this->fear->data;
+    }
+
+    template<class T>
+    void Lq_queue<T>::visit(void (*method_visit)(T &in)){
+        if(this->empty())
+            return;
+        Node<T> *temp = this->top->next;
+        while(temp != nullptr){
+            method_visit(temp->data);
+            temp = temp->next;
+        }
     }
 }
