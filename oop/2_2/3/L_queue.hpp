@@ -1,11 +1,9 @@
 
-#pragma once
-
 namespace my_queue{
     
     template<class T>
     class Node{
-        protected:
+        public:
             T data;
             Node<T> *next;
         public:
@@ -15,7 +13,6 @@ namespace my_queue{
 
     template<class T>
     Node<T>::Node(){
-        this->data = nullptr;
         this->next =nullptr;
     }
 
@@ -43,7 +40,6 @@ namespace my_queue{
             T back() const;
             void visit(void (*method_visit)(T &in));
     };
-
 
     template<class T>
     Lq_queue<T>::Lq_queue(){
@@ -96,7 +92,7 @@ namespace my_queue{
     int Lq_queue<T>::push(T &in){
         this->fear->next = new Node<T>(in);
         this->fear = this->fear->next;
-        this->length--;
+        this->length++;
         return 0;
     }
 
@@ -108,6 +104,7 @@ namespace my_queue{
         Node<T> *pop_node = this->top->next;
         this->top->next = pop_node->next;
         delete pop_node;
+        this->length--;
         return pop_data;
     }
 
