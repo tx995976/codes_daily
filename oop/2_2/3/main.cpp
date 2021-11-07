@@ -16,36 +16,36 @@ void queue_print(std::string &in){
 }
 
 void queue_clear(){
-    cout<<"è¯·ä»¥ä¸‹æ‚£è€…æ˜Žæ—¥å†æ¥:"<<endl;
+    cout<<"ÇëÒÔÏÂ»¼ÕßÃ÷ÈÕÔÙÀ´:"<<endl;
     pat_queue.visit(&queue_print);
     cout<<endl;
 }
 
 void queue_in(){
     std::string pat_in;
-    cout<<"è¾“å…¥åå­—"<<endl;
+    cout<<"ÊäÈëÃû×Ö"<<endl;
     cin>>pat_in;
     pat_queue.push(pat_in);
-    cout<<"æ‚¨çŽ°åœ¨çš„é˜Ÿåˆ—ä½æ•°:"<<pat_queue.size()<<endl;
+    cout<<"ÄúÏÖÔÚµÄ¶ÓÁÐÎ»Êý:"<<pat_queue.size()<<endl;
 }
 
 void queue_next(){
     if(pat_queue.empty()){
-        cout<<"æ— æ‚£è€…"<<endl;
+        cout<<"ÎÞ»¼Õß"<<endl;
         return;
     }
     std::string pat_next = pat_queue.pop();
-    cout<<"è¯·æ‚£è€…:"<<pat_next<<" å°±è¯Š"<<endl;
+    cout<<"Çë»¼Õß:"<<pat_next<<" ¾ÍÕï"<<endl;
 }
 
 void menu(){
     int i;
     while(1){
-        cout<<"è¾“å…¥æ“ä½œ:"<<endl
-            <<"1.æ‚£è€…æŠ¥åˆ°\n"
-            <<"2.ä¸‹ä¸€ä½æ‚£è€…å°±è¯Š\n"
-            <<"3.ä¸‹ç­æé†’\n"
-            <<"0.é€€å‡º\n";
+        cout<<"ÊäÈë²Ù×÷:"<<endl
+            <<"1.»¼Õß±¨µ½\n"
+            <<"2.ÏÂÒ»Î»»¼Õß¾ÍÕï\n"
+            <<"3.ÏÂ°àÌáÐÑ\n"
+            <<"0.ÍË³ö\n";
         cin>>i;
         switch(i){
             case 1 :{
@@ -68,7 +68,6 @@ void menu(){
 }
 
 int main(){
-    std::system("chcp 65001");
     menu();
     return 0;
 }
