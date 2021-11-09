@@ -4,7 +4,7 @@
 #include <string>
 #include <regex>
 #include <vector>
-#pragma once
+
 
 namespace my_tree{
 
@@ -93,7 +93,23 @@ namespace my_tree{
         int str_itor = 0,child_flag = 0,node_itor = -1;
         std::vector<TNode<T>*> t_node;
         while(input[str_itor] != '\0'){
-            
+            switch(input[str_itor]){
+                case '(':
+                    node_itor++;
+                    t_node.push_back(pt_temp);
+                    child_flag = 1;
+                    break;
+                case ')':
+                    node_itor--;
+                    break;
+                case ',':
+                    child_flag = 2;
+                    break;
+                default :
+                    std::regex_search(input[str_itor]+1,input.end(),result,key);
+                    cout<<input[1];
+                    pt_temp = new TNode<T>();
+            }
 
         }
     }
