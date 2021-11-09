@@ -3,6 +3,7 @@
 #include <stack>
 #include <string>
 #include <regex>
+#include <vector>
 #pragma once
 
 namespace my_tree{
@@ -27,7 +28,7 @@ namespace my_tree{
             Btree(std::string &input);
             ~Btree(){}
             void pre_order();
-            void post_order_re(TNode<T> *pt_this = main_node);
+            void post_order_re(TNode<T> *pt_this);
             void find_ancestor(T &child);
             void clear();
             TNode<T> *get_node(); 
@@ -62,18 +63,18 @@ namespace my_tree{
     
     template<class T>
     void Btree<T>::pre_order(){
-        std::stack<TNode<T>> t_node;
+        std::stack<TNode<T>*> t_node;
         TNode<T> *pt_node = this->main_node;
         TNode<T> *pt_temp = pt_node;
-        t_node.push(*pt_temp);
+        t_node.push(pt_temp);
 
         while(!t_node.empty()){
-            t_node.pop(*pt_temp);
+            t_node.pop(pt_temp);
             std::cout<<pt_temp->data<<" ";
             if(pt_temp->l_node != nullptr)
-                t_node.push(*(pt_temp->l_node));
+                t_node.push(pt_temp->l_node);
             if(pt_temp->r_node != nullptr)
-                t_node.push(*(pt_temp->r_node));
+                t_node.push(pt_temp->r_node);
         }
         std::cout<<"\n";
     }
@@ -85,7 +86,15 @@ namespace my_tree{
 
     template<class T>
     Btree<T>::Btree(std::string &input){
-        std::regex:
+        std::regex key("(\\S+)[\\(\\),]");
+        std::smatch result;
+        
+        TNode<T> *pt_temp = nullptr;
+        int str_itor = 0,child_flag = 0,node_itor = -1;
+        std::vector<TNode<T>*> t_node;
+        while(input[str_itor] != '\0'){
+            
 
+        }
     }
 }
