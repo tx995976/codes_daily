@@ -65,16 +65,21 @@ namespace my_tree{
         TNode<T> *pt_temp = pt_node;
     
         while(pt_temp != nullptr || !t_node.empty()){
-                if(pt_temp != nullptr){
+            if(pt_temp != nullptr){
+                t_node.push(*pt_temp);
+                pt_temp = pt_temp->l_node;
+            }
+            else{
+                t_node.pop(*pt_temp);
+                if(pt_temp->r_node != nullptr){
+                    pt_temp = pt_temp->r_node;
                     t_node.push(*pt_temp);
+                 }
+                else{
+                    std::cout<<pt_temp->data<<" ";
                     pt_temp = pt_temp->l_node;
                 }
-                else{
-                
-
-                }
+            }
         }
-
-
     }
 }
