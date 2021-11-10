@@ -5,7 +5,6 @@
 #include <regex>
 #include <vector>
 
-
 namespace my_tree{
 
     template<class T>
@@ -18,7 +17,7 @@ namespace my_tree{
             TNode(){}
             TNode(T &data_in);
     };
-
+ 
     template<class T>
     class Btree{
         protected:
@@ -43,7 +42,7 @@ namespace my_tree{
 
     template<class T>
     Btree<T>::Btree(){
-        this->main_node = new TNode<T>();
+        this->main_node = new TNode<T>();  
     }
 
     template<class T>
@@ -81,23 +80,25 @@ namespace my_tree{
 
     template<class T>
     void Btree<T>::find_ancestor(T &child){
-            
+        
     }
 
     template<class T>
     Btree<T>::Btree(std::string &input){
-        std::regex key("(\\S+)[\\(\\),]");
+        std::regex key("^(\\S+)[\\(\\),]");
         std::smatch result;
-        
-        TNode<T> *pt_temp = nullptr;
-        int str_itor = 0,child_flag = 0,node_itor = -1;
+
         std::vector<TNode<T>*> t_node;
+        TNode<T> *pt_temp = nullptr;
+        this->main_node = nullptr;
+
+        int str_itor = 0,child_flag = 0,node_itor = -1;
         while(input[str_itor] != '\0'){
             switch(input[str_itor]){
                 case '(':
                     node_itor++;
-                    t_node.push_back(pt_temp);
                     child_flag = 1;
+                    t_node.push_back(pt_temp);
                     break;
                 case ')':
                     node_itor--;
@@ -106,11 +107,27 @@ namespace my_tree{
                     child_flag = 2;
                     break;
                 default :
-                    std::regex_search(input[str_itor]+1,input.end(),result,key);
-                    cout<<input[1];
-                    pt_temp = new TNode<T>();
+                    std::regex_search(input,result,key);
+                    pt_temp = new TNode<T>(result[1].str());
+                    input.erase(0,result[1].length()-1);
+                    if(this->main_node == nullptr){
+                        this->main_node = pt_temp;
+                    }
+                    else{
+                        switch(child_flag){
+                            case 1:
+                                t_node[node_itor]->l_node = pt_temp;
+                                break;
+                            case 2:
+                                t_node[node_itor]->r_node = pt_temp;
+                                break;
+                        }
+                    }
             }
-
+            input.erase(0,1);
         }
+        t_node.clear();
     }
 }
+
+
