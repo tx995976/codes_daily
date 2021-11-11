@@ -11,6 +11,7 @@ namespace my_tree{
     class TNode{
         public:
             T data;
+            int deep = 0;
             TNode<T> *l_node,*r_node;
         public:
             ~TNode(){}
@@ -26,11 +27,13 @@ namespace my_tree{
             Btree();
             Btree(std::string &input);
             ~Btree(){}
+            void setting_up(std::string &input);
             void pre_order();
             void post_order_re(TNode<T> *pt_this);
-            void find_ancestor(T &child);
-            void clear();
-            TNode<T> *get_node(); 
+            int find_ancestor(T &child);
+            void show_ancestor_deep(TNode<T> *pt_this,int &deep_in);
+            void clear(TNode<T> *pt_this);
+            TNode<T> *get_node()const; 
     };
     
     template<class T>
@@ -46,7 +49,12 @@ namespace my_tree{
     }
 
     template<class T>
-    TNode<T> *Btree<T>::get_node(){
+    Btree<T>::Btree(std::string &input){
+        setting_up(input);
+    }
+
+    template<class T>
+    TNode<T> *Btree<T>::get_node()const{
         return this->main_node;
     }
 
@@ -79,12 +87,36 @@ namespace my_tree{
     }
 
     template<class T>
-    void Btree<T>::find_ancestor(T &child){
-        
+    int Btree<T>::find_ancestor(T &child){
+        std::stack<TNode<T>*> t_node;
+        TNode<T> *pt_temp = this->main_node,*pt_pre_node = nullptr;
+        t_node.push(pt_temp);
+        while(!t_node.empty()){
+            t_node.pop(pt_temp);
+            if(pt_temp->data == child){
+                show_ancestor_deep(pt_temp->deep);
+                return pt_temp->deep;
+            }
+            if(pt_temp->l_node != nullptr)
+                t_node.push(pt_temp->l_node);
+            if(pt_temp->r_node != nullptr)
+                t_node.push(pt_temp->r_node);
+        }
+        return 0;
     }
 
     template<class T>
-    Btree<T>::Btree(std::string &input){
+    void Btree<T>::show_ancestor_deep(TNode<T> *pt_this,int &deep_in){
+        if(pt_this == nullptr)
+            return;
+        if(pt_this->deep < deep_in-1)
+            show_ancestor_deep(pt_this->l_node,deep_in);
+        show_ancestor_deep(pt_this->r_node,deep_in);
+        std::cout<<pt_this->data<<" \0";
+    }
+
+    template<class T>
+    void Btree<T>::setting_up(std::string &input){
         std::regex key("^(\\S+)[\\(\\),]");
         std::smatch result;
 
@@ -117,9 +149,11 @@ namespace my_tree{
                         switch(child_flag){
                             case 1:
                                 t_node[node_itor]->l_node = pt_temp;
+                                pt_temp->deep = t_node[node_itor]->deep+1;
                                 break;
                             case 2:
                                 t_node[node_itor]->r_node = pt_temp;
+                                pt_temp->deep = t_node[node_itor]->deep;
                                 break;
                         }
                     }
@@ -127,6 +161,15 @@ namespace my_tree{
             input.erase(0,1);
         }
         t_node.clear();
+    }
+
+    template <class T>
+    void Btree<T>::clear(TNode<T> *pt_this){
+        if(pt_this == nullptr)
+            return;
+        clear(pt_this->l_node);
+        clear(pt_this->r_node);
+        delete pt_this;
     }
 }
 
