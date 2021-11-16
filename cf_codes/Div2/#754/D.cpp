@@ -9,10 +9,20 @@ bool find[max_node];
 
 void find_node(int head_node,int this_node,int round,int line = 0){
     find[this_node] = 1;
-    
-
+    auto itor = tree[this_node].begin();
+    for(;itor != tree[this_node].end();itor++){
+        if(find[*itor] == 0 && *itor^this_node <= (*itor < this_node ? *itor : this_node)){
+            find_node(head_node,*itor,round+1);
+            line++;
+        }
+    }
+    find[this_node] = 0;
+    if(line == 0){
+        if(round ^ 1 == 1)
+            std::printf("%d ",head_node);
+    }
+    return;
 }
-
 void tree_build(){
     int j =0,u,v;
     std::scanf("%d",&j);
@@ -26,14 +36,14 @@ void tree_build(){
         tree[v].push_back(u);
     } 
     for(int i = 1;i<=j;i++){
-        find_node(i,i,0);
+        find_node(i,i,1);
     }
+    std::printf("\n");
     while(j > 0){
         tree[j].clear();
         j--;
     }
 }
-
 int main(){
     int i;
     std::scanf("%d",&i);
