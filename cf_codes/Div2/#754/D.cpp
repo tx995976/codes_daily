@@ -18,8 +18,9 @@ void find_node(int head_node,int this_node,int round,int line = 0){
     }
     find[this_node] = 0;
     if(line == 0){
-        if(round ^ 1 == 1)
-            std::printf("%d ",head_node);
+        if(round ^ 1 == 0){
+            
+        }
     }
     return;
 }
