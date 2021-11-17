@@ -22,7 +22,7 @@ void find_node(int head_node,int this_node,int round,int line = 0){
         ans[head_node] = 1;
     return;
 }
-void tree_build(){
+inline void tree_build(){
     int j =0,u,v;
     std::scanf("%d",&j);
     if(j == 1){
