@@ -7,7 +7,6 @@
 
 namespace my_tree{
     const int DEFAULT_size = 100;
-
     
     class TNode{
         public:

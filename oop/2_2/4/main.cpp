@@ -14,12 +14,12 @@ void menu(){
     std::string child;
     int i = 0;
     while(1){
-        std::cout<<"1.å»ºç«‹å®¶è°±æ ‘\n"
-                 <<"2.åŽåºéåŽ†\n"
-                 <<"3.å‰åºéåŽ†\n"
-                 <<"4.å¯»æ‰¾é•¿è¾ˆ\n"
-                 <<"5.é”€æ¯æ ‘\n"
-                 <<"0.é€€å‡º\n";
+        std::cout<<"1.½¨Á¢¼ÒÆ×Ê÷\n"
+                 <<"2.ºóÐò±éÀú\n"
+                 <<"3.Ç°Ðò±éÀú\n"
+                 <<"4.Ñ°ÕÒ³¤±²\n"
+                 <<"5.Ïú»ÙÊ÷\n"
+                 <<"0.ÍË³ö\n";
         std::cin>>i;
         switch(i){
             case 1:
@@ -39,7 +39,7 @@ void menu(){
                 name_tree.clear(name_tree.get_node());
                 break;
             default:
-                std::cout<<"éžæ³•è¾“å…¥";
+                std::cout<<"·Ç·¨ÊäÈë";
                 return;
         }
     }
