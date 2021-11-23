@@ -9,8 +9,11 @@ int solve(){
     int ans_max,ans_min,y = b_y;
     std::sort(z+1,z+a_n+1);
     for(int i = 1;i <= a_n;i++){
-        
-
+        if(z[i] <= sit+1)
+            y -= (z[i]+1)*z_i[z[i]];
+        else{
+            
+        }
     }
 }
 
