@@ -27,12 +27,12 @@ namespace my_graph{
             non_dgraph(){}
             ~non_dgraph(){}
 
-            bool insert_vex();
-            bool insert_edge();
-            bool delete_vex();
-            bool delete_edge();
-            bool update_vex();
-            bool update_edge();
+            bool insert_vex(Vex svex);
+            bool delete_vex(Vex svex);
+            bool update_vex(Vex svex);
+            bool insert_edge(Edge sedge);
+            bool delete_edge(Edge sedge);
+            bool update_edge(Edge sedge);
 
             Edge get_edge(std::string vex_code1,std::string vex_code2);
             Vex get_vex(std::string vex_code);
