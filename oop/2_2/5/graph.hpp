@@ -15,8 +15,6 @@ namespace my_graph{
         int length;
     };
 
-
-    template<class T>
     class non_dgraph{
         private:
             int adj_matrix[max_n][max_n];
@@ -40,6 +38,11 @@ namespace my_graph{
             int print_prim();
             int print_kruskal();
     };
+
+    bool non_dgraph::insert_edge(Edge sedge){
+        
+    }
+
 
 
 

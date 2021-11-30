@@ -11,15 +11,15 @@ int n,m,ans = 0,i = 0;
 using i_p = std::pair<int,int>;
 i_p res[max_m];
 bool cmp(const i_p &l,const i_p &r){
-    return l.first == r.first ? l.second <r.second : l.first < r.first;
+    return l.first == r.first ? l.second < r.second : l.first < r.first;
 }
 
-void sort(int l,int r,int n){
+void sort(int l,int r){
     if(r - l <= 1)
         return;
     int mid = (l+r) >> 1;
-    sort(l,mid,n);
-    sort(mid,r,n);
+    sort(l,mid);
+    sort(mid,r);
 
     int p_char = l ,p_l = l ,p_r = mid;
     while(p_char < r){
@@ -29,9 +29,9 @@ void sort(int l,int r,int n){
         }
         else
             t_char[p_char++] = t_dna[p_l++];
-        for(int i = l;i < r;i++)
-            t_dna[i] = t_char[i];
     }
+    for(int i = l;i < r;i++)
+        t_dna[i] = t_char[i];
 }
 
 void solve(){
@@ -39,20 +39,19 @@ void solve(){
         ans = 0;
         memset(t_char,0,sizeof(t_char));
         memcpy(t_dna,DNA[i],sizeof(t_dna));
-        sort(1,n,i);
+        sort(0,n);
         res[i] = i_p(ans,i);
     }
     std::sort(res+1,res+i+1,cmp);
-    for(int i =1;i < ::i;i++){
-        printf("%s\n",DNA[res[i].second][1]);
+    for(int i =1;i <= ::i;i++){
+        printf("%s\n",DNA[res[i].second]);
     }
 }
 
 int main(){
     scanf("%d %d",&n,&m);
     while(m--){
-        scanf("%s",DNA[++i][1]);
-
+        scanf("%s",DNA[++i]);
     }
     solve();
     return 0;
