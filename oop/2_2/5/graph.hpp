@@ -14,7 +14,7 @@ namespace my_graph{
         std::string name;
         Vex(){}
         Vex(int a,std::string b){code = a,name = b;}
-        bool operator == (const Vex &r){
+        bool operator== (const Vex &r)const{
             return code == r.code && name == r.name;
         }
     };
