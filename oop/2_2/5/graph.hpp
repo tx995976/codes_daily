@@ -7,7 +7,7 @@
 #pragma once
 
 namespace my_graph{
-    const int max_n = 20;
+    const int max_n = 100;
 
     struct Vex{
         int code;
@@ -79,6 +79,7 @@ namespace my_graph{
         }
         else
             vexs.erase(i);
+            num_vex--;
         return true;
     }
     
@@ -110,5 +111,15 @@ namespace my_graph{
             *i = sedge;
         return 1;
     }
+
+    bool non_dgraph::graph_ready(){
+        for(auto it : edges){
+            adj_matrix[it.vex1.code][it.vex2.code] = it.length;
+            adj_matrix[it.vex2.code][it.vex1.code] = it.length;
+        }
+        return 1;
+    }
+    
+    
 
 }
