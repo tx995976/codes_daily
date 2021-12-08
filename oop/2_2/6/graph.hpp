@@ -1,5 +1,6 @@
 #include <iostream>
 #include<vector>
+#include<algorithm>
 
 #pragma once
 
@@ -25,12 +26,16 @@ namespace my_graph{
         int in = 0;
         ArcNode *fir_arc;
     };
+    bool cmp_in(const Vnode &l,const Vnode &r){
+        return l.in < r.in;
+    }
 
 
     class AL_graph{
         public:
             int num_vex;
             int num_arc;
+            int all_weight;
             std::vector<Vnode> vertices;
             std::vector<Arcinfo> infos;
 
@@ -82,16 +87,48 @@ namespace my_graph{
         }
         return num_vex;
     }
-
+////////////////////////////////////////////
     void AL_graph::graph_ready(){
         for(auto it : infos){
+            all_weight += it.weight;
             vertices[find_node(it.to)].in += 1;
-
             ArcNode *from = vertices[find_node(it.from)].fir_arc;
             while(from != nullptr)
                 from = from->next_arc;
             *from = ArcNode(find_node(it.to),it.weight);
         }
     }
+
+    void AL_graph::top_order(){
+        std::vector<Vnode> U;
+        std::sort(vertices.begin(),vertices.end(),cmp_in);
+        int non_flag = 1;
+
+        while(U.size() < num_vex && non_flag){
+            for(auto it : vertices){
+                if(it.in == 0){
+                    auto i = it.fir_arc;
+                    while(i != nullptr){
+                        vertices[i->adjvex].in -= 1;
+                        i = i->next_arc;
+                    }
+                    U.push_back(it);
+                    it.in = -1;
+                    non_flag = 1;
+                    break;
+                }
+                non_flag = 0;
+            }
+        }
+
+
+
+        return;
+    }
         
+
+    void AL_graph::display(){
+       
+    }
+
 }
