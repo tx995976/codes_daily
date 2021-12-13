@@ -2,15 +2,15 @@
 
 my_graph::AL_graph graph;
 
-const int max_scope = 10;
+const double max_scope = 10;
 const int n = 6;
 
 void new_node(){
     my_graph::Vnode temp;
-    printf("杈撳叆鏁版嵁(搴忓彿,璇剧▼鍚嶇О,瀛﹀垎):\n");
+    printf("输入数据(序号,课程名称,学分):\n");
     std::cin>>temp.data.number>>temp.data.name>>temp.data.scope;
     if(!graph.new_VNode(temp)){
-        printf("鏁版嵁閲嶅!\n");
+        printf("数据重复!\n");
         return;
     }
     return;
@@ -18,10 +18,10 @@ void new_node(){
 
 void new_road(){
     my_graph::Arcinfo temp;
-    printf("杈撳叆鏁版嵁(from,to):\n");
+    printf("输入数据(from,to):\n");
     std::cin>>temp.from>>temp.to;
     if(!graph.new_ArcInfo(temp)){
-        printf("鏁版嵁閲嶅!\n");
+        printf("数据重复!\n");
         return;
     }
     return;
@@ -30,18 +30,18 @@ void new_road(){
 void node_update(){
     my_graph::Vnode temp;
     std::string name;
-    printf("杈撳叆鏁版嵁(name):\n");
+    printf("输入数据(name):\n");
     std::cin>>name;
     if(!graph.get_node(name,temp)){
-        printf("鏃犺鑺傜偣\n");
+        printf("无该节点\n");
         return;
     }
-    printf("鎵惧埌鑺傜偣:\nno:%d\nname:%s\nscope:%d\n",
+    printf("找到节点:\nno:%d\nname:%s\nscope:%.1f\n",
             temp.data.number,
             temp.data.name.c_str(),
             temp.data.scope
         );
-    printf("鎿嶄綔:\n1.鍒犻櫎\n2.淇敼\n");
+    printf("操作:\n1.删除\n2.修改\n");
     int i;
     std::cin>>i;
     switch(i){
@@ -49,11 +49,12 @@ void node_update(){
             graph.delete_VNode(temp);
             break;
         case 2:
-            printf("杈撳叆鏁版嵁(scope):\n");
+            printf("输入数据(scope):\n");
             std::cin>>temp.data.scope;
             graph.update_Vnode(temp);
+            break;
         default:
-            printf("鏃犳晥杈撳叆\n");
+            printf("无效输入\n");
             break;
     }
 }
@@ -61,13 +62,13 @@ void node_update(){
 void road_update(){
     my_graph::Arcinfo temp;
     std::string from,to;
-    printf("杈撳叆鏁版嵁(from,to):\n");
+    printf("输入数据(from,to):\n");
     std::cin>>from>>to;
     if(!graph.get_arc(from,to,temp)){
-        printf("鏃犺鑺傜偣\n");
+        printf("无该节点\n");
         return;
     }
-    printf("鎵惧埌璺嚎:\nfrom:%s\nto:%s\nweight:%d\n",
+    printf("找到路线:\nfrom:%s\nto:%s\nweight:%d\n",
         temp.from.c_str(),
         temp.to.c_str(),
         temp.weight
@@ -79,38 +80,84 @@ void road_update(){
             graph.delete_ArcInfo(temp);
             break;
         case 2:
-            printf("杈撳叆鏁版嵁(weight):\n");
+            printf("输入数据(weight):\n");
             std::cin>>temp.weight;
             graph.update_ArcInfo(temp);
         default:
-            printf("鏃犳晥杈撳叆\n");
+            printf("无效输入\n");
             break;
     }
 }
 
+void print_class(){
+     printf("%d %-8s %.1f",
+        graph.result.front().data.number,
+        graph.result.front().data.name.c_str(),
+        graph.result.front().data.scope
+    );
+     graph.result.erase(graph.result.begin());
+}
+
 void table_build(){
-    printf("閫夋嫨缂栧埗绛栫暐:\n1.鍧囪　\n2.闆嗕腑\n");
-    int i;
+    printf("选择编制策略:\n1.均衡\n2.集中\n");
+    int i,round = 1;
     std::cin>>i;
     graph.top_order();
     switch(i){
-        case 1:
-            
-        case 2:
-            
+        case 1:{
+            double sum = 0,average = graph.all_weight/(double)n;
+            printf("第%d学期:\n",round++);
+            while(!graph.result.empty()){
+                if(sum + graph.result.front().data.scope < average){
+                    sum += graph.result.front().data.scope;
+                }
+                else if(sum + graph.result.front().data.scope < max_scope){
+                    sum = 0;
+                    print_class();
+                    printf("第%d学期:\n",round++);
+                    continue;
+                }
+                else{
+                    printf("第%d学期:\n",round++);
+                    sum = graph.result.front().data.scope;
+                }
+                print_class();
+            }
+        }
+            break;
+        case 2:{
+            double sum = 0;
+            printf("第%d学期:\n",round++);
+            while(!graph.result.empty()){
+                if(sum + graph.result.front().data.scope <= max_scope){
+                    sum += graph.result.front().data.scope;
+                }
+                else{
+                    printf("第%d学期:\n",round++);
+                    sum = graph.result.front().data.scope;
+                }
+                 print_class();
+            }
+            if(round > 6)
+                printf("未能成功编制\n");
+        }
+            break;
+        default:
+            printf("无效输入\n");
+            break;
     }
-
-
+    return;
 }
+
 
 void menu(){
     while(1){
-        printf("1.娣诲姞璇剧▼\n");
-        printf("2.娣诲姞淇椤哄簭\n");
-        printf("3.璇剧▼鏁版嵁鏀瑰姩\n");
-        printf("4.椤哄簭鏁版嵁鏀瑰姩\n");
-        printf("5.鐢熸垚鏁欏璁″垝\n");
-        printf("0.閫�鍑篭n");
+        printf("1.添加课程\n");
+        printf("2.添加修课顺序\n");
+        printf("3.课程数据改动\n");
+        printf("4.顺序数据改动\n");
+        printf("5.生成教学计划\n");
+        printf("0.退出\n");
         int i = 6;
         scanf("%d",&i);
         switch(i){
@@ -132,7 +179,7 @@ void menu(){
             case 0:
                 return;
             default:
-                printf("鏃犳晥杈撳叆\n");
+                printf("无效输入\n");
                 break;
         }
     }

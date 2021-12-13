@@ -35,3 +35,10 @@ namespace my_sort {
 
 
 
+int main(){
+    std::sort();
+
+}
+
+
+

@@ -44,6 +44,9 @@ namespace my_graph{
         info_class  data;
         int in = 0;
         ArcNode *fir_arc;
+        bool operator== (const Vnode &r)const{
+            return data == r.data;
+        }
     };
     bool cmp_in(const Vnode &l,const Vnode &r){
         return l.in < r.in;
@@ -54,7 +57,7 @@ namespace my_graph{
         public:
             int num_vex;
             int num_arc;
-            int all_weight;
+            double all_weight;
             std::vector<Vnode> vertices;
             std::vector<Arcinfo> infos;
             std::vector<Vnode> result;
@@ -130,6 +133,7 @@ namespace my_graph{
                 *it = a;
                 return 1;
             }
+            it++;
         }
         return 0;
     }
@@ -141,6 +145,7 @@ namespace my_graph{
                 *it = a;
                 return 1;
             }
+            it++;
         }
         return 0;
     }
@@ -179,6 +184,7 @@ namespace my_graph{
     void AL_graph::graph_ready(){
         for(auto i : vertices){
             i.in = 0;
+            all_weight += i.data.scope;
             i.fir_arc = nullptr;
         }
         for(auto it : infos){
