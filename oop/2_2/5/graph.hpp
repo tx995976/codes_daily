@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include<vector>
+#include<functional>
+
 
 #pragma once
 
@@ -18,6 +20,7 @@ namespace my_graph{
             return code == r.code && name == r.name;
         }
     };
+    //
     bool update_judge(const Vex &a,const Vex &b){
         return a.code == b.code;
     }
@@ -34,6 +37,7 @@ namespace my_graph{
             return length < r.length;
         }
     };
+    //
     bool update_judge_1(const Edge &a,const Edge &b){
         return a.vex1 == b.vex1 && a.vex2 == b.vex2
             || a.vex1 == b.vex2 && a.vex2 == b.vex1;
@@ -82,7 +86,7 @@ namespace my_graph{
 
     bool non_dgraph::insert_vex(Vex svex){
         auto i = std::find(vexs.begin(),vexs.end(),svex);
-        if(i == vexs.end()){
+        if(i != vexs.end()){
             return false;
         }
         vexs.push_back(svex);
@@ -92,7 +96,7 @@ namespace my_graph{
 
     bool non_dgraph::insert_edge(Edge sedge){
         auto i =std::find(edges.begin(),edges.end(),sedge);
-        if(i == edges.end())
+        if(i != edges.end())
             return false;
         edges.push_back(sedge);
         return 1;
@@ -119,23 +123,27 @@ namespace my_graph{
     }
 
     bool non_dgraph::update_vex(Vex svex){
-        auto equal = std::bind(update_judge,svex,std::placeholders::_1);
-        auto i = std::find(vexs.begin(),vexs.end(),equal);
-        if(i == vexs.end())
-            return 0;
-        else
-            *i = svex;
-        return true;
+        auto it = vexs.begin();
+        while(it != vexs.end()){
+            if(update_judge(svex,*it)){
+                *it = svex;
+                return 1;
+            }
+            it++;
+        }
+        return 0;
     }
 
     bool non_dgraph::update_edge(Edge sedge){
-        auto equal = std::bind(update_judge_1,sedge,std::placeholders::_1);
-        auto i = std::find(edges.begin(),edges.end(),equal);
-        if(i == edges.end())
-            return 0;
-        else
-            *i = sedge;
-        return 1;
+        auto it = edges.begin();
+        while(it != edges.end()){
+            if(update_judge_1(*it,sedge)){
+                *it = sedge;
+                return 1;
+            }
+            it++;
+        }
+        return 0;
     }
 
     bool non_dgraph::graph_ready(){
@@ -145,7 +153,7 @@ namespace my_graph{
         }
         return 1;
     }
-    
+    ///?
     Edge non_dgraph::get_edge(int vex_code1,int vex_code2){
             for(auto i : edges)
                 if(i.vex1.code == vex_code1 && i.vex2.code == vex_code2
@@ -154,7 +162,7 @@ namespace my_graph{
                 }
             return edges.back();
     }
-
+    ///?
     Vex non_dgraph::get_vex(int vex_code){
         for(auto i : vexs)
             if(i.code == vex_code)
@@ -164,6 +172,7 @@ namespace my_graph{
     
 /////////////////////////////////////////////
     int non_dgraph::print_prim(){
+        this->graph_ready();
         int code_now,code,min_value = INT32_MAX;
         std::vector<Vex> U;
         std::vector<Edge> TE;
@@ -185,10 +194,12 @@ namespace my_graph{
             TE.push_back(get_edge(code,code_now));
             min_value = INT32_MAX;
         }
+        show_TE(TE);
         return 1;
     }
 
     int non_dgraph::print_kruskal(){
+        this->graph_ready();
         int code_now,code,min_value;
         std::vector<Vex> U(vexs);
         std::vector<Edge> TE;
@@ -212,10 +223,11 @@ namespace my_graph{
             }
             TE.push_back(it);
         }
+        show_TE(TE);
         return 1;
     }
 
-    void show_TE(std::vector<Edge> &TE){
+    void non_dgraph::show_TE(std::vector<Edge> &TE){
         for(auto it : TE){
             printf("%d:%s %d:%s length:%d\n",
                 it.vex1.code,
