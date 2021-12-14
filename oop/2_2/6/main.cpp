@@ -73,6 +73,7 @@ void road_update(){
         temp.to.c_str(),
         temp.weight
     );
+     printf("²Ù×÷:\n1.É¾³ý\n2.ÐÞ¸Ä\n");
     int i;
     std::cin>>i;
     switch(i){
@@ -90,7 +91,7 @@ void road_update(){
 }
 
 void print_class(){
-     printf("%d %-8s %.1f",
+     printf("%d %-14s %.1f\n",
         graph.result.front().data.number,
         graph.result.front().data.name.c_str(),
         graph.result.front().data.scope

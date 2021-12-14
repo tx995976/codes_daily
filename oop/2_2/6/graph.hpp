@@ -188,12 +188,11 @@ namespace my_graph{
             i.fir_arc = nullptr;
         }
         for(auto it : infos){
-            all_weight += it.weight;
             vertices[find_node(it.to)].in += 1;
-            ArcNode *from = vertices[find_node(it.from)].fir_arc;
+            auto from = vertices[find_node(it.from)].fir_arc;
             while(from != nullptr)
                 from = from->next_arc;
-            *from = ArcNode(find_node(it.to),it.weight);
+            from = new ArcNode(find_node(it.to),it.weight);
         }
     }
 
@@ -208,13 +207,15 @@ namespace my_graph{
         while(!non_in.empty()){
             auto i = non_in.front().fir_arc;
             U.push_back(non_in.front());
-            non_in.pop();
             while(i != nullptr){
-                vertices[i->adjvex].in--;
+                printf("get\n");
+                vertices[i->adjvex].in -= 1;
                 if(vertices[i->adjvex].in == 0){
                     non_in.push(vertices[i->adjvex]);
                 }
+                i = i->next_arc;
             }
+            non_in.pop();
         }
         result.swap(U);
         return;
