@@ -18,6 +18,7 @@ void new_node(){
 
 void new_road(){
     my_graph::Arcinfo temp;
+    temp.weight = 0;
     printf("输入数据(from,to):\n");
     std::cin>>temp.from>>temp.to;
     if(!graph.new_ArcInfo(temp)){
@@ -91,7 +92,7 @@ void road_update(){
 }
 
 void print_class(){
-     printf("%d %-14s %.1f\n",
+     printf("%d\t %-14s \t%.1f\n",
         graph.result.front().data.number,
         graph.result.front().data.name.c_str(),
         graph.result.front().data.scope
@@ -107,6 +108,7 @@ void table_build(){
     switch(i){
         case 1:{
             double sum = 0,average = graph.all_weight/(double)n;
+            printf("f:%f\n",average);
             printf("第%d学期:\n",round++);
             while(!graph.result.empty()){
                 if(sum + graph.result.front().data.scope < average){
@@ -115,32 +117,36 @@ void table_build(){
                 else if(sum + graph.result.front().data.scope < max_scope){
                     sum = 0;
                     print_class();
-                    printf("第%d学期:\n",round++);
+                    printf("\n第%d学期:\n",round++);
                     continue;
                 }
                 else{
-                    printf("第%d学期:\n",round++);
+                    printf("\n第%d学期:\n",round++);
                     sum = graph.result.front().data.scope;
                 }
                 print_class();
             }
+            if(round > 6)
+                printf("未能成功编制\n");
+            printf("\n");
         }
             break;
         case 2:{
             double sum = 0;
-            printf("第%d学期:\n",round++);
+            printf("\n第%d学期:\n",round++);
             while(!graph.result.empty()){
                 if(sum + graph.result.front().data.scope <= max_scope){
                     sum += graph.result.front().data.scope;
                 }
                 else{
-                    printf("第%d学期:\n",round++);
+                    printf("\n第%d学期:\n",round++);
                     sum = graph.result.front().data.scope;
                 }
                  print_class();
             }
             if(round > 6)
                 printf("未能成功编制\n");
+            printf("\n");
         }
             break;
         default:

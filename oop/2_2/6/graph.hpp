@@ -34,9 +34,9 @@ namespace my_graph{
 
     struct ArcNode{
         int adjvex,weight;
-        ArcNode *next_arc;
+        ArcNode *next_arc = nullptr;
         ArcNode(){}
-        ArcNode(int a,int b){adjvex = a;weight = b;}
+        ArcNode(int a,int b){adjvex = a;weight = b;next_arc = nullptr;}
     };
 
     
@@ -46,6 +46,9 @@ namespace my_graph{
         ArcNode *fir_arc;
         bool operator== (const Vnode &r)const{
             return data == r.data;
+        }
+        bool operator< (const Vnode &r)const{
+            return data.scope < r.data.scope;
         }
     };
     bool cmp_in(const Vnode &l,const Vnode &r){
@@ -182,6 +185,7 @@ namespace my_graph{
     }
 ////////////////////////////////////////////
     void AL_graph::graph_ready(){
+            all_weight = 0;
         for(auto i : vertices){
             i.in = 0;
             all_weight += i.data.scope;
@@ -190,32 +194,37 @@ namespace my_graph{
         for(auto it : infos){
             vertices[find_node(it.to)].in += 1;
             auto from = vertices[find_node(it.from)].fir_arc;
-            while(from != nullptr)
+            if(from == nullptr){
+                vertices[find_node(it.from)].fir_arc = new ArcNode(find_node(it.to),it.weight);
+                continue;
+            }
+            while(from->next_arc != nullptr){
                 from = from->next_arc;
-            from = new ArcNode(find_node(it.to),it.weight);
+            }
+            from->next_arc = new ArcNode(find_node(it.to),it.weight);
         }
     }
 
     void AL_graph::top_order(){
         this->graph_ready();
-        std::queue<Vnode> non_in;
+        std::vector<Vnode> non_in;
         std::vector<Vnode> U;
         for(auto it : vertices){
             if(it.in == 0)
-                non_in.push(it);
+                non_in.push_back(it);
         }
         while(!non_in.empty()){
+            //std::sort(non_in.begin(),non_in.end());
             auto i = non_in.front().fir_arc;
             U.push_back(non_in.front());
             while(i != nullptr){
-                printf("get\n");
                 vertices[i->adjvex].in -= 1;
                 if(vertices[i->adjvex].in == 0){
-                    non_in.push(vertices[i->adjvex]);
+                    non_in.push_back(vertices[i->adjvex]);
                 }
                 i = i->next_arc;
             }
-            non_in.pop();
+            non_in.erase(non_in.begin());
         }
         result.swap(U);
         return;
