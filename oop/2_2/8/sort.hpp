@@ -31,14 +31,24 @@ namespace my_sort {
                 return _num < r._num;
             }            
     };
-}
+
+    //接受顺序迭代器
+    template<class T>
+    void sort(T frist,T Last){
+
+
+    }
 
 
 
-int main(){
-    std::sort();
 
-}
+
+
+
+
+
+};
+
 
 
 
