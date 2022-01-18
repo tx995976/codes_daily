@@ -7,10 +7,10 @@ const int n = 6;
 
 void new_node(){
     my_graph::Vnode temp;
-    printf("ÊäÈëÊý¾Ý(ÐòºÅ,¿Î³ÌÃû³Æ,Ñ§·Ö):\n");
+    printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½,ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½,Ñ§ï¿½ï¿½):\n");
     std::cin>>temp.data.number>>temp.data.name>>temp.data.scope;
     if(!graph.new_VNode(temp)){
-        printf("Êý¾ÝÖØ¸´!\n");
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½!\n");
         return;
     }
     return;
@@ -19,10 +19,10 @@ void new_node(){
 void new_road(){
     my_graph::Arcinfo temp;
     temp.weight = 0;
-    printf("ÊäÈëÊý¾Ý(from,to):\n");
+    printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(from,to):\n");
     std::cin>>temp.from>>temp.to;
     if(!graph.new_ArcInfo(temp)){
-        printf("Êý¾ÝÖØ¸´!\n");
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½!\n");
         return;
     }
     return;
@@ -31,18 +31,18 @@ void new_road(){
 void node_update(){
     my_graph::Vnode temp;
     std::string name;
-    printf("ÊäÈëÊý¾Ý(name):\n");
+    printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(name):\n");
     std::cin>>name;
     if(!graph.get_node(name,temp)){
-        printf("ÎÞ¸Ã½Úµã\n");
+        printf("ï¿½Þ¸Ã½Úµï¿½\n");
         return;
     }
-    printf("ÕÒµ½½Úµã:\nno:%d\nname:%s\nscope:%.1f\n",
+    printf("ï¿½Òµï¿½ï¿½Úµï¿½:\nno:%d\nname:%s\nscope:%.1f\n",
             temp.data.number,
             temp.data.name.c_str(),
             temp.data.scope
         );
-    printf("²Ù×÷:\n1.É¾³ý\n2.ÐÞ¸Ä\n");
+    printf("ï¿½ï¿½ï¿½ï¿½:\n1.É¾ï¿½ï¿½\n2.ï¿½Þ¸ï¿½\n");
     int i;
     std::cin>>i;
     switch(i){
@@ -50,12 +50,12 @@ void node_update(){
             graph.delete_VNode(temp);
             break;
         case 2:
-            printf("ÊäÈëÊý¾Ý(scope):\n");
+            printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(scope):\n");
             std::cin>>temp.data.scope;
             graph.update_Vnode(temp);
             break;
         default:
-            printf("ÎÞÐ§ÊäÈë\n");
+            printf("ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½\n");
             break;
     }
 }
@@ -63,18 +63,18 @@ void node_update(){
 void road_update(){
     my_graph::Arcinfo temp;
     std::string from,to;
-    printf("ÊäÈëÊý¾Ý(from,to):\n");
+    printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(from,to):\n");
     std::cin>>from>>to;
     if(!graph.get_arc(from,to,temp)){
-        printf("ÎÞ¸Ã½Úµã\n");
+        printf("ï¿½Þ¸Ã½Úµï¿½\n");
         return;
     }
-    printf("ÕÒµ½Â·Ïß:\nfrom:%s\nto:%s\nweight:%d\n",
+    printf("ï¿½Òµï¿½Â·ï¿½ï¿½:\nfrom:%s\nto:%s\nweight:%d\n",
         temp.from.c_str(),
         temp.to.c_str(),
         temp.weight
     );
-     printf("²Ù×÷:\n1.É¾³ý\n2.ÐÞ¸Ä\n");
+     printf("ï¿½ï¿½ï¿½ï¿½:\n1.É¾ï¿½ï¿½\n2.ï¿½Þ¸ï¿½\n");
     int i;
     std::cin>>i;
     switch(i){
@@ -82,11 +82,11 @@ void road_update(){
             graph.delete_ArcInfo(temp);
             break;
         case 2:
-            printf("ÊäÈëÊý¾Ý(weight):\n");
+            printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(weight):\n");
             std::cin>>temp.weight;
             graph.update_ArcInfo(temp);
         default:
-            printf("ÎÞÐ§ÊäÈë\n");
+            printf("ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½\n");
             break;
     }
 }
@@ -101,7 +101,7 @@ void print_class(){
 }
 
 void table_build(){
-    printf("Ñ¡Ôñ±àÖÆ²ßÂÔ:\n1.¾ùºâ\n2.¼¯ÖÐ\n");
+    printf("Ñ¡ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½:\n1.ï¿½ï¿½ï¿½ï¿½\n2.ï¿½ï¿½ï¿½ï¿½\n");
     int i,round = 1;
     std::cin>>i;
     graph.top_order();
@@ -109,7 +109,7 @@ void table_build(){
         case 1:{
             double sum = 0,average = graph.all_weight/(double)n;
             printf("f:%f\n",average);
-            printf("µÚ%dÑ§ÆÚ:\n",round++);
+            printf("ï¿½ï¿½%dÑ§ï¿½ï¿½:\n",round++);
             while(!graph.result.empty()){
                 if(sum + graph.result.front().data.scope < average){
                     sum += graph.result.front().data.scope;
@@ -117,40 +117,40 @@ void table_build(){
                 else if(sum + graph.result.front().data.scope < max_scope){
                     sum = 0;
                     print_class();
-                    printf("\nµÚ%dÑ§ÆÚ:\n",round++);
+                    printf("\nï¿½ï¿½%dÑ§ï¿½ï¿½:\n",round++);
                     continue;
                 }
                 else{
-                    printf("\nµÚ%dÑ§ÆÚ:\n",round++);
+                    printf("\nï¿½ï¿½%dÑ§ï¿½ï¿½:\n",round++);
                     sum = graph.result.front().data.scope;
                 }
                 print_class();
             }
             if(round > 6)
-                printf("Î´ÄÜ³É¹¦±àÖÆ\n");
+                printf("Î´ï¿½Ü³É¹ï¿½ï¿½ï¿½ï¿½ï¿½\n");
             printf("\n");
         }
             break;
         case 2:{
             double sum = 0;
-            printf("\nµÚ%dÑ§ÆÚ:\n",round++);
+            printf("\nï¿½ï¿½%dÑ§ï¿½ï¿½:\n",round++);
             while(!graph.result.empty()){
                 if(sum + graph.result.front().data.scope <= max_scope){
                     sum += graph.result.front().data.scope;
                 }
                 else{
-                    printf("\nµÚ%dÑ§ÆÚ:\n",round++);
+                    printf("\nï¿½ï¿½%dÑ§ï¿½ï¿½:\n",round++);
                     sum = graph.result.front().data.scope;
                 }
                  print_class();
             }
             if(round > 6)
-                printf("Î´ÄÜ³É¹¦±àÖÆ\n");
+                printf("Î´ï¿½Ü³É¹ï¿½ï¿½ï¿½ï¿½ï¿½\n");
             printf("\n");
         }
             break;
         default:
-            printf("ÎÞÐ§ÊäÈë\n");
+            printf("ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½\n");
             break;
     }
     return;
@@ -159,12 +159,12 @@ void table_build(){
 
 void menu(){
     while(1){
-        printf("1.Ìí¼Ó¿Î³Ì\n");
-        printf("2.Ìí¼ÓÐÞ¿ÎË³Ðò\n");
-        printf("3.¿Î³ÌÊý¾Ý¸Ä¶¯\n");
-        printf("4.Ë³ÐòÊý¾Ý¸Ä¶¯\n");
-        printf("5.Éú³É½ÌÑ§¼Æ»®\n");
-        printf("0.ÍË³ö\n");
+        printf("1.ï¿½ï¿½ï¿½Ó¿Î³ï¿½\n");
+        printf("2.ï¿½ï¿½ï¿½ï¿½ï¿½Þ¿ï¿½Ë³ï¿½ï¿½\n");
+        printf("3.ï¿½Î³ï¿½ï¿½ï¿½ï¿½Ý¸Ä¶ï¿½\n");
+        printf("4.Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸Ä¶ï¿½\n");
+        printf("5.ï¿½ï¿½ï¿½É½ï¿½Ñ§ï¿½Æ»ï¿½\n");
+        printf("0.ï¿½Ë³ï¿½\n");
         int i = 6;
         scanf("%d",&i);
         switch(i){
@@ -186,7 +186,7 @@ void menu(){
             case 0:
                 return;
             default:
-                printf("ÎÞÐ§ÊäÈë\n");
+                printf("ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½\n");
                 break;
         }
     }
@@ -197,3 +197,4 @@ int main(){
     menu();
     return 0;
 }
+

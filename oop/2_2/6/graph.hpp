@@ -2,6 +2,7 @@
 #include<vector>
 #include<algorithm>
 #include<queue>
+#include<numeric>
 
 #pragma once
 
@@ -113,7 +114,7 @@ namespace my_graph{
 
     bool AL_graph::delete_ArcInfo(Arcinfo &a){
         auto it = std::find(infos.begin(),infos.end(),a);
-        if(it == infos.end())
+        if(it == infos.end())   
             return 0;
         infos.erase(it);
         num_arc--;
@@ -229,7 +230,7 @@ namespace my_graph{
         result.swap(U);
         return;
     }
-        
+    
     void AL_graph::display(){
        
     }

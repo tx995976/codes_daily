@@ -76,7 +76,7 @@ void compare_file(){
     printf("input: id(file1,file2):\n");
     scanf("%d %d",&f1,&f2);
     result = word_table.compare(f1,f2);
-    printf("result:%.1f%\n");
+    printf("result:%.1f%\n",(double)result*100);
 }
 
 

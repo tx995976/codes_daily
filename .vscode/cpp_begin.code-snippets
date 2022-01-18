@@ -21,18 +21,44 @@
 			"#include<iostream>",
 			"#include<algorithm>",
 			"#include<cstdio>",
+			"#include<cmath>",
 			"",
 			"",
 			"int main(){",
 			"",
 			"",
-			"	return 0;"
+			"\treturn 0;",
 			"}"
 		],
-		"description": "cpp算法初始模板"
+		"description": "cpp初始模板"
 	},
+
 	"cpp_o2":{
-		"prefix": "cpp_optimize",
+		"prefix": "cpp_o2",
 		"body": "#pragma gcc optimize(2)"
-	}
+	},
+
+	"cpp_for":{
+		"prefix": "cpp_for",
+		"body": "for(int ${1:i} = $int;${1:i} <= $range;${1:i}${plus:++}){$0}"
+	},
+
+	"cpp_switch":{
+		"prefix": "cpp_switch",
+		"body": ["switch($1){",
+				 "\tcase $2 :",
+				 "\tbreak;",
+				 "\tcase $3 :",
+				 "\tbreak;",
+				 "}$0"
+		]
+	},
+	"cpp_scanf":{
+		"prefix": "scanf",
+		"body": "scanf(\" %$1\",&$2);$0"
+	},
+	"cpp_printf":{
+		"prefix": "printf",
+		"body": "printf(\"%$1\\n\",$Vars);$0"
+	},
 }
