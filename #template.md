@@ -65,13 +65,18 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
 
 ## 并查集
 ```cpp
-//状态压缩
  struct my_union{
         int father[max_n];
-        int find(int x){
+        //状态压缩
+        int find_zip(int x){
             if(x != father[x])
                 father[x] = find(father[x]);
             return father[x];
+        }
+        //不压缩
+        int find(int x){
+            x = father[x] == x ? x : find(x);
+            return x;
         }
         void unionset(int a,int b){
             a = find(a);
@@ -79,6 +84,9 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
             father[a] = b;
         }
     };
-
-
 ```
+* 带权并查集
+额外存储描述子节点与父节点关系  
+例题  
+[p2024-食物链](https://www.luogu.com.cn/blog/XTZORZ/solution-p2024)  
+
