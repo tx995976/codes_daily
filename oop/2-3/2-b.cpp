@@ -23,22 +23,20 @@ int main(){
 
             int i = n;
             while(i--){
-                if(it == q_list[id_list].end())
+                if(++it == q_list[id_list].end())
                     it = q_list[id_list].begin();
-                else
-                    it++;
             }
             auto er_it = it;
-            if(it == q_list[id_list].end())
+            if(++it == q_list[id_list].end())
                 it = q_list[id_list].begin();
-            else
-                it++;
+
             q_list[id_list^1].push_back(*er_it);
             q_list[id_list].erase(er_it);
 
+            
         }
     }
-    for(auto it : q_list[id_list])
+    for(auto it : q_list[id_list^1])
         printf("%-4d",it);
     return 0;
 }
