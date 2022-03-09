@@ -18,19 +18,25 @@ int main(){
         scanf(" %d",&n);
         std::cin>>s;
         per = s;
-        int l=0,r = n-1;
+        int l = 0,r = n-1;
         while(l < r){
-            per[l] = per[r];
+            per[r] = per[l];
             l++,r--;
         }
         int middle = (n-1)/2;
         for(int i = 0;i <= middle;i++){
-            ans *= 26ll,ans %= mod;
-            ans += (s[i] - 'A'), ans %= mod;
+            ans *= 26ll;
+            ans %= mod;
+            ans += (s[i] - 'A');
+            ans %= mod;
         }
-        if(s != per)
-            ans -= 1ll,ans %= mod;
-        printf("%lld\n",&ans);
+        ans++;
+        ans %= mod;
+        if(s < per){
+            ans += (mod-1);
+            ans %= mod;
+        }
+        printf("%d\n",ans);
     }
     return 0;
 }
