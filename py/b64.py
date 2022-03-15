@@ -1,6 +1,6 @@
 import base64
 
-f=open('abc242.png','rb')
+f=open('abc243.png','rb')
 out = open('out.txt','wb')
 code_png = base64.b64encode(f.read())
 f.close()
