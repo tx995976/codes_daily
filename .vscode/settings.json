@@ -79,7 +79,10 @@
         "concept_check.h": "c",
         "debug.h": "c",
         "px_huffman.h": "c",
-        "px_quicksort.h": "c"
+        "px_quicksort.h": "c",
+        "any": "cpp",
+        "bit": "cpp",
+        "variant": "cpp"
     },
     "cmake.configureOnOpen": false,
     "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",

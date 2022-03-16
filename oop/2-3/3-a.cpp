@@ -15,18 +15,21 @@ int main(){
         scanf(" %d",&temp);
         nums.push_back(temp);
     }
-    for(int i = 1;i <= n;i++){
-        scanf(" %d",&temp);
+    
+    while(~scanf(" %d",&temp))
         que.push_back(temp);
-    }
+    
     int pos_q = 0,size_q = que.size();
-    for(int pos_n = 0;pos_n < n && pos_q < size_q;){
+
+    for(int pos_n = 0;pos_n <= n && pos_q < size_q;){
         while(!stk.empty()){
-            if(que.front() == que[pos_q]){
+            if(stk.front() == que[pos_q]){
                 stk.pop_front();
                 pos_q++;
                 ans++;
             }
+            else
+                break;
         }
         stk.push_front(nums[pos_n++]);
     }
