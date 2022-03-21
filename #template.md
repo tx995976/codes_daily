@@ -90,3 +90,7 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
 例题  
 [p2024-食物链](https://www.luogu.com.cn/blog/XTZORZ/solution-p2024)  
 
+## DP
+### 01
+    
+
