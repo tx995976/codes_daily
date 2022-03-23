@@ -2,5 +2,5 @@
 *.exe
 *.gch
 *.rar
-*_no.md
+*_no*
 *.test
