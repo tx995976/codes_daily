@@ -5,11 +5,14 @@
 #include<deque>
 #include<list>
 #include<forward_list>
+#include<fstream>
 
-std::string in;
+std::string cstr_in;
 
 int main(){
-    while(std::getline(std::cin,in))
-        printf("%s\n",in.c_str());
+    std::ifstream in;
+    in.open("bgstations.txt",std::ios::in);
+    while(std::getline(std::cin,cstr_in))
+        printf("%s\n",cstr_in.c_str());
 }
 

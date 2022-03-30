@@ -11,11 +11,6 @@ class tree{
         tree *l_c = nullptr,*r_c = nullptr;
         int cnt = 0;
     tree(){}
-    ~tree(){
-        delete value;
-        delete l_c;
-        delete r_c;
-    }
 };
 
 tree root;

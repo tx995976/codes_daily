@@ -29,14 +29,14 @@ int main(){
         scanf(" %d",&temp);
         nums.push_back(temp);
     }
-
     int window = defat_window,id = 1,time;
+
     for(time = 0;time < rod;time++){
+        //客户到达
         int num_i = nums[time];
         for(int i = 1;i <= num_i;i++)
             que.push_back({id++,time});
             
-        //客户到达
         if((double)que.size()/window >= 7){
             int free = max_window-window;
             switch(free){
