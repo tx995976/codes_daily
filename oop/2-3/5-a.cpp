@@ -100,9 +100,7 @@ void search(std::string q1,std::string q2){
         printf("%s %s %d\n",pa->data->c_str(),n1->data->c_str(),n1->deep-pa->deep);
         printf("%s %s %d\n",pa->data->c_str(),n2->data->c_str(),n2->deep-pa->deep);
     }
-    
 }
-
 
 int main(){
     int n;

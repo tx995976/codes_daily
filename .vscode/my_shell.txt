@@ -1,0 +1,1 @@
+scan-build -v -v -o "./" --use-analyzer "D:\Program Files\LLVM\bin\clang++.exe"  g++ c.cpp -o c.exe
