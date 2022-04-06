@@ -22,8 +22,9 @@ int edge_line[300][300];
 
 int id = 0;
 
-void find_min(int from,int to){
+void find_min(int from){
     int max_n = str_id.size();
+    //dis(起点到点最短距离) vis(已找到最短距离)
     std::vector<int>dis(max_n,INT32_MAX),vis(max_n,0);
     ans.resize(max_n);
     dis[from] = 0;
@@ -92,6 +93,7 @@ int main(){
             if(i != 1){
                 edges[str_id[stat]].push_back(str_id[pre]);
                 edges[str_id[pre]].push_back(str_id[stat]);
+                
                 edge_line[str_id[stat]][str_id[pre]] = line;
                 edge_line[str_id[pre]][str_id[stat]] = line;
             }
@@ -100,7 +102,7 @@ int main(){
     }
     //
     std::cin>>stat>>pre;
-    find_min(str_id[stat],str_id[pre]);
+    find_min(str_id[stat]);
     print_way(str_id[pre]);
     return 0;
 }

@@ -27,6 +27,7 @@ std::string rot,lc,rc;
 std::deque<TNode*> ptr;
 
 void build(){
+    //根节点构造
     if(ptr.empty()){
         root.data = new std::string(rot);
         if(lc != null_c){
@@ -39,10 +40,10 @@ void build(){
         }
         return;
     }
-
+    //
     while(*ptr.front()->data != rot)
         ptr.pop_front();
-
+    //
     c_r = ptr.front();
     ptr.pop_front();
     
@@ -64,14 +65,13 @@ TNode* get_pat(TNode *n1,TNode *n2){
     return n1;
 }
 
-//bfs
 void search(std::string q1,std::string q2){
     std::deque<TNode*> que;
     que.push_back(&root);
 
     bool find_1 = 1,find_2 = 1;
     TNode *n1 = nullptr,*n2 = nullptr;
-
+    //bfs
     while(!que.empty() &&(find_1 || find_2)){
         auto it = que.front();
         que.pop_front();
@@ -89,14 +89,14 @@ void search(std::string q1,std::string q2){
         if(it->r_node != nullptr)
             que.push_back(it->r_node);
     }
+    //
     if(n1->deep != n2->deep){
         if(n1->deep < n2->deep)
             std::swap(n1,n2);
         printf("%s %s %d\n",n1->data->c_str(),n2->data->c_str(),n1->deep-n2->deep);
-        
     }
     else{
-       TNode *pa = get_pat(n1,n2);
+        TNode *pa = get_pat(n1,n2);
         printf("%s %s %d\n",pa->data->c_str(),n1->data->c_str(),n1->deep-pa->deep);
         printf("%s %s %d\n",pa->data->c_str(),n2->data->c_str(),n2->deep-pa->deep);
     }

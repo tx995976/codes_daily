@@ -21,7 +21,7 @@ int main(){
 
     scanf(" %d",&tar);
     int pos_l = 0,pos_r = arr.size()-1;
-    while(pos_l <= pos_r){
+    while(pos_l < pos_r){
         int jud = arr[pos_l]+arr[pos_r];
         if(tar > jud)
             pos_l++;
