@@ -13,7 +13,7 @@ std::map<std::string,info> data;
 void find_book(std::string &key){
     for(auto it : data){
         if(it.first.find(key) != std::string::npos){
-            printf("%-50s %-20s %-30s %-10s\n",
+            printf("%-50s%-20s%-30s%-10s\n",
                 it.first.c_str(),
                 it.second.au.c_str(),
                 it.second.co.c_str(),
@@ -37,7 +37,6 @@ int main(){
     int func;
     std::string temp,au,co,da;
     std::ifstream in("books.txt",std::ios::in);
-
     while(in.good() && !in.eof()){
         in>>temp>>au>>co>>da;
         data[temp] = {au,co,da};
@@ -58,10 +57,9 @@ int main(){
                 break;
         }
     }
-
     freopen("ordered.txt","w",stdout);
     for(auto it : data){
-        printf("%-50s %-20s %-30s %-10s\n",
+        printf("%-50s%-20s%-30s%-10s\n",
                 it.first.c_str(),
                 it.second.au.c_str(),
                 it.second.co.c_str(),

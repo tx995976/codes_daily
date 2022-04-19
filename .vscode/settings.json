@@ -82,7 +82,13 @@
         "px_quicksort.h": "c",
         "any": "cpp",
         "bit": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "filesystem": "cpp",
+        "xiosbase": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
     },
     "cmake.configureOnOpen": false,
     "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",

@@ -19,10 +19,10 @@
 		"prefix": "cpp_begin",
 		"body": [
 			"#include<iostream>",
-			"#include<algorithm>",
 			"#include<cstdio>",
-			"#include<cmath>",
+			"#include<algorithm>",
 			"#include<deque>",
+			"#include<string>",
 			"",
 			"",
 			"int main(){",
