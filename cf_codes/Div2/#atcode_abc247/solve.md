@@ -1,11 +1,18 @@
-#include<iostream>
-#include<cstdio>
-#include<algorithm>
-#include<deque>
-#include<string>
-#include<set>
-#include<vector>
+# ABC247
 
+## E.MAX MIN
+
+对于寻找满足要求的`[L,R]`对,可以转换成对应区间 $A_L\dots A_R$ 的个数  
+当我们找到所有满足 $Y<= A_k<= X$ 的区间后  
+由集合的相关知识可以知道
+
+包含`X`和`Y`的区间数$=$
+全集$-$不包含`X`的区间数$-$不包含`Y`的区间数$+$不包含`X`和`Y`的区间数  
+
+而我们知道全集中$Y<= A_k<= X$  
+因此每一个包含`X`和`Y`的区间都是满足要求的`[L,R]`对
+
+```cpp
 using ll = long long;
 const int max_n = 2e5+10;
 
@@ -44,3 +51,4 @@ int main(){
     printf("%lld\n",ans);
     return 0;
 }
+```
