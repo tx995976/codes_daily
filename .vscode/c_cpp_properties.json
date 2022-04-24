@@ -18,7 +18,7 @@
             "compilerArgs": [],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "compilerPath": "F:/MingW/bin/g++.exe",
+            "compilerPath": "C:/mingw64/bin/g++.exe",
             "browse": {
                 "path": [
                     "C:/mingw64/include",
@@ -65,8 +65,7 @@
             "name": "win64",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/mingw64/include",
-                "C:\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include"
+                "C:/mingw64/include/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -91,7 +90,7 @@
             "name": "clang",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\**"
+                "C:\\mingw64\\include\\c++\\11.3.0\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -99,7 +98,7 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "D:\\Program Files\\LLVM\\bin\\clang.exe",
+            "compilerPath": "C:/mingw64/bin/clang.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-clang-x64"

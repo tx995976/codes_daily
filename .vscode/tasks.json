@@ -2,27 +2,8 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "cppbuild",
-			"label": "gcc_9.1",
-			"command": "F:\\MingW\\bin\\g++.exe",
-			"args": [
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe",
-				"-fexec-charset=GBK"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build"
-		},
-		{
 			"type": "shell",
-			"label": "gcc_8.1",
+			"label": "gcc_11.3",
 			"command": "C:\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-g",
