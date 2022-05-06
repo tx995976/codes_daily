@@ -31,27 +31,6 @@
                 }*/
             ],
         },
-
-        {
-            "name": "gcc9",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "F:\\MingW\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-        },
         {
             "name": "clang",
             "type": "cppdbg",
@@ -63,7 +42,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "miDebuggerPath": "D:\\Program Files\\LLVM\\bin\\lldb.exe",
+            "miDebuggerPath": "F:\\llvm_x64_gnu\\bin\\lldb.exe",
             "preLaunchTask": "C/C++: clang.exe"
         },
     ]
