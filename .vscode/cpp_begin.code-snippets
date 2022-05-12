@@ -62,9 +62,5 @@
 	"cpp_printf":{
 		"prefix": "my_printf",
 		"body": "printf(\"%$1\\n\",$Vars);$0"
-	},
-	"cpp_comment":{
-		"prefix": "//",
-		"body": "/*\n$body\n*/",
 	}
 }

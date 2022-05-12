@@ -92,5 +92,35 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
 
 ## DP
 ### 01
+
+## 树状数组
+```cpp
+    const int max_tree = 1e5 + 5;
+    int tree[max_tree];
+
+    int lowbit(int x){
+        return x & (-x);
+    }
+    
+    void add(int x, int val){
+        while(x <= max_tree){
+            tree[x] += val;
+            x += lowbit(x);
+        }
+    }
+
+    int query(int x){
+        int res = 0;
+        while(x > 0){
+            res += tree[x];
+            x -= lowbit(x);
+        }
+        return res;
+    }
+
+    int query_range(int l, int r){
+        return query(r) - query(l - 1);
+    }
+```
     
 
