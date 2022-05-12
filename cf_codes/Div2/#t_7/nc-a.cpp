@@ -6,7 +6,10 @@
 
 const int max_n = 1e5 + 5;
 
+
 int main(){   
-    
+
+
+
     return 0;
 }
