@@ -5,18 +5,24 @@
 #include<string>
 #include<vector>
 
+const int max_n = 1e6+10;
 using ll = long long;
 int N,Q;
 
 namespace alo{
-     std::vector<ll> tree,arr,mark;
+    std::vector<ll> tree;
+    std::vector<ll> arr,mark;
 
-    void push_down(int p,int len){
+    void push_down(int p,int tl,int tr){
         mark [p << 1] += mark[p];
         mark [p << 1 | 1] += mark[p];
-        tree[p << 1] += mark[p] * (len - (len >> 1));
-        tree[p << 1 | 1] += mark[p] * (len >> 1);
+        ll mid = (tl + tr) >> 1;
+        //ll
+        tree[p << 1] +=  1ll * mark[p] * (mid - tl + 1);
+        //ll
+        tree[p << 1 | 1] += 1ll * mark[p] * (tr - mid);
         mark[p] = 0;
+        return; 
     }
 
     void build(int l, int r ,int p){
@@ -32,13 +38,16 @@ namespace alo{
     }
 
     void update(int l, int r, int d, int p = 1, int tl = 1,int tr = N){
+        if(l > tr || r < tl) 
+            return;
         if(tl >= l && tr <= r){
-            tree[p] += d * (tr - tl + 1);
-            mark[p] += d;
+            //ll
+            tree[p] += 1ll * d * (tr - tl + 1);
+            mark[p] += d;   
             return;
         }
         if(mark[p])
-            push_down(p,tr - tl + 1);
+            push_down(p,tl,tr);
         int mid = (tl + tr) >> 1;
         if(mid >= l)
             update(l, r, d, p << 1, tl, mid);
@@ -49,10 +58,12 @@ namespace alo{
     }
 
     ll query(int l, int r, int p = 1, int tl = 1, int tr = N){
+        if(l > tr || r < tl)
+            return 0;
         if(tl >= l && tr <= r)
             return tree[p];
         if(mark[p])
-            push_down(p,tr - tl + 1);
+            push_down(p,tl,tr);
         int mid = (tl + tr) >> 1;
         ll ret = 0;
         if(mid >= l)
@@ -72,14 +83,14 @@ int main(){
 
     for(int i = 1;i <= N;i++)
         scanf(" %lld", &alo::arr[i]);
-    alo::build(1, N, 1);
 
+    alo::build(1, N, 1);
     int prc;
     int arg1,arg2,arg3;
     while(Q--){
-        scanf(" %d", &prc);
+        scanf("%d", &prc);
         if(prc == 2){
-            scanf(" %d %d",&arg1,&arg2);
+            scanf("%d%d",&arg1,&arg2);
             printf("%lld\n", alo::query(arg1, arg2));
         }
         else{

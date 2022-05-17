@@ -3,47 +3,46 @@
 #include<cstring>
 #include<cmath>
 #include<algorithm>
+#include<vector>
 
 using ll = long long;
 const int max_n= 1e5+10;
 int n,q,k;
 
-struct node{
-   int atom;
-   double cost;
-   bool operator < (const node &a) const{
-       return cost<a.cost;
-   }
-}
-arr[max_n];
-int eg[max_n];
+
+std::vector<int> eg(max_n);
+int min_eg = INT32_MAX,min_atom;
+double per_eg = 1e10;
 
 ll ans = 0ll;
 
 int main(){
     scanf(" %d %d",&n,&q);
     for(int i=1;i<=n;i++){ 
-	scanf(" %d",&eg[i]);
-	arr[i].atom = i;
-	arr[i].cost = eg[i] / (double)i;
+	    scanf(" %d",&eg[i]);
+        if(eg[i]< min_eg) 
+            min_eg = eg[i];
+        if((double)eg[i]/i < per_eg){
+            per_eg = (double)eg[i]/i;
+            min_atom = i;
+        }
     }
-    std::sort(arr+1,arr+n+1);
+
+    eg.resize((min_atom+1)*n);
+    
+    
+
+
     for(int i=1;i<=q;i++){
-	scanf(" %d",&k);
-	ans = 0ll;
-	while(k > 0){
-            if(k <= n){
-		ans += eg[k];
-		k = 0;
-	    }
+	    scanf(" %d",&k);
+	    ans = 0ll;
+        if(k <= n)
+	        ans += eg[k];
 	    else{
-                int over = k - n;
-		int add = over % arr[1].atom == 0 ? 0 : 1;
-		ans += eg[arr[1].atom] * (over / arr[1].atom + add);
-                k -= arr[1].atom * (over / arr[1].atom + add);
+            
 	    }
-	}
-	printf("%lld\n",ans);
+	    
+	    printf("%lld\n",ans);
     }
     return 0;
 }

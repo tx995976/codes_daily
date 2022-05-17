@@ -127,12 +127,14 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
 ```cpp
      std::vector<int> tree,arr,mark;
 
-    void push_down(int p,int len){
+    void push_down(int p,int tl,int tr){
         mark [p << 1] += mark[p];
         mark [p << 1 | 1] += mark[p];
-        tree[p << 1] += mark[p] * (len - (len >> 1));
-        tree[p << 1 | 1] += mark[p] * (len >> 1);
+        ll mid = (tl + tr) >> 1;
+        tree[p << 1] +=  1ll * mark[p] * (mid - tl + 1);
+        tree[p << 1 | 1] += 1ll * mark[p] * (tr - mid);
         mark[p] = 0;
+        return; 
     }
 
     void build(int l, int r ,int p){
@@ -147,14 +149,16 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
         return;
     }
 
-    void update(int l, int r, int d, int p = 1, int tl = 1,int tr = n){
+    void update(int l, int r, int d, int p = 1, int tl = 1,int tr = N){
+        if(l > tr || r < tl) 
+            return;
         if(tl >= l && tr <= r){
-            tree[p] += d * (tr - tl + 1);
-            mark[p] += d;
+            tree[p] += 1ll * d * (tr - tl + 1);
+            mark[p] += d;   
             return;
         }
-        //
-        push_down(p,tr - tl + 1);
+        if(mark[p])
+            push_down(p,tl,tr);
         int mid = (tl + tr) >> 1;
         if(mid >= l)
             update(l, r, d, p << 1, tl, mid);
@@ -164,12 +168,15 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
         return;
     }
 
-    int query(int l, int r, int p = 1, int tl = 1, int tr = n){
+    ll query(int l, int r, int p = 1, int tl = 1, int tr = N){
+        if(l > tr || r < tl)
+            return 0;
         if(tl >= l && tr <= r)
             return tree[p];
-        push_down(p,tr - tl + 1);
+        if(mark[p])
+            push_down(p,tl,tr);
         int mid = (tl + tr) >> 1;
-        int ret = 0;
+        ll ret = 0;
         if(mid >= l)
             ret += query(l, r, p << 1, tl, mid);
         if(mid < r)
