@@ -4,7 +4,6 @@ int gcd(int a,int b){
     return b ? gcd(b,a%b) : a;
 }
 ```
-
 ## 快速幂
 ```cpp
 long long fast_pow(long long a,long long b){
@@ -41,7 +40,19 @@ int prime_list(int range)
     return cnt;
 }
 ```
-
+## 二分
+```cpp
+    while(L<=R)
+    {
+        int mid=(L+R)>>1;
+        if(judge(mid)) 
+        {
+            ans=mid;
+            L=mid+1;
+        }
+        else R=mid-1;
+    }
+```
 ## 单调队列
 ```cpp
 std::deque<int> num_d;
@@ -85,14 +96,36 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
         }
     };
 ```
-* 带权并查集
-额外存储描述子节点与父节点关系  
-例题  
-[p2024-食物链](https://www.luogu.com.cn/blog/XTZORZ/solution-p2024)  
-
 ## DP
 ### 01
 
+### 数位dp
+```cpp
+ll dfs(int pos,int pre,int st,……,int lead,int limit)//记搜
+{
+    if(pos>len) return st;//剪枝
+    if((dp[pos][pre][st]……[……]!=-1&&(!limit)&&(!lead))) return dp[pos][pre][st]……[……];//记录当前值
+    ll ret=0;//暂时记录当前方案数
+    int res=limit ? a[len-pos+1] : 9;//res当前位能取到的最大值
+    for(int i=0;i<=res;i++)
+    {
+        //有前导0并且当前位也是前导0
+        if((!i)&&lead) ret+=dfs(……,……,……,i==res&&limit);
+        //有前导0但当前位不是前导0，当前位就是最高位
+        else if(i&&lead) ret+=dfs(……,……,……,i==res&&limit); 
+        else if(根据题意而定的判断) ret+=dfs(……,……,……,i==res&&limit);
+    }
+    if(!limit&&!lead) dp[pos][pre][st]……[……]=ret;//当前状态方案数记录
+    return ret;
+}
+ll part(ll x)//把数按位拆分
+{
+    len=0;
+    while(x) a[++len]=x%10,x/=10;
+    memset(dp,-1,sizeof dp);//初始化-1（因为有可能某些情况下的方案数是0）
+    return dfs(……,……,……,……);//进入记搜
+}
+```
 ## 树状数组
 ```cpp
     const int max_tree = 1e5 + 5;
@@ -101,14 +134,12 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
     int lowbit(int x){
         return x & (-x);
     }
-    
     void add(int x, int val){
         while(x <= max_tree){
             tree[x] += val;
             x += lowbit(x);
         }
     }
-
     int query(int x){
         int res = 0;
         while(x > 0){
@@ -117,16 +148,13 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
         }
         return res;
     }
-
     int query_range(int l, int r){
         return query(r) - query(l - 1);
     }
 ```
-
 ## 线段树
 ```cpp
-     std::vector<int> tree,arr,mark;
-
+    std::vector<int> tree,arr,mark;
     void push_down(int p,int tl,int tr){
         mark [p << 1] += mark[p];
         mark [p << 1 | 1] += mark[p];
@@ -183,8 +211,4 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
             ret += query(l, r, (p << 1) | 1, mid + 1, tr);
         return ret;
     }
-
-
 ```
-    
-
