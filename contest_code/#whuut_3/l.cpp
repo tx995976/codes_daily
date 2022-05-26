@@ -5,9 +5,11 @@
 #include<string>
 #include<vector>
 
-const int max_n=1e6+10;
+using ll = long long;
+const int max_n = 1e6+10;
 int n,x,y;
 int pre[max_n],a[max_n];
+
 namespace alo{
     const int max_tree = max_n;
     int tree[max_tree];
@@ -21,16 +23,13 @@ namespace alo{
             x += lowbit(x);
         }
     }
-    int query(int x){
-        int res = 0;
+    ll query(int x){
+        ll res = 0;
         while(x > 0){
             res += tree[x];
             x -= lowbit(x);
         }
         return res;
-    }
-    int query_range(int l, int r){
-        return query(r) - query(l - 1);
     }
 }
 
@@ -49,11 +48,11 @@ int main(){
 		pre[i] = a[i] + pre[i - 1];
     }
 
-	int ans = 0;
+	ll ans = 0;
 	for(int i = 1; i <= n; i++){
-		if(pre[i] >= pre[0]){
-			ans += alo::query(pre[i]) + 1;
-		}
+		if(pre[i] >= pre[0])
+			ans += 1;
+		ans += alo::query(pre[i]);
 		alo::add(pre[i], 1);
 	}
 
@@ -62,11 +61,12 @@ int main(){
 		if(a[i] == 0)
 			emp++;
 		else{
-			if(emp > 0)
-				ans -= (tmp + 1) * tmp / 2;
+			ans -= 1ll * (emp + 1) * emp / 2;
 			emp = 0;
 		}
 	}
-	printf("%d\n",ans);
+    ans -= 1ll * (emp+1) * emp / 2;
+
+	printf("%lld\n",ans);
     return 0;
 }
