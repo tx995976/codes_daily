@@ -109,7 +109,6 @@ int best_fit(int ID,int size){
             p->data.ID=ID;
             return 1;
         }
-
         if (p->data.isUsed==FREE && p->data.size>size)
         {
             if(q == NULL)

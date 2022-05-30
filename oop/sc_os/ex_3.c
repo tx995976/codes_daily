@@ -99,7 +99,7 @@ void FIFO(int total_pf)
     if(p1[page[i]].pfn==INVALID)	//页面失效
     {   
       diseffect+=1;			//失效次数
-      if(freepf_head==NULL)		//无空闲页面
+      if(freepf_head == NULL)		//无空闲页面
       {
         p=busypf_head->next;
         p1[busypf_head->pn].pfn=INVALID;
@@ -132,25 +132,31 @@ void LRU(int total_pf){
     initialize(total_pf);
     busypf_head=busypf_tail=NULL;
     for(i=0;i<total_instruction;i++){
-        if(p1[page[i]].pfn==INVALID){   //页面失效
+        if(p1[page[i]].pfn == INVALID){   //页面失效
             diseffect+=1;		//失效次数
             if(freepf_head==NULL){//无空闲页面
                 p = busypf_head;
-                while(p == busypf_tail){
-                    if(q ==NULL)
+                while(p){
+                    if(q == NULL)
                         q = p;
                     else if(p1[q->pn].time > p1[p->pn].time)
                         q = p;
                     p = p->next;
                 }
                 p = busypf_head;
-                while(p->next != q)
-                    p = p->next;
-                p->next = q->next;
+                if(q != busypf_head){
+                    while(p->next != q)
+                        p = p->next;
+                    p->next = q->next;
+                }
+                else{
+                    busypf_head = q->next;
+                }
                 p1[q->pn].pfn=INVALID;
                 freepf_head=q;	
                 freepf_head->next=NULL;                   
             }
+
             p=freepf_head->next;	//按LRU方式调入新页面到内存页面
             freepf_head->next=NULL;  
             freepf_head->pn=page[i];  
