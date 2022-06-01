@@ -26,14 +26,14 @@ struct Proc{
 
 struct Proc_ptr{
 	Proc *p = nullptr;
-	Proc *next = nullptr;
-	Proc *prev = nullptr;
+	Proc_ptr *next = nullptr;
+	Proc_ptr *prev = nullptr;
 };
 
 struct Proc_queue{
 	Proc_ptr *head = nullptr;
 	Proc_ptr *tail = nullptr;
-	bool (*cmp)(*Proc_ptr a,*Proc_ptr b);
+	bool (*cmp)(Proc_ptr *a,Proc_ptr *b);
 	//cmp
 	void push(Proc *in){
 		if(head == nullptr){
@@ -57,11 +57,9 @@ struct Proc_queue{
 			}
 		}
 	}
-
-	*Proc top(){
+	Proc* top(){
 		return head->p;
 	}
-
 	void pop(){
 		if(head == nullptr) return;
 		Proc_ptr *tmp = head;
@@ -128,7 +126,7 @@ bool new_process(Proc *new_p){
 	}
 	if(!flag) 
 		return 0;
-    if(new_p->start_tme <= time_now){
+    if(new_p->start_time <= time_now){
 		new_p->status = wait;
 		wait_list.push(new_p);
 	}
