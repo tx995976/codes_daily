@@ -1,16 +1,14 @@
 #include<cstdio>
 #include<cstdlib>
 #include<cstring>
-#include<random>
+#include<ctime>
 
 const int max_process = 100;
-const int max_core = 8;
-
+const int max_core = 4;
 const int wait = 1;
 const int run = 2;
 const int finish = 3;
 const int plan = -1;
-
 int time_now = 0;
 
 struct Proc{
@@ -26,7 +24,7 @@ struct Proc{
 
 struct Core{
 	Proc *proc;
-	int last_time;
+	int cpu_time;
 };
 
 struct Proc_ptr{
@@ -178,7 +176,7 @@ void print_proc_list(){
 					run_list[i].proc->start_time,
 					run_list[i].proc->end_time,
 					run_list[i].proc->priority,
-					run_list[i].last_time,
+					run_list[i].cpu_time,
 					"run"
 				);
 		}
@@ -244,9 +242,9 @@ bool step_time(int type){
 		if(run_list[i].proc == nullptr){
 			run_list[i].proc = wait_list.top();
 			if(type == 2)
-				run_list[i].last_time = run_list[i].proc->need_time;
+				run_list[i].cpu_time = run_list[i].proc->need_time;
 			else
-				run_list[i].last_time = run_list[i].proc->priority;
+				run_list[i].cpu_time = run_list[i].proc->priority;
 			run_list[i].proc->status = run;
 			show_dispatch(run_list[i].proc,1);
 			wait_list.pop();
@@ -257,7 +255,7 @@ bool step_time(int type){
 	//time step;
 	for(int i = 0;i < max_core;i++){
 		if(run_list[i].proc != nullptr){
-			run_list[i].last_time--;
+			run_list[i].cpu_time--;
 			run_list[i].proc->exec_time++;
 
 			if(run_list[i].proc->exec_time == run_list[i].proc->need_time){
@@ -267,7 +265,7 @@ bool step_time(int type){
 				show_dispatch(run_list[i].proc,4);
 				run_list[i].proc = nullptr;
 			}
-			else if(run_list[i].last_time == 0){
+			else if(run_list[i].cpu_time == 0){
 				run_list[i].proc->status = wait;
 				show_dispatch(run_list[i].proc,2);
 				if(type == 1)
@@ -341,7 +339,6 @@ int main(){
 	scanf("%d",&num);
 	printf("type for alo\n1.priority\n2.start_time\n3.round\n:");
 	scanf("%d",&type);
-
 	wait_list.cmp = cmp_time;
 	plan_list.cmp = cmp_time;
 	switch(type){
