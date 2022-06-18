@@ -2,6 +2,7 @@
 #include<cstdlib>
 #include<cstring>
 #include<ctime>
+#include<iostream>
 
 const int max_process = 100;
 const int max_core = 4;
