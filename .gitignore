@@ -12,3 +12,4 @@
 *.out
 *\.xmake
 *\build
+*.pdf
