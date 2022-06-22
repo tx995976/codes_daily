@@ -22,7 +22,6 @@ struct Proc{
 	int priority = 1;
 	int status = -1;
 };
-
 struct Core{
 	Proc *proc;
 	int cpu_time;
