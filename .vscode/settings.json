@@ -93,5 +93,11 @@
     },
     "cmake.configureOnOpen": false,
     "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
-    "editor.fontFamily": "Source Code Pro, Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "Source Code Pro, Consolas, 'Courier New', monospace",
+    "markdown-preview-enhanced.breakOnSingleNewLine": false,
+    "markdown-preview-enhanced.codeBlockTheme": "atom-dark.css",
+    "markdown-preview-enhanced.enableHTML5Embed": true,
+    "markdown-preview-enhanced.HTML5EmbedUseLinkSyntax": true,
+    "markdown-preview-enhanced.mathRenderingOption": "MathJax",
+    "markdown-preview-enhanced.previewTheme": "atom-dark.css"
 }
