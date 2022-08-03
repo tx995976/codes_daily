@@ -89,7 +89,8 @@
         "xiosbase": "cpp",
         "xstring": "cpp",
         "xutility": "cpp",
-        "rope": "cpp"
+        "rope": "cpp",
+        "coroutine": "cpp"
     },
     "cmake.configureOnOpen": false,
     "python.pythonPath": "C:\\Users\\tx995976\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",

@@ -18,27 +18,21 @@ long long fast_pow(long long a,long long b){
 ```
 ## 素数筛
 ```cpp
-bool flag_prime[max_n];
-int prime[max_n];
+class prime_geter{
+public:
+    std::vector<bool> flag_prime;
 
-int prime_list(int range)
-{
-    int cnt=0;
-    memset(flag_prime,true,sizeof(flag_prime));
-    for(int i=2;i<=range;i++)
-    {
-        if(flag_prime[i])
-        prime[++cnt]=i;   // begin:prime[1]
-        for(int j=1;j<=cnt;j++){
-            if(i*prime[j]>range)
-                break;
-            flag_prime[i*prime[j]]=0;
-            if(i%prime[j]==0)
-                break;
+    int prime_list(int range){
+        flag_prime.resize(range+1,0);
+        flag_prime[1]=1;
+        for(int i = 2;i <= range;i++){
+            if(mark[i])
+                continue;
+            for(int j=i+i;j <= range;j+=i)
+                mark[j]=1;
         }
     }
-    return cnt;
-}
+};
 ```
 ## 二分
 ```cpp
@@ -128,32 +122,40 @@ ll part(ll x)//把数按位拆分
 ```
 ## 树状数组
 ```cpp
-    const int max_tree = 1e5 + 5;
-    int tree[max_tree];
-
-    int lowbit(int x){
-        return x & (-x);
-    }
-    void add(int x, int val){
-        while(x <= max_tree){
-            tree[x] += val;
-            x += lowbit(x);
+template<class T>
+    class binary_tree{
+        int max_tree;
+        std::vector<T> tree;
+    public:
+        binary_tree(int n){
+            max_tree = n;
+            tree.resize(n+1);
         }
-    }
-    int query(int x){
-        int res = 0;
-        while(x > 0){
-            res += tree[x];
-            x -= lowbit(x);
+        T lowbit(T x){
+            return x & (-x);
         }
-        return res;
-    }
-    int query_range(int l, int r){
-        return query(r) - query(l - 1);
-    }
+        void add(T x, T val){
+            while(x <= max_tree){
+                tree[x] += val;
+                x += lowbit(x);
+            }
+        }
+        T query(T x){
+            T res = 0;
+            while(x > 0){
+                res += tree[x];
+                x -= lowbit(x);
+            }
+            return res;
+        }
+        T query_range(T l, T r){
+            return query(r) - query(l - 1);
+        }
+    };
 ```
 ## 线段树
 ```cpp
+    //懒惰标记
     std::vector<int> tree,arr,mark;
     void push_down(int p,int tl,int tr){
         mark [p << 1] += mark[p];
@@ -203,6 +205,49 @@ ll part(ll x)//把数按位拆分
             return tree[p];
         if(mark[p])
             push_down(p,tl,tr);
+        int mid = (tl + tr) >> 1;
+        ll ret = 0;
+        if(mid >= l)
+            ret += query(l, r, p << 1, tl, mid);
+        if(mid < r)
+            ret += query(l, r, (p << 1) | 1, mid + 1, tr);
+        return ret;
+    }
+    //无懒惰标记
+    std::vector<int> tree,arr;
+     void build(int l, int r ,int p){
+        if(l == r){
+            tree[p] = arr[l];
+            return;
+        }
+        int mid = (l + r) >> 1;
+        build(l, mid, p << 1);
+        build(mid + 1, r,(p << 1) | 1);
+        tree[p] = tree[p << 1] + tree[(p << 1) | 1];
+        return;
+    }
+
+    void update(int l, int r, int d, int p = 1, int tl = 1,int tr = N){
+        if(l > tr || r < tl) 
+            return;
+        if(tl >= l && tr <= r){
+            tree[p] += 1ll * d * (tr - tl + 1);
+            return;
+        }
+        int mid = (tl + tr) >> 1;
+        if(mid >= l)
+            update(l, r, d, p << 1, tl, mid);
+        if(mid < r)
+            update(l, r, d, (p << 1) | 1, mid + 1, tr);
+        tree[p] = tree[p << 1] + tree[(p << 1) | 1];
+        return;
+    }
+
+    ll query(int l, int r, int p = 1, int tl = 1, int tr = N){
+        if(l > tr || r < tl)
+            return 0;
+        if(tl >= l && tr <= r)
+            return tree[p];
         int mid = (tl + tr) >> 1;
         ll ret = 0;
         if(mid >= l)

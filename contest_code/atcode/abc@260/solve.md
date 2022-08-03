@@ -1,14 +1,14 @@
+
 # ABC260
-
 ### E. At Least One 
-
 朴素枚举所有区间并验证需要 $ m^2n $ 时间,考虑优化  
 考虑滑动窗口的思想,已知$ [L,R] $为满足条件的序列  
 那么对于$1 \eqslantless i \eqslantless L$, $R \eqslantless j \eqslantless M$  
 $[i,j]$同样为满足条件的序列.  
 因此从$[L,R]$出发, 找到所有满足条件的最小区间序列集.  
-再求出它们的扩展序列区间就得到所有满足条件的区间
-```cpp
+再求出它们的扩展序列区间就得到所有满足条件的区间  
+
+```cpp  
 const int max_n = 2e5+10;
 
 int N,M;
@@ -56,7 +56,7 @@ int main(){
 
     return 0;
 }
-```
+```  
 
 ### F. Find 4-cycle
 
@@ -113,8 +113,8 @@ int main(){
     return 0;
 }
 ```
+![](ac.png)
 
-@import "ac.png"  
 
 
 

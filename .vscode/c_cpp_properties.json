@@ -90,7 +90,7 @@
             "name": "clang",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\mingw64\\include\\c++\\11.3.0\\**"
+                "F:\\llvm_x64_gnu\\include\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -98,9 +98,9 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/mingw64/bin/clang.exe",
+            "compilerPath": "F:/llvm_x64_gnu/bin/clang.exe",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "windows-clang-x64"
         }
     ],

@@ -1,7 +1,5 @@
-/* 
-#数学/鸽巢原理
-#图论
-*/
+//#数学/鸽巢原理 #图论
+//
 #include<cstdio>
 #include<algorithm>
 #include<deque>
