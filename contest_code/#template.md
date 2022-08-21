@@ -4,6 +4,7 @@
 - [动态规划](#dp)
 - [数据结构](#单调队列)
 - [图论](#图论)
+---
 
 
 
@@ -13,6 +14,30 @@
 $k = a^{p-2}$(费马小定理)  
 $k_i = k_{i+1} * (i+1) (\bmod p) $
 
+## 组合数
+```cpp
+//组合数阶乘及逆元
+struct rv_fact{
+    int range;
+    std::vector<ll> fac,inv;
+    rv_fact(int n) : fac(n+1),inv(n+1),range(n){}
+
+    void table_fact_inv(){
+        fac[0] = 1ll;
+        for(int i = 1;i < range;i++)
+            fac[i] = fac[i-1] * i %_mod;
+        inv[range-1] = fast_pow(fac[range-1],_mod-2);
+        for(int i = range - 2;i >= 0;i--)
+            inv[i] = inv[i+1] * (i+1) % _mod;
+    }
+
+    ll C(int n,int k){
+        return k <= n ? fac[n]*inv[n-k]%_mod*inv[k]%_mod : 0ll;
+    }
+};
+
+```
+
 
 ## gcd
 ```cpp
@@ -20,6 +45,10 @@ int gcd(int a,int b){
     return b ? gcd(b,a%b) : a;
 }
 ```
+## lcm
+```cpp
+```
+
 ## 快速幂
 ```cpp
 long long fast_pow(long long a,long long b){
@@ -52,11 +81,9 @@ struct prime{
 
 ## 二分
 ```cpp
-    while(L<=R)
-    {
+    while(L<=R){
         int mid=(L+R)>>1;
-        if(judge(mid)) 
-        {
+        if(judge(mid)) {
             ans=mid;
             L=mid+1;
         }
@@ -89,12 +116,18 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
 
 ## 并查集
 ```cpp
- struct union{
-        int father[max_n];
+ struct funion{
+        std::vector<int> father,size;
+        funion(int n) : father(n),size(n){
+            for(int i = 0;i < n;i++){
+                father[i] = i;
+                size[i] = 1;
+            }
+        }
         //状态压缩
         int find_zip(int x){
             if(x != father[x])
-                father[x] = find(father[x]);
+                father[x] = find_zip(father[x]);
             return father[x];
         }
         //不压缩
@@ -103,15 +136,19 @@ while(!num_cow.empty() && h_cow[i] >= h_cow[num_cow.back()]){
             return x;
         }
         void unionset(int a,int b){
-            a = find(a);
-            b = find(b);
-            father[a] = b;
+            a = find_zip(a);
+            b = find_zip(b);
+            if(a != b){
+                father[a] = b;
+                size[b] += size[a];
+                size[a] = 0;
+            }
         }
     };
 ```
 ## 树状数组
 ```cpp
-template<class T>
+template<typename T>
    struct binary_tree{
         int max_tree;
         std::vector<T> tree;
@@ -240,4 +277,110 @@ ll part(ll x)//把数按位拆分
 
 ## 图论
 
+
 ### 网络流
+
+```cpp
+//dinic
+struct max_flow{
+    int n;
+    ll max_T;
+    struct eg{
+        int to;
+        ll val;
+    };
+
+    std::vector<eg> ed;
+    std::vector<std::vector<int>> gh;
+    std::vector<int> cur,h;
+    max_flow(int in){
+        n = in;
+        max_T = std::numeric_limits<ll>::max();
+        gh.resize(in);
+    }
+
+    void add_edge(int f,int t,ll val){
+        gh[f].push_back(ed.size());
+        ed.push_back((eg){t,val});
+        gh[t].push_back(ed.size());
+        ed.push_back((eg){f,0});
+    }
+
+    bool bfs(int s,int t){
+        h.assign(n,-1);
+        std::queue<int> que;
+        h[s] = 0;
+        que.push(s);
+        while(!que.empty()){
+            int i = que.front();
+            que.pop();
+            for(int it : gh[i]){
+                auto [v,c] = ed[it]; 
+                if(c > 0 && h[v] == -1){
+                    h[v] = h[i] + 1;
+                    if(v == t)
+                        return 1;
+                    que.push(v);
+                }
+            }
+        }
+        return 0;
+    }
+
+    ll dfs(int u,int t,ll val){
+        if(u == t)
+            return val;
+        auto r = val;
+        for(int &i = cur[u];i < (int)gh[u].size();i++){
+            const int j = gh[u][i];
+            auto [v,c] = ed[j];
+            if(c > 0 && h[v] == h[u] + 1 ){
+                auto a = dfs(v,t,std::min(r,c));
+                r -= a;
+                ed[j].val -= a;
+                ed[j^1].val += a;
+                if(r == 0)
+                    return val;
+            }
+        }
+        return val - r;
+    }
+
+    ll mflow(int s,int t){
+        ll ans = 0;
+        while(bfs(s,t)){
+            cur.assign(n,0);
+            ans += dfs(s,t,max_T);
+        }
+        return ans;
+    }
+};
+
+```
+
+
+----
+----
+
+
+## 其他模板
+
+```cpp
+template <typename T>
+struct mint{
+    T val;
+    mint(T _val) : val(_val){}
+    mint(){}
+    T*  operator &(){return &val;}
+    T&  operator *(){return val;}
+    void  operator =(const T &r){val = r;}
+    mint operator +(const mint &r){return mint(val+r.val % _mod);}
+    mint operator *(const mint &r){return mint(val*r.val % _mod);}
+    mint operator -(const mint &r){return mint(val+_mod-r.val % _mod);}
+    void operator +=(const mint &r){val+r.val % _mod;}
+    void operator -=(const mint &r){val+_mod-r.val % _mod;}
+    void operator *=(const mint &r){val*r.val % _mod;}
+};
+
+
+```

@@ -11,6 +11,7 @@ using ll = long long;
 const int max_p = 2e7+10;
 const int inf = 1e9;
 
+
 struct prime{
     std::vector<bool> flag_prime;
     void prime_list(int range){
@@ -24,6 +25,7 @@ struct prime{
         }
     }
 };
+
 struct max_flow{
     int n;
     ll max_T;
@@ -97,8 +99,6 @@ struct max_flow{
         return ans;
     }
 };
-
-std::vector<int> od,c_od,ev,c_ev;
 
 int main(){
     int n;

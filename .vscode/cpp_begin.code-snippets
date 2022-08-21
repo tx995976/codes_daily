@@ -18,6 +18,8 @@
 	"begin":{
 		"prefix": "cpp_begin",
 		"body": [
+			"//#",
+			"//@",
 			"#include<cstdio>",
 			"#include<algorithm>",
 			"#include<string>",
