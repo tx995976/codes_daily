@@ -1,9 +1,16 @@
-#include<iostream>
-using namespace std;
+#include <cstdio>
+#include <cmath>
+
+double r,h;
+double res_area,res_perimeter,res_vol;
+double pi = 3.14;
+
 int main(){
-    long a1,a2,a3,a4;
-    cin>>a1>>a2>>a3>>a4;
-    cout<<a1<<" "<<a2<<a3<<a4;
-    
-    return 0;
+    printf("input r,h:\n");
+    scanf("%lf %lf",&r,&h);
+    res_perimeter = r*2*pi;
+    res_area = r*r*pi;
+    res_vol = res_area*h;
+
+    printf("area is %.2f\nperimeter is %.2f\nvol is %.2f\n",res_perimeter,res_area,res_vol);
 }

@@ -1,11 +1,6 @@
 #include<iostream>
-#include<algorithm>
 #include<cstdio>
-#include<cmath>
-#include<deque>
-#include<list>
-#include<forward_list>
-#include<fstream>
+
 
 std::string cstr_in;
 
